@@ -491,7 +491,11 @@ function renderPaper() {
   badge.textContent = label;
   badge.className = "badge " + (p.status === "running" ? "Passed" : p.status === "not_started" ? "Running" : "Rejected");
   const title = p.title ? `<b>${esc(p.title)}</b>, ` : "";
-  $("#paper-sub").innerHTML = p.status === "not_started"
+  const pilot = p.kind === "pilot";
+  const holdingName = { risk_on: "the S&P 500 (SPYM)", risk_off: "T-bills (SGOV)" }[p.rule_state];
+  $("#paper-sub").innerHTML = pilot
+    ? `<b>${esc(p.title)}</b>: the real-money pilot's rehearsal on an Interactive Brokers paper account since ${esc(p.started)}. At each month-end it holds the S&amp;P 500, or T-bills when SPY closes below its 200-day average. ${holdingName ? `Rule now: ${holdingName}${p.drill ? " (a scheduled test switch is in progress)" : ""}.` : ""} Percentages only.`
+    : p.status === "not_started"
     ? `${title}the strategy that passed its holdout, is next. Paper trading on an Interactive Brokers paper account starts once the live data feed and broker connection are commissioned. ${p.trend ? "The market filter below already runs on live data." : ""}`
     : `${title}running forward on an Interactive Brokers paper account since ${esc(p.started)}. Returns and weights only. Data through ${esc(p.feed_as_of || "–")}.`;
 
@@ -499,10 +503,16 @@ function renderPaper() {
   const ret = last(p.growth), spy = last(p.spy), bm = last(p.beta_matched);
   const tiles = p.growth ? [
     [pct(ret), "return since start", ret >= 0],
-    [pct(ret - spy), "vs S&P 500"],
-    [pct(ret - bm), `vs ${Math.round((p.benchmark_beta || 0) * 100)}% S&P (benchmark)`, ret - bm >= 0],
+    [spy == null ? "–" : pct(ret - spy), "vs S&P 500"],
+    ...(bm == null ? [] : [[pct(ret - bm), `vs ${Math.round((p.benchmark_beta || 0) * 100)}% S&P (benchmark)`, ret - bm >= 0]]),
     [String((p.holdings || []).length), "holdings"],
-    [p.book_matches == null ? "–" : p.book_matches ? "Yes" : `${p.book_diff} off`, "book matches backtest", p.book_matches],
+    [p.book_matches == null ? "–" : p.book_matches ? "Yes" : `${p.book_diff} off`, pilot ? "holding matches the rule" : "book matches backtest", p.book_matches],
+    ...(pilot && p.next_rebalance ? [[new Date(p.next_rebalance + "T12:00").toLocaleDateString(undefined, { month: "short", day: "numeric" }), "next month-end check"]] : []),
+  ] : pilot ? [
+    [p.trend ? (p.trend.risk_on ? "S&P" : "T-bills") : "–", "signal today", p.trend && p.trend.risk_on],
+    [p.trend ? num(p.trend.index_vs_sma, 3) : "–", "SPY ÷ 200-day avg"],
+    [p.next_rebalance ? new Date(p.next_rebalance + "T12:00").toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "–", "next month-end check"],
+    [p.feed_as_of ? new Date(p.feed_as_of + "T12:00").toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "–", "data through"],
   ] : [
     [p.trend ? (p.trend.risk_on ? "In" : "Out") : "–", "market filter", p.trend && p.trend.risk_on],
     [p.trend ? num(p.trend.index_vs_sma, 3) : "–", "index ÷ 200-day avg"],
@@ -527,7 +537,7 @@ function renderPaper() {
       xAxis: { type: "time", axisLabel: { color: t.ink3 }, axisLine: { lineStyle: { color: t.line } } },
       yAxis: { type: "value", axisLabel: { color: t.ink3, formatter: (v) => Math.round(v * 100) + "%" }, splitLine: { lineStyle: { color: t.line } } },
       series: [
-        { name: "Paper portfolio", type: "line", data: toPts(p.growth), showSymbol: false, lineStyle: { width: 2.4, color: pick ? pick.color : t.accent }, itemStyle: { color: pick ? pick.color : t.accent }, areaStyle: { color: pick ? pick.color : t.accent, opacity: 0.08 } },
+        { name: pilot ? "Pilot (paper)" : "Paper portfolio", type: "line", data: toPts(p.growth), showSymbol: false, lineStyle: { width: 2.4, color: pick ? pick.color : t.accent }, itemStyle: { color: pick ? pick.color : t.accent }, areaStyle: { color: pick ? pick.color : t.accent, opacity: 0.08 } },
         p.beta_matched && { name: `${Math.round((p.benchmark_beta || 0) * 100)}% S&P + cash`, type: "line", data: toPts(p.beta_matched), showSymbol: false, lineStyle: { width: 1.6, color: t.ink2 }, itemStyle: { color: t.ink2 } },
         p.spy && { name: "S&P 500 (SPY)", type: "line", data: toPts(p.spy), showSymbol: false, lineStyle: { width: 1.4, type: "dashed", color: t.ink3 }, itemStyle: { color: t.ink3 } },
       ].filter(Boolean),
@@ -540,7 +550,7 @@ function renderPaper() {
   const tr = chart("trend");
   if (p.trend) {
     const on = p.trend.risk_on;
-    $("#trend-label").innerHTML = `Market filter · <span class="state-pill ${on ? "on" : "off"}">${on ? "In the market" : "In cash"}</span>`;
+    $("#trend-label").innerHTML = `${pilot ? "Crash rule" : "Market filter"} · <span class="state-pill ${on ? "on" : "off"}">${on ? (pilot ? "Above: hold the S&amp;P 500" : "In the market") : (pilot ? "Below: hold T-bills" : "In cash")}</span>`;
     const band = p.trend.sma.filter((x) => x[1] != null).map(([d, v]) => [d, v * p.trend.band]);
     tr.setOption({
       textStyle: t.text,
@@ -550,9 +560,9 @@ function renderPaper() {
       xAxis: { type: "time", axisLabel: { color: t.ink3 }, axisLine: { lineStyle: { color: t.line } } },
       yAxis: { type: "value", scale: true, axisLabel: { color: t.ink3 }, splitLine: { lineStyle: { color: t.line } } },
       series: [
-        { name: "Equal-weight S&P 500", type: "line", data: p.trend.index, showSymbol: false, lineStyle: { width: 2, color: t.accent }, itemStyle: { color: t.accent } },
+        { name: p.trend.label || "Equal-weight S&P 500", type: "line", data: p.trend.index, showSymbol: false, lineStyle: { width: 2, color: t.accent }, itemStyle: { color: t.accent } },
         { name: "200-day average", type: "line", data: p.trend.sma, showSymbol: false, lineStyle: { width: 1.4, color: t.ink2 }, itemStyle: { color: t.ink2 } },
-        { name: "Exit line (0.97×)", type: "line", data: band, showSymbol: false, lineStyle: { width: 1.2, type: "dashed", color: t.bad }, itemStyle: { color: t.bad } },
+        ...(p.trend.band < 1 ? [{ name: `Exit line (${p.trend.band}×)`, type: "line", data: band, showSymbol: false, lineStyle: { width: 1.2, type: "dashed", color: t.bad }, itemStyle: { color: t.bad } }] : []),
       ],
     });
   } else {
