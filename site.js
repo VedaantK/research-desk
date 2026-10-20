@@ -440,7 +440,9 @@ function renderPaper() {
   ];
   $("#paper-kpis").innerHTML = tiles.map(([v, l, hl]) => `<div class="stat${hl ? " hl" : ""}"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("");
 
-  // Growth chart
+  // Growth chart (collapsed while there is nothing to draw)
+  $("#paper-growth").classList.toggle("chart-empty", !p.growth);
+  $("#trend").classList.toggle("chart-empty", !p.trend);
   const g = chart("paper-growth");
   if (p.growth) {
     const toPts = (arr) => arr.map(([d, v]) => [d, (v - 1)]);

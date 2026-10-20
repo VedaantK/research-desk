@@ -215,3 +215,4 @@ table.holdings svg { width: 96px; height: 24px; display: block; margin-left: aut
 .more-btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink-2); font: 500 13px Inter, sans-serif; padding: 7px 14px; border-radius: 8px; cursor: pointer; }
 .more-btn:hover { color: var(--ink); }
 table.holdings tfoot td { text-align: center; border-bottom: 0; padding: 14px; }
+.chart.chart-empty { height: 160px; }
