@@ -100,6 +100,7 @@ function renderStats(data) {
       if (k < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
+    setTimeout(() => (el.textContent = target), 1200);
   });
   const running = exps.filter((e) => e.verdict === "Running");
   if (running.length) {
