@@ -461,7 +461,7 @@ function renderPaper() {
       ].filter(Boolean),
     });
   } else {
-    g.setOption({ graphic: { type: "text", left: "center", top: "middle", style: { text: "The paper portfolio's growth appears here\nonce trading starts.", fill: t.ink3, font: "14px Inter", align: "center", lineHeight: 22 } } });
+    g.setOption({ graphic: { type: "text", left: "center", top: "middle", style: { text: "Growth appears here once trading starts.", fill: t.ink3, font: "14px Inter" } } });
   }
 
   // Trend filter chart
