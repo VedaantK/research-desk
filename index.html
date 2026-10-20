@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Colloquy Research Desk</title>
+<meta name="description" content="An autonomous research loop that tests systematic S&amp;P 500 strategies on survivorship-free data, three reconciling backtest engines and a sealed holdout.">
+<meta property="og:title" content="Colloquy Research Desk">
+<meta property="og:description" content="Every trading idea tested, including the ones that failed, against the S&amp;P 500.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Colloquy</a>
+    <nav>
+      <a href="#performance">Performance</a>
+      <a href="#search">Search</a>
+      <a href="#strategies">Strategies</a>
+      <a href="#method">Method</a>
+    </nav>
+    <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <p class="eyebrow"><span id="live-dot" class="dot"></span><span id="live-text">Research desk</span></p>
+    <h1>Most trading ideas don't survive real data.<br><span class="accent">This machine finds out which ones do.</span></h1>
+    <p class="lede">Colloquy is an autonomous research loop. You describe a strategy in plain English. Claude turns it into a specification, Codex writes the code, and three independent backtest engines must agree on every trade. The two models then critique the result, and it has to clear risk gates before a sealed holdout period is opened, once. Every idea is shown here, including the ones that failed.</p>
+    <div class="stats" id="stats"></div>
+  </section>
+
+  <section id="performance" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Growth of $100,000</h2>
+        <p class="sub">Each strategy as first specified, after trading costs, against the S&amp;P 500 total return. Shaded bands are market crises; the hatched band is a sealed holdout period.</p>
+      </div>
+      <div class="controls">
+        <div class="seg" id="range">
+          <button data-range="all" class="on">All</button>
+          <button data-range="2000-2009">2000s</button>
+          <button data-range="2010-2019">2010s</button>
+          <button data-range="2020-2025">2020s</button>
+        </div>
+        <div class="seg" id="scale">
+          <button data-scale="log" class="on">Log</button>
+          <button data-scale="value">Linear</button>
+        </div>
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="panel">
+      <div id="growth" class="chart chart-tall"></div>
+      <div class="chart-label">Drawdown from peak</div>
+      <div id="drawdown" class="chart chart-short"></div>
+    </div>
+  </section>
+
+  <section id="search" class="wrap section">
+    <div class="grid-2">
+      <div>
+        <div class="section-head compact">
+          <div>
+            <h2>The whole search, not the highlight reel</h2>
+            <p class="sub">Every strategy version the loop tested, on 2000–2019 research data. The green box is the pass zone: Sharpe ≥ 0.5 with a worst drop no deeper than −35%. Hover for details.</p>
+          </div>
+        </div>
+        <div class="panel"><div id="scatter" class="chart chart-mid"></div></div>
+      </div>
+      <div>
+        <div class="section-head compact">
+          <div>
+            <h2>Skill or luck?</h2>
+            <p class="sub">Annual return left over after removing exposure to the market, size, value, profitability, investment and momentum factors (Fama–French 5 + momentum). Solid bars are statistically significant (|t| ≥ 2).</p>
+          </div>
+        </div>
+        <div class="panel"><div id="alpha" class="chart chart-mid"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Year by year</h2>
+        <p class="sub">Calendar-year returns. The S&amp;P 500 row is the yardstick; years outside a strategy's test window are blank.</p>
+      </div>
+    </div>
+    <div class="panel"><div id="heatmap-wrap"><div id="heatmap" class="chart"></div></div></div>
+  </section>
+
+  <section id="strategies" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Strategies tested</h2>
+        <p class="sub">Newest first. Open a card for the original hypothesis as submitted, every version that was tried, and why it stopped.</p>
+      </div>
+      <div class="seg" id="filter">
+        <button data-filter="all" class="on">All</button>
+        <button data-filter="Passed">Passed</button>
+        <button data-filter="Rejected">Rejected</button>
+        <button data-filter="Running">Running</button>
+      </div>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section id="method" class="wrap section">
+    <div class="section-head"><div><h2>How an idea is tested</h2>
+      <p class="sub">The loop is designed to reject ideas cheaply. It stops early when a strategy is far from the targets, and the holdout can be spent only once.</p></div></div>
+    <ol class="pipeline">
+      <li><b>Describe</b><span>A strategy in plain English, with the reason it should work.</span></li>
+      <li><b>Formalize</b><span>Claude writes a precise spec: universe, signals, timing, sizing, exits.</span></li>
+      <li><b>Implement</b><span>Codex writes the code. A validator replays it on synthetic markets to catch lookahead.</span></li>
+      <li><b>Backtest ×3</b><span>A reference engine, vectorbt and NautilusTrader must reconcile on the same orders.</span></li>
+      <li><b>Critique</b><span>Claude and Codex each propose falsifiable fixes. At most two rounds, and every version is counted.</span></li>
+      <li><b>Gates</b><span>Sharpe ≥ 0.5 and worst drop ≥ −35%, then doubled costs and nearby settings (Sharpe ≥ 0.3).</span></li>
+      <li><b>Holdout</b><span>A sealed later period is opened once. There is no re-tuning after it is seen.</span></li>
+      <li><b>Paper</b><span>Survivors trade on an Interactive Brokers paper account before any real money.</span></li>
+    </ol>
+    <div class="grid-3 guard">
+      <div class="panel pad"><h3>No hindsight in the data</h3><p>CRSP daily prices including delisted companies and delisting returns, point-in-time S&amp;P 500 membership, and Compustat quarterly fundamentals available only after their report date.</p></div>
+      <div class="panel pad"><h3>Realistic execution</h3><p>Decisions are made at the close and filled at the next open. Costs include commissions, the quoted spread, size-based market impact and a borrow fee on shorts. Cash earns no interest, which understates hedged strategies.</p></div>
+      <div class="panel pad"><h3>Honest statistics</h3><p>Pass/fail targets are set before any results are seen and never moved afterwards. Alpha is measured against six factors, every tried version counts toward a deflated Sharpe ratio, and the holdout is locked by the engine itself.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap footer">
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. Updated automatically from the research machine. <span id="generated"></span></p>
+  <p class="fine">Backtested and hypothetical results. Not investment advice. Past performance, simulated or real, does not guarantee future returns. Data: CRSP and Compustat via WRDS (only portfolio-level aggregates are published) and Kenneth French's data library.</p>
+</footer>
+
+<script src="echarts.min.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
