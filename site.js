@@ -8,7 +8,7 @@ const CRISES = [
   ["", "2022-01-03", "2022-10-12"],
 ];
 const START = 100000;
-const state = { data: null, selected: new Set(), scale: "log", range: "all", filter: "all", charts: {} };
+const state = { data: null, selected: new Set(), scale: "log", range: "all", showArchive: false, charts: {} };
 
 const $ = (sel) => document.querySelector(sel);
 const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
@@ -17,7 +17,9 @@ const pct = (v, d = 1, sign = true) =>
 const num = (v, d = 2) => (v == null || !isFinite(v) ? "–" : (v < 0 ? "−" : "") + Math.abs(v).toFixed(d));
 const money = (v) => "$" + (v >= 1e6 ? (v / 1e6).toFixed(2) + "M" : Math.round(v / 1000) + "k");
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-const verdictClass = (v) => (v === "Passed" ? "Passed" : v === "Rejected" || v === "Not testable yet" ? "Rejected" : "Running");
+const verdictClass = (v) => (v.startsWith("Passed") ? "Passed" : v === "Archived" ? "Archived" : v === "Rejected" || v === "Not testable yet" ? "Rejected" : "Running");
+const shortlist = () => state.data.experiments.filter((e) => e.tier === "shortlist");
+const SP_PROT = "sp-protected";
 
 function store(key, value) {
   try {
@@ -64,27 +66,27 @@ function prepare(data) {
     e.series = chain(e, from);
     e.m = e.headline ? e.headline.metrics : null;
   });
-  const sp = data.sp500.growth || [];
-  const base = sp.length ? sp[0][1] : 1;
-  data.sp = sp.map(([d, v]) => [d, (v / base) * START]);
-  const charted = data.experiments.filter((e) => e.series);
-  const ranked = [...charted].sort((a, b) => (b.m.sharpe ?? -9) - (a.m.sharpe ?? -9));
-  charted.forEach((e) => {
-    if (e.verdict === "Passed" || e.verdict === "Running" || ranked.indexOf(e) < 3) state.selected.add(e.id);
-  });
+  const rebase = (g) => {
+    const b = g.length ? g[0][1] : 1;
+    return g.map(([d, v]) => [d, (v / b) * START]);
+  };
+  data.sp = rebase(data.sp500.growth || []);
+  data.spProt = rebase((data.crash_protection || {}).growth || []);
+  data.experiments.filter((e) => e.series && e.tier === "shortlist").forEach((e) => state.selected.add(e.id));
+  if (data.spProt.length) state.selected.add(SP_PROT);
 }
 
 // ---------- hero ----------
 
 function renderStats(data) {
   const exps = data.experiments;
-  const passed = exps.filter((e) => e.verdict === "Passed").length;
+  const passed = exps.filter((e) => e.tier === "shortlist" && e.verdict !== "Running").length;
   const tiles = [
     [exps.length, "ideas tested"],
     [data.totals.versions, "strategy versions"],
     [data.totals.backtests, "backtests"],
     [data.totals.engine_runs, "engine runs reconciled"],
-    [passed, passed === 1 ? "passed the holdout" : "passed the holdout", true],
+    [passed, "on the shortlist", true],
   ];
   $("#stats").innerHTML = tiles
     .map(([v, l, hl]) => `<div class="stat${hl ? " hl" : ""}"><b data-count="${v}">0</b><span>${l}</span></div>`)
@@ -154,15 +156,21 @@ function renderGrowth() {
       lineStyle: { width: 1.6, type: "dashed", color: t.ink2 }, itemStyle: { color: t.ink2 }, z: 1,
       markArea: { silent: true, data: crisisAreas },
     },
+    ...(state.selected.has(SP_PROT) && data.spProt.length ? [{
+      name: "S&P 500 + crash protection", type: "line", data: data.spProt, showSymbol: false,
+      lineStyle: { width: 1.6, type: "dotted", color: t.ink2 }, itemStyle: { color: t.ink2 }, z: 2,
+    }] : []),
     ...exps.map((e) => ({
-      name: e.title, type: "line", data: e.series.pts, showSymbol: false,
+      name: e.title + (e.headline.held ? " (as held)" : ""), type: "line", data: e.series.pts, showSymbol: false,
       lineStyle: { width: 2.2, color: e.color }, itemStyle: { color: e.color },
       emphasis: { focus: "series", lineStyle: { width: 3 } }, z: 3,
       markArea: e.series.holdout
         ? {
             silent: true,
             data: [[
-              { name: "Sealed holdout", xAxis: e.series.holdout[0], itemStyle: { color: e.color, opacity: 0.1, decal: { symbol: "rect", dashArrayX: [1, 0], dashArrayY: [2, 5], rotation: -0.8, color: e.color } }, label: { color: e.color, fontSize: 10, fontWeight: 600, position: "insideTopRight" } },
+              e.holdout.kind === "after"
+                ? { name: "After-check (not sealed)", xAxis: e.series.holdout[0], itemStyle: { color: e.color, opacity: 0.06, decal: { symbol: "circle", symbolSize: 0.6, dashArrayX: [1, 4], dashArrayY: [1, 4], color: e.color } }, label: { color: t.ink3, fontSize: 10, fontWeight: 600, position: "insideTopLeft", distance: 14 } }
+                : { name: "Sealed holdout", xAxis: e.series.holdout[0], itemStyle: { color: e.color, opacity: 0.1, decal: { symbol: "rect", dashArrayX: [1, 0], dashArrayY: [2, 5], rotation: -0.8, color: e.color } }, label: { color: e.color, fontSize: 10, fontWeight: 600, position: "insideTopRight" } },
               { xAxis: e.series.holdout[1] },
             ]],
           }
@@ -218,6 +226,7 @@ function renderDrawdown(exps) {
     dataZoom: [{ type: "inside", ...rangeWindow() }],
     series: [
       { name: "S&P 500", type: "line", data: drawdown(data.sp), showSymbol: false, lineStyle: { width: 1.2, type: "dashed", color: t.ink2 }, itemStyle: { color: t.ink2 } },
+      ...(state.selected.has(SP_PROT) && data.spProt.length ? [{ name: "S&P 500 + crash protection", type: "line", data: drawdown(data.spProt), showSymbol: false, lineStyle: { width: 1.2, type: "dotted", color: t.ink2 }, itemStyle: { color: t.ink2 } }] : []),
       ...exps.map((e) => ({ name: e.title, type: "line", data: drawdown(e.series.pts), showSymbol: false, lineStyle: { width: 1.6, color: e.color }, itemStyle: { color: e.color }, areaStyle: area(e.color) })),
     ],
   });
@@ -225,11 +234,17 @@ function renderDrawdown(exps) {
 }
 
 function renderChips() {
-  const exps = state.data.experiments.filter((e) => e.series);
+  const all = state.data.experiments.filter((e) => e.series);
+  const archived = all.filter((e) => e.tier !== "shortlist");
+  const exps = all.filter((e) => e.tier === "shortlist" || state.showArchive);
+  const chip = (id, title, color, extra = "") =>
+    `<button class="chip${extra}${state.selected.has(id) ? " on" : ""}" data-id="${id}" style="--c:${color}" aria-pressed="${state.selected.has(id)}"><i></i>${esc(title)}</button>`;
   $("#chips").innerHTML =
     `<span class="chip on" style="--c:${css("--ink-2")}" title="Always shown"><i></i>S&amp;P 500</span>` +
-    exps.map((e) => `<button class="chip${state.selected.has(e.id) ? " on" : ""}" data-id="${e.id}" style="--c:${e.color}" aria-pressed="${state.selected.has(e.id)}"><i></i>${esc(e.title)}</button>`).join("");
-  $("#chips").querySelectorAll("button").forEach((b) =>
+    (state.data.spProt.length ? chip(SP_PROT, "S&P 500 + crash protection", css("--ink-2")) : "") +
+    exps.map((e) => chip(e.id, e.title, e.color, e.tier === "shortlist" ? "" : " ghost")).join("") +
+    (archived.length ? `<button class="chip ghost" id="toggle-archive" style="--c:${css("--ink-3")}">${state.showArchive ? "Hide archived" : `+ ${archived.length} archived`}</button>` : "");
+  $("#chips").querySelectorAll("button[data-id]").forEach((b) =>
     b.addEventListener("click", () => {
       const id = b.dataset.id;
       state.selected.has(id) ? state.selected.delete(id) : state.selected.add(id);
@@ -238,6 +253,13 @@ function renderChips() {
       renderGrowth();
     })
   );
+  const tog = $("#toggle-archive");
+  if (tog) tog.addEventListener("click", () => {
+    state.showArchive = !state.showArchive;
+    if (!state.showArchive) archived.forEach((e) => state.selected.delete(e.id));
+    renderChips();
+    renderGrowth();
+  });
 }
 
 function renderScatter() {
@@ -269,11 +291,19 @@ function renderScatter() {
         name: "Pass zone", type: "scatter", data: [], silent: true,
         markArea: { silent: true, itemStyle: { color: t.accent, opacity: 0.1, borderColor: t.accent, borderWidth: 1, borderType: "dashed" }, label: { show: true, position: "insideTopRight", color: t.accent, fontWeight: 600, formatter: "PASS ZONE" }, data: [[{ coord: [-35, 0.5] }, { coord: [0, ymax] }]] },
       },
-      ...groups.map((e) => ({
-        name: e.title, type: "scatter", symbolSize: 13,
-        itemStyle: { color: e.color, borderColor: t.panel, borderWidth: 1.5, opacity: 0.92 },
-        emphasis: { scale: 1.5 },
-        data: e.versions.map((v) => ({ value: [v.metrics.max_drawdown * 100, v.metrics.sharpe], v })),
+      ...groups.map((e) => {
+        const live = e.tier === "shortlist";
+        return {
+          name: e.title, type: "scatter", symbolSize: live ? 13 : 9, z: live ? 3 : 1,
+          itemStyle: { color: live ? e.color : t.ink3, borderColor: t.panel, borderWidth: 1.5, opacity: live ? 0.92 : 0.35 },
+          emphasis: { scale: 1.5 },
+          data: e.versions.map((v) => ({ value: [v.metrics.max_drawdown * 100, v.metrics.sharpe], v })),
+        };
+      }),
+      ...groups.filter((e) => e.headline && e.headline.held).map((e) => ({
+        name: e.title + " (as held)", type: "scatter", symbolSize: 16, z: 4,
+        itemStyle: { color: "transparent", borderColor: e.color, borderWidth: 3 },
+        data: [{ value: [e.m.max_drawdown * 100, e.m.sharpe], v: { version: e.headline.version, label: "Crash-protected, as held (three engines)", metrics: e.m } }],
       })),
       {
         name: "S&P 500", type: "scatter", symbol: "diamond", symbolSize: 16,
@@ -287,7 +317,7 @@ function renderScatter() {
 
 function renderAlpha() {
   const t = base();
-  const exps = state.data.experiments.filter((e) => e.m && e.m.factor_alpha_annual != null)
+  const exps = shortlist().filter((e) => e.m && e.m.factor_alpha_annual != null)
     .sort((a, b) => a.m.factor_alpha_annual - b.m.factor_alpha_annual);
   const c = chart("alpha");
   c.setOption({
@@ -318,9 +348,9 @@ function renderAlpha() {
 
 function renderHeatmap() {
   const t = base(), data = state.data;
-  const rows = [{ title: "S&P 500", yearly: data.sp500.yearly || {} }].concat(
-    data.experiments.filter((e) => e.headline).map((e) => ({ title: e.title, yearly: { ...e.headline.yearly, ...(e.holdout ? e.holdout.yearly : {}) }, holdout: e.holdout }))
-  );
+  const rows = [{ title: "S&P 500", yearly: data.sp500.yearly || {} }]
+    .concat(data.crash_protection ? [{ title: "S&P 500 + crash protection", yearly: data.crash_protection.yearly || {} }] : [])
+    .concat(shortlist().filter((e) => e.headline).map((e) => ({ title: e.title, yearly: { ...e.headline.yearly, ...(e.holdout ? e.holdout.yearly : {}) }, holdout: e.holdout })));
   const lastYear = Math.max(...rows.flatMap((r) => Object.keys(r.yearly).map(Number)));
   const years = [];
   for (let y = 2000; y <= lastYear; y++) years.push(String(y));
@@ -368,14 +398,22 @@ function spark(e, width = 320, height = 56) {
     <path d="${path(pts)}" fill="none" stroke="${e.color}" stroke-width="2" vector-effect="non-scaling-stroke"/></svg>`;
 }
 
+function holdoutLine(e) {
+  if (!e.holdout) return "";
+  const h = e.holdout.metrics;
+  const kind = e.holdout.kind === "after" ? "After-check" : "Sealed holdout";
+  const tail = e.holdout.kind === "after" ? " · not sealed" : "";
+  const bench = h.benchmark_cagr != null ? ` (S&amp;P ${pct(h.benchmark_cagr)}/yr)` : "";
+  return `<p><b>${kind} ${h.start.slice(0, 4)}–${h.end.slice(0, 4)}${tail}:</b> ${pct(h.cagr)}/yr, Sharpe ${num(h.sharpe)}, worst drop ${pct(h.max_drawdown)}${bench}, alpha t ${num(h.factor_alpha_t, 1)}</p>`;
+}
+
 function renderCards() {
-  const exps = [...state.data.experiments].reverse()
-    .filter((e) => state.filter === "all" || verdictClass(e.verdict) === state.filter);
+  const exps = shortlist().reverse();
   $("#cards").innerHTML = exps.map((e) => {
     const m = e.m || {};
     const cls = verdictClass(e.verdict);
-    const ho = e.holdout
-      ? `<p><b>Holdout ${e.holdout.metrics.start.slice(0, 4)}–${e.holdout.metrics.end.slice(0, 4)}:</b> ${pct(e.holdout.metrics.cagr)}/yr, Sharpe ${num(e.holdout.metrics.sharpe)}, worst drop ${pct(e.holdout.metrics.max_drawdown)} (S&amp;P ${pct(e.holdout.metrics.benchmark_cagr)}/yr)</p>`
+    const asIs = m.as_is
+      ? `<p class="held">As held with crash protection (out of stocks ${pct(m.share_protected, 0, false)} of the time). Without it: ${pct(m.as_is.cagr)}/yr, Sharpe ${num(m.as_is.sharpe)}, worst drop ${pct(m.as_is.max_drawdown, 0)}.</p>`
       : "";
     const versions = e.versions.map((v) => `<tr><td>v${v.version}</td><td>${esc(v.label)}</td><td class="num">${num(v.metrics.sharpe)}</td><td class="num">${pct(v.metrics.max_drawdown, 0)}</td><td class="num">${v.stress_sharpe != null ? num(v.stress_sharpe) : "–"}</td></tr>`).join("");
     return `<article class="panel card" style="--c:${e.color}">
@@ -389,15 +427,49 @@ function renderCards() {
         <div>Worst drop<b class="${m.max_drawdown < -0.35 ? "neg" : ""}">${pct(m.max_drawdown, 0)}</b></div>
         <div>Alpha t<b class="${Math.abs(m.factor_alpha_t) >= 2 ? "pos" : ""}">${num(m.factor_alpha_t, 1)}</b></div>
       </div>
-      ${ho}
+      ${asIs}
+      ${holdoutLine(e)}
       ${e.takeaway ? `<p class="takeaway">${esc(e.takeaway)}</p>` : ""}
       <details class="more"><summary>Hypothesis, versions and verdict</summary>
-        <div class="label">Verdict</div><p>${esc(e.reason || "In progress")}</p>
+        ${e.rescore ? `<div class="label">Re-scored</div><p>${esc(e.rescore)}</p>` : ""}
+        <div class="label">Original verdict</div><p>${esc(e.reason || "In progress")}</p>
         ${versions ? `<div class="label">Versions tried</div><table class="versions"><thead><tr><th>#</th><th>Change</th><th class="num">Sharpe</th><th class="num">Drop</th><th class="num">2× cost</th></tr></thead><tbody>${versions}</tbody></table>` : ""}
         <div class="label">Original hypothesis, as submitted</div><div class="hyp">${esc(e.hypothesis)}</div>
       </details>
     </article>`;
   }).join("");
+  renderArchive();
+}
+
+function renderArchive() {
+  const rows = state.data.experiments.filter((e) => e.tier !== "shortlist").reverse();
+  $("#archive").hidden = !rows.length;
+  $("#archive-count").textContent = `${rows.length} idea${rows.length === 1 ? "" : "s"}`;
+  const head = `<thead><tr><th>Strategy</th><th class="hide-sm">Family</th><th class="num">Return/yr</th><th class="num">S&amp;P</th><th class="num">Sharpe</th><th class="num">Worst drop</th><th class="num">Alpha t</th><th class="why">Why it's archived</th></tr></thead>`;
+  const body = rows.map((e) => {
+    const m = e.m || {};
+    return `<tr><td><b>${esc(e.title)}</b><span class="badge ${verdictClass(e.verdict)}">${esc(e.verdict)}</span></td>
+      <td class="hide-sm">${esc(e.family)}</td>
+      <td class="num">${pct(m.cagr)}</td><td class="num">${pct(m.benchmark_cagr)}</td>
+      <td class="num">${num(m.sharpe)}</td><td class="num">${pct(m.max_drawdown, 0)}</td>
+      <td class="num">${num(m.factor_alpha_t, 1)}</td>
+      <td class="why">${esc(e.takeaway || e.reason || "")}</td></tr>`;
+  }).join("");
+  $("#archive-table").innerHTML = head + `<tbody>${body}</tbody>`;
+}
+
+function renderRules() {
+  const cp = state.data.crash_protection;
+  if (!cp) return;
+  const s = cp.summary;
+  $("#cp-kpis").innerHTML = [
+    `<div class="head">S&amp;P 500</div><div>Return/yr<b>${pct(s.index.cagr)}</b></div><div>Worst drop<b class="neg">${pct(s.index.max_drawdown, 0)}</b></div>`,
+    `<div class="head">+ crash protection</div><div>Return/yr<b>${pct(s.tbills.cagr)}</b></div><div>Worst drop<b class="pos">${pct(s.tbills.max_drawdown, 0)}</b></div>`,
+  ].join("");
+  $("#cp-note").textContent = `${cp.start.slice(0, 4)}–${cp.end.slice(0, 4)}, after switching costs. Out of stocks ${pct(cp.share_protected, 0, false)} of the time; the price is false alarms (2011, 2018) and a late return after fast rebounds.`;
+  const cell = (v) => `<td class="num ${v >= 0 ? "pos" : v < -0.2 ? "neg" : ""}">${pct(v)}</td>`;
+  $("#episodes").innerHTML = `<thead><tr><th>Peak to trough</th><th class="num">S&amp;P 500</th><th class="num">Rule → T-bills</th><th class="num">Rule → bonds</th></tr></thead><tbody>` +
+    cp.episodes.map((x) => `<tr><td>${esc(x.name)} <span class="tag">${x.start.slice(0, 7)}</span></td>${cell(x.index)}${cell(x.tbills)}${cell(x.bonds)}</tr>`).join("") + "</tbody>";
 }
 
 // ---------- live paper portfolio ----------
@@ -446,7 +518,7 @@ function renderPaper() {
   const g = chart("paper-growth");
   if (p.growth) {
     const toPts = (arr) => arr.map(([d, v]) => [d, (v - 1)]);
-    const pick = state.data.experiments.find((e) => e.verdict === "Passed");
+    const pick = state.data.experiments.find((e) => e.title === p.title) || shortlist()[0];
     g.setOption({
       textStyle: t.text,
       grid: { left: 52, right: 16, top: 36, bottom: 28 },
@@ -532,6 +604,7 @@ function renderHoldings() {
 
 function renderAll() {
   renderPaper();
+  renderRules();
   renderChips();
   renderGrowth();
   renderScatter();
@@ -574,7 +647,6 @@ async function main() {
   renderAll();
   segmented("#scale", "scale", renderGrowth);
   segmented("#range", "range", renderGrowth);
-  segmented("#filter", "filter", renderCards);
   let pending;
   window.addEventListener("resize", () => {
     clearTimeout(pending);

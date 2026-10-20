@@ -20,6 +20,7 @@
     <nav>
       <a href="#live">Live</a>
       <a href="#performance">Performance</a>
+      <a href="#rules">Rules</a>
       <a href="#search">Search</a>
       <a href="#strategies">Strategies</a>
       <a href="#method">Method</a>
@@ -60,7 +61,7 @@
     <div class="section-head">
       <div>
         <h2>Growth of $100,000</h2>
-        <p class="sub">Each strategy as first specified, after trading costs, against the S&amp;P 500 total return. Shaded bands are market crises; the hatched band is a sealed holdout period.</p>
+        <p class="sub">The shortlist, after trading costs, against the S&amp;P 500 total return. Strategies marked "as held" use crash protection. Shaded bands are market crises; a hatched band is a sealed holdout, a dotted one an after-check that was not sealed. Archived ideas can be added from the chips.</p>
       </div>
       <div class="controls">
         <div class="seg" id="range">
@@ -83,13 +84,31 @@
     </div>
   </section>
 
+  <section id="rules" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>The rules changed once <span class="badge Running">20 Oct 2026</span></h2>
+        <p class="sub">The original rules rejected any stock strategy that fell more than 35%, which in practice meant any strategy that stayed invested through 2008, however good its stock picks. They also asked three holdout years to clear a fixed Sharpe target, which a genuinely good strategy fails about half the time by luck. Version 2 was written down before anything was re-scored with it:</p>
+      </div>
+    </div>
+    <div class="grid-3 guard">
+      <div class="panel pad"><h3>Crash protection</h3><p>A long stock strategy may be held with one fixed rule: if the S&amp;P 500 ends a month below its 200-day average, move to T-bills until a month ends back above it. The −35% limit applies to the portfolio as held. The rule is never tuned per strategy.</p></div>
+      <div class="panel pad"><h3>An edge of its own</h3><p>The rule alone makes the index look good, so a strategy must also beat the six-factor model on its own picks (alpha t-stat ≥ 1.5), measured without protection. Holding the index with the rule cannot pass.</p></div>
+      <div class="panel pad"><h3>Holdout: did it break?</h3><p>The sealed years now fail a strategy only when it does clearly worse than its research predicts, allowing for how noisy a few years are. A pass means paper trading, not proof: no strategy kept a factor edge after its research years.</p></div>
+    </div>
+    <div class="grid-2 rules-grid">
+      <div class="panel pad"><h3>Does stepping aside in a crash work?</h3><div id="cp-kpis" class="kpi-row"></div><p class="note" id="cp-note"></p></div>
+      <div class="panel pad"><h3>Through each crisis</h3><div class="table-wrap"><table class="versions" id="episodes"></table></div><p class="note">Bonds rallied in 2000–02 and 2008 but fell with stocks in 2022, so the rules use T-bills.</p></div>
+    </div>
+  </section>
+
   <section id="search" class="wrap section">
     <div class="grid-2">
       <div>
         <div class="section-head compact">
           <div>
             <h2>The whole search, not the highlight reel</h2>
-            <p class="sub">Every strategy version the loop tested, on 2000–2019 research data. The green box is the pass zone: Sharpe ≥ 0.5 with a worst drop no deeper than −35%. Hover for details.</p>
+            <p class="sub">Every strategy version the loop tested, on research data. The green box is Sharpe ≥ 0.5 with a worst drop no deeper than −35%. Archived ideas are grey; a ringed point is a shortlisted strategy as held with crash protection. Hover for details.</p>
           </div>
         </div>
         <div class="panel"><div id="scatter" class="chart chart-mid"></div></div>
@@ -98,7 +117,7 @@
         <div class="section-head compact">
           <div>
             <h2>Skill or luck?</h2>
-            <p class="sub">Annual return left over after removing exposure to the market, size, value, profitability, investment and momentum factors (Fama–French 5 + momentum). Solid bars are statistically significant (|t| ≥ 2).</p>
+            <p class="sub">Shortlist only. Annual return left over after removing exposure to the market, size, value, profitability, investment and momentum factors (Fama–French 5 + momentum), measured on the strategy itself, without crash protection. Solid bars are statistically significant (|t| ≥ 2).</p>
           </div>
         </div>
         <div class="panel"><div id="alpha" class="chart chart-mid"></div></div>
@@ -110,7 +129,7 @@
     <div class="section-head">
       <div>
         <h2>Year by year</h2>
-        <p class="sub">Calendar-year returns. The S&amp;P 500 row is the yardstick; years outside a strategy's test window are blank.</p>
+        <p class="sub">Calendar-year returns of the shortlist as held. The S&amp;P 500 rows are the yardstick; years outside a strategy's test window are blank.</p>
       </div>
     </div>
     <div class="panel"><div id="heatmap-wrap"><div id="heatmap" class="chart"></div></div></div>
@@ -119,17 +138,15 @@
   <section id="strategies" class="wrap section">
     <div class="section-head">
       <div>
-        <h2>Strategies tested</h2>
-        <p class="sub">Newest first. Open a card for the original hypothesis as submitted, every version that was tried, and why it stopped.</p>
-      </div>
-      <div class="seg" id="filter">
-        <button data-filter="all" class="on">All</button>
-        <button data-filter="Passed">Passed</button>
-        <button data-filter="Rejected">Rejected</button>
-        <button data-filter="Running">Running</button>
+        <h2>Shortlist</h2>
+        <p class="sub">Strategies that pass the current rules, newest first. Open a card for the original hypothesis, every version that was tried, and how it was judged.</p>
       </div>
     </div>
     <div class="cards" id="cards"></div>
+    <details class="panel archive" id="archive">
+      <summary><span><b>Archive</b> · <span id="archive-count"></span></span><span class="sub">Rejected or not worth pursuing, kept for the record</span></summary>
+      <div class="table-wrap"><table class="versions archive-table" id="archive-table"></table></div>
+    </details>
   </section>
 
   <section id="method" class="wrap section">
@@ -141,14 +158,14 @@
       <li><b>Implement</b><span>Codex writes the code. A validator replays it on synthetic markets to catch lookahead.</span></li>
       <li><b>Backtest ×3</b><span>A reference engine, vectorbt and NautilusTrader must reconcile on the same orders.</span></li>
       <li><b>Critique</b><span>Claude and Codex each propose falsifiable fixes. At most two rounds, and every version is counted.</span></li>
-      <li><b>Gates</b><span>Sharpe ≥ 0.5 and worst drop ≥ −35%, then doubled costs and nearby settings (Sharpe ≥ 0.3).</span></li>
-      <li><b>Holdout</b><span>A sealed later period is opened once. There is no re-tuning after it is seen.</span></li>
+      <li><b>Gates</b><span>Sharpe ≥ 0.5 and worst drop ≥ −35% as held, a six-factor alpha t ≥ 1.5, then doubled costs and nearby settings (Sharpe ≥ 0.3).</span></li>
+      <li><b>Holdout</b><span>A sealed later period is opened once and must be consistent with research. There is no re-tuning after it is seen.</span></li>
       <li><b>Paper</b><span>Survivors trade on an Interactive Brokers paper account before any real money.</span></li>
     </ol>
     <div class="grid-3 guard">
       <div class="panel pad"><h3>No hindsight in the data</h3><p>CRSP daily prices including delisted companies and delisting returns, point-in-time S&amp;P 500 membership, and Compustat quarterly fundamentals available only after their report date.</p></div>
       <div class="panel pad"><h3>Realistic execution</h3><p>Decisions are made at the close and filled at the next open. Costs include commissions, the quoted spread, size-based market impact and a borrow fee on shorts. Cash earns no interest, which understates hedged strategies.</p></div>
-      <div class="panel pad"><h3>Honest statistics</h3><p>Pass/fail targets are set before any results are seen and never moved afterwards. Alpha is measured against six factors, every tried version counts toward a deflated Sharpe ratio, and the holdout is locked by the engine itself.</p></div>
+      <div class="panel pad"><h3>Honest statistics</h3><p>Pass/fail rules are set before results are seen. They changed once (version 2, above), written down before any re-scoring, and re-scored verdicts are labelled. Alpha is measured against six factors, every tried version counts toward a deflated Sharpe ratio, and the holdout is locked by the engine itself.</p></div>
     </div>
   </section>
 </main>
