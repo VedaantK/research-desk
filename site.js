@@ -400,9 +400,136 @@ function renderCards() {
   }).join("");
 }
 
+// ---------- live paper portfolio ----------
+
+const sortState = { key: "weight", dir: -1, all: false };
+
+function miniSpark(values, color) {
+  if (!values || values.length < 2) return "";
+  const lo = Math.min(...values), hi = Math.max(...values);
+  const pts = values.map((v, i) => `${((i / (values.length - 1)) * 96).toFixed(1)},${(22 - ((v - lo) / (hi - lo || 1)) * 20).toFixed(1)}`).join(" ");
+  return `<svg viewBox="0 0 96 24" aria-hidden="true"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5"/></svg>`;
+}
+
+function renderPaper() {
+  const p = state.data.paper || { status: "not_started" };
+  const t = base();
+  const label = { not_started: "Not started", running: "Running", paused: "Paused", error: "Needs attention" }[p.status] || p.status;
+  const badge = $("#paper-badge");
+  badge.textContent = label;
+  badge.className = "badge " + (p.status === "running" ? "Passed" : p.status === "not_started" ? "Running" : "Rejected");
+  const title = p.title ? `<b>${esc(p.title)}</b>, ` : "";
+  $("#paper-sub").innerHTML = p.status === "not_started"
+    ? `${title}the strategy that passed its holdout, is next. Paper trading on an Interactive Brokers paper account starts once the live data feed and broker connection are commissioned. ${p.trend ? "The market filter below already runs on live data." : ""}`
+    : `${title}running forward on an Interactive Brokers paper account since ${esc(p.started)}. Returns and weights only. Data through ${esc(p.feed_as_of || "–")}.`;
+
+  const last = (arr) => (arr && arr.length ? arr[arr.length - 1][1] - 1 : null);
+  const ret = last(p.growth), spy = last(p.spy), bm = last(p.beta_matched);
+  const tiles = p.growth ? [
+    [pct(ret), "return since start", ret >= 0],
+    [pct(ret - spy), "vs S&P 500"],
+    [pct(ret - bm), `vs ${Math.round((p.benchmark_beta || 0) * 100)}% S&P (benchmark)`, ret - bm >= 0],
+    [String((p.holdings || []).length), "holdings"],
+    [p.book_matches == null ? "–" : p.book_matches ? "Yes" : `${p.book_diff} off`, "book matches backtest", p.book_matches],
+  ] : [
+    [p.trend ? (p.trend.risk_on ? "In" : "Out") : "–", "market filter", p.trend && p.trend.risk_on],
+    [p.trend ? num(p.trend.index_vs_sma, 3) : "–", "index ÷ 200-day avg"],
+    [p.trend ? num(p.trend.band, 2) : "0.97", "exit below"],
+    [p.next_rebalance ? new Date(p.next_rebalance + "T12:00").toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "–", "next rebalance"],
+    [p.feed_as_of ? new Date(p.feed_as_of + "T12:00").toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "–", "data through"],
+  ];
+  $("#paper-kpis").innerHTML = tiles.map(([v, l, hl]) => `<div class="stat${hl ? " hl" : ""}"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("");
+
+  // Growth chart
+  const g = chart("paper-growth");
+  if (p.growth) {
+    const toPts = (arr) => arr.map(([d, v]) => [d, (v - 1)]);
+    const pick = state.data.experiments.find((e) => e.verdict === "Passed");
+    g.setOption({
+      textStyle: t.text,
+      grid: { left: 52, right: 16, top: 36, bottom: 28 },
+      legend: { top: 4, textStyle: { color: t.ink2 }, itemWidth: 14, itemHeight: 3 },
+      tooltip: { ...t.tooltip, trigger: "axis", valueFormatter: (v) => pct(v) },
+      xAxis: { type: "time", axisLabel: { color: t.ink3 }, axisLine: { lineStyle: { color: t.line } } },
+      yAxis: { type: "value", axisLabel: { color: t.ink3, formatter: (v) => Math.round(v * 100) + "%" }, splitLine: { lineStyle: { color: t.line } } },
+      series: [
+        { name: "Paper portfolio", type: "line", data: toPts(p.growth), showSymbol: false, lineStyle: { width: 2.4, color: pick ? pick.color : t.accent }, itemStyle: { color: pick ? pick.color : t.accent }, areaStyle: { color: pick ? pick.color : t.accent, opacity: 0.08 } },
+        p.beta_matched && { name: `${Math.round((p.benchmark_beta || 0) * 100)}% S&P + cash`, type: "line", data: toPts(p.beta_matched), showSymbol: false, lineStyle: { width: 1.6, color: t.ink2 }, itemStyle: { color: t.ink2 } },
+        p.spy && { name: "S&P 500 (SPY)", type: "line", data: toPts(p.spy), showSymbol: false, lineStyle: { width: 1.4, type: "dashed", color: t.ink3 }, itemStyle: { color: t.ink3 } },
+      ].filter(Boolean),
+    });
+  } else {
+    g.setOption({ graphic: { type: "text", left: "center", top: "middle", style: { text: "The paper portfolio's growth appears here\nonce trading starts.", fill: t.ink3, font: "14px Inter", align: "center", lineHeight: 22 } } });
+  }
+
+  // Trend filter chart
+  const tr = chart("trend");
+  if (p.trend) {
+    const on = p.trend.risk_on;
+    $("#trend-label").innerHTML = `Market filter · <span class="state-pill ${on ? "on" : "off"}">${on ? "In the market" : "In cash"}</span>`;
+    const band = p.trend.sma.filter((x) => x[1] != null).map(([d, v]) => [d, v * p.trend.band]);
+    tr.setOption({
+      textStyle: t.text,
+      grid: { left: 52, right: 16, top: 36, bottom: 28 },
+      legend: { top: 4, textStyle: { color: t.ink2 }, itemWidth: 14, itemHeight: 3 },
+      tooltip: { ...t.tooltip, trigger: "axis", valueFormatter: (v) => num(v, 3) },
+      xAxis: { type: "time", axisLabel: { color: t.ink3 }, axisLine: { lineStyle: { color: t.line } } },
+      yAxis: { type: "value", scale: true, axisLabel: { color: t.ink3 }, splitLine: { lineStyle: { color: t.line } } },
+      series: [
+        { name: "Equal-weight S&P 500", type: "line", data: p.trend.index, showSymbol: false, lineStyle: { width: 2, color: t.accent }, itemStyle: { color: t.accent } },
+        { name: "200-day average", type: "line", data: p.trend.sma, showSymbol: false, lineStyle: { width: 1.4, color: t.ink2 }, itemStyle: { color: t.ink2 } },
+        { name: "Exit line (0.97×)", type: "line", data: band, showSymbol: false, lineStyle: { width: 1.2, type: "dashed", color: t.bad }, itemStyle: { color: t.bad } },
+      ],
+    });
+  } else {
+    tr.setOption({ graphic: { type: "text", left: "center", top: "middle", style: { text: "Waiting for the first live data build.", fill: t.ink3, font: "14px Inter" } } });
+  }
+  renderHoldings();
+}
+
+function renderHoldings() {
+  const p = state.data.paper || {};
+  const rows = [...(p.holdings || [])];
+  const table = $("#holdings");
+  if (!rows.length) {
+    table.innerHTML = `<tr><td class="empty">No positions yet. Holdings appear after the first rebalance, each linked to its TradingView chart.</td></tr>`;
+    $("#holdings-note").textContent = "";
+    return;
+  }
+  const k = sortState.key, dir = sortState.dir;
+  rows.sort((a, b) => (typeof a[k] === "string" ? a[k].localeCompare(b[k]) : (a[k] ?? -9) - (b[k] ?? -9)) * dir);
+  $("#holdings-note").textContent = `Cash ${pct(p.cash_weight, 1, false)} · click a ticker for its TradingView chart`;
+  const cols = [["symbol", "Ticker"], ["name", "Company"], ["weight", "Weight", 1], ["day", "Today", 1], ["since_entry", "Since bought", 1], [null, "3 months", 1]];
+  const head = cols.map(([key, l, n]) => `<th class="${n ? "num" : ""}" ${key ? `data-key="${key}"` : ""} ${key === k ? `aria-sort="${dir > 0 ? "ascending" : "descending"}"` : ""}>${l}</th>`).join("");
+  const shown = sortState.all ? rows : rows.slice(0, 12);
+  const body = shown.map((h) => {
+    const color = (h.spark && h.spark[h.spark.length - 1] >= h.spark[0]) ? css("--accent") : css("--bad");
+    return `<tr>
+      <td><a href="https://www.tradingview.com/chart/?symbol=${encodeURIComponent(h.tv)}" target="_blank" rel="noopener">${esc(h.symbol)}</a></td>
+      <td class="nm">${esc(h.name)}</td>
+      <td class="num">${pct(h.weight, 1, false)}</td>
+      <td class="num ${h.day > 0 ? "pos" : h.day < 0 ? "neg" : ""}">${pct(h.day, 2)}</td>
+      <td class="num ${h.since_entry > 0 ? "pos" : h.since_entry < 0 ? "neg" : ""}">${pct(h.since_entry)}</td>
+      <td class="num">${miniSpark(h.spark, color)}</td></tr>`;
+  }).join("");
+  const more = rows.length > 12
+    ? `<tfoot><tr><td colspan="6"><button class="more-btn" id="more-holdings">${sortState.all ? "Show top 12" : `Show all ${rows.length}`}</button></td></tr></tfoot>`
+    : "";
+  table.innerHTML = `<thead><tr>${head}</tr></thead><tbody>${body}</tbody>${more}`;
+  const btn = $("#more-holdings");
+  if (btn) btn.addEventListener("click", () => { sortState.all = !sortState.all; renderHoldings(); });
+  table.querySelectorAll("th[data-key]").forEach((th) => th.addEventListener("click", () => {
+    const key = th.dataset.key;
+    sortState.dir = sortState.key === key ? -sortState.dir : (key === "symbol" || key === "name" ? 1 : -1);
+    sortState.key = key;
+    renderHoldings();
+  }));
+}
+
 // ---------- wiring ----------
 
 function renderAll() {
+  renderPaper();
   renderChips();
   renderGrowth();
   renderScatter();

@@ -18,6 +18,7 @@
   <div class="wrap nav-inner">
     <a class="brand" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Colloquy</a>
     <nav>
+      <a href="#live">Live</a>
       <a href="#performance">Performance</a>
       <a href="#search">Search</a>
       <a href="#strategies">Strategies</a>
@@ -35,6 +36,24 @@
     <h1>Most trading ideas don't survive real data.<br><span class="accent">This machine finds out which ones do.</span></h1>
     <p class="lede">Colloquy is an autonomous research loop. You describe a strategy in plain English. Claude turns it into a specification, Codex writes the code, and three independent backtest engines must agree on every trade. The two models then critique the result, and it has to clear risk gates before a sealed holdout period is opened, once. Every idea is shown here, including the ones that failed.</p>
     <div class="stats" id="stats"></div>
+  </section>
+
+  <section id="live" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Live paper portfolio <span id="paper-badge" class="badge Running">Not started</span></h2>
+        <p class="sub" id="paper-sub">The strategy that passed its holdout, running forward on an Interactive Brokers paper account. Returns and weights only.</p>
+      </div>
+    </div>
+    <div id="paper-kpis" class="stats"></div>
+    <div class="grid-2 live-grid">
+      <div class="panel"><div class="chart-label pad-top">Since start · paper vs benchmarks</div><div id="paper-growth" class="chart chart-mid"></div></div>
+      <div class="panel"><div class="chart-label pad-top" id="trend-label">Market filter</div><div id="trend" class="chart chart-mid"></div></div>
+    </div>
+    <div class="panel holdings-panel">
+      <div class="holdings-head"><h3>Holdings</h3><span class="sub" id="holdings-note"></span></div>
+      <div class="table-wrap"><table class="holdings" id="holdings"></table></div>
+    </div>
   </section>
 
   <section id="performance" class="wrap section">

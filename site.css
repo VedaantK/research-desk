@@ -189,3 +189,29 @@ table.versions th.num { text-align: right; }
 .panel { min-width: 0; overflow: hidden; }
 #heatmap-wrap { overflow-x: auto; }
 @media (max-width: 860px) { .stat:last-child { grid-column: 1 / -1; } }
+
+.live-grid { margin-top: 16px; }
+.pad-top { padding-top: 16px; }
+.holdings-panel { margin-top: 16px; }
+.holdings-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 16px 20px 4px; flex-wrap: wrap; }
+.holdings-head h3 { margin: 0; }
+.table-wrap { overflow-x: auto; }
+table.holdings { width: 100%; border-collapse: collapse; font-size: 13.5px; min-width: 620px; }
+table.holdings th { text-align: left; font: 500 11px "JetBrains Mono", monospace; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink-3); padding: 10px 12px; border-bottom: 1px solid var(--line); cursor: pointer; user-select: none; white-space: nowrap; }
+table.holdings th.num, table.holdings td.num { text-align: right; }
+table.holdings th[aria-sort]::after { content: " ↓"; }
+table.holdings th[aria-sort="ascending"]::after { content: " ↑"; }
+table.holdings td { padding: 9px 12px; border-bottom: 1px solid var(--line); }
+table.holdings td.num { font-family: "JetBrains Mono", monospace; }
+table.holdings tr:hover td { background: var(--bg-2); }
+table.holdings a { text-decoration: none; font-weight: 600; }
+table.holdings a:hover { color: var(--accent); }
+table.holdings .nm { color: var(--ink-2); max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+table.holdings svg { width: 96px; height: 24px; display: block; margin-left: auto; }
+.empty { padding: 28px 20px; color: var(--ink-2); text-align: center; }
+.state-pill { display: inline-flex; align-items: center; gap: 6px; font: 600 12px Inter, sans-serif; padding: 3px 10px; border-radius: 999px; }
+.state-pill.on { color: var(--accent); background: var(--accent-soft); }
+.state-pill.off { color: var(--warn); background: color-mix(in srgb, var(--warn) 14%, transparent); }
+.more-btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink-2); font: 500 13px Inter, sans-serif; padding: 7px 14px; border-radius: 8px; cursor: pointer; }
+.more-btn:hover { color: var(--ink); }
+table.holdings tfoot td { text-align: center; border-bottom: 0; padding: 14px; }
