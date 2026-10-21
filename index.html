@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Colloquy Research Desk</title>
-<meta name="description" content="An autonomous research loop that tests systematic S&amp;P 500 strategies on survivorship-free data, three reconciling backtest engines and a sealed holdout.">
+<meta name="description" content="An autonomous research loop that tests systematic S&amp;P 500 strategies on survivorship-free data, three reconciling backtest engines and recorded historical evaluations.">
 <meta property="og:title" content="Colloquy Research Desk">
 <meta property="og:description" content="Every trading idea tested, including the ones that failed, against the S&amp;P 500.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
@@ -37,7 +37,7 @@
   <section class="hero wrap">
     <p class="eyebrow"><span id="live-dot" class="dot"></span><span id="live-text">Research desk</span></p>
     <h1>Most trading ideas don't survive real data.<br><span class="accent">This machine finds out which ones do.</span></h1>
-    <p class="lede">Colloquy is an autonomous research loop. You describe a strategy in plain English. Claude turns it into a specification, Codex writes the code, and three independent backtest engines must agree on every trade. The two models then critique the result, and it has to clear risk gates before a sealed holdout period is opened, once. Every idea is shown here, including the ones that failed.</p>
+    <p class="lede">Colloquy is an autonomous research loop. You describe a strategy in plain English. Claude turns it into a specification, Codex writes the code, and three independent backtest engines must agree on every trade. The two models then critique the result, and it has to clear risk gates before a separate historical evaluation is opened. These historical years have been examined; prospective validation starts only after a new protocol is frozen. Every idea is shown here, including the ones that failed.</p>
     <div class="stats" id="stats"></div><aside class="research-banner"><p class="eyebrow">NEW · OCTOBER 21, 2026</p><h2>Annual value research: completed, criteria failed</h2><p>Seven runs completed and three engines agreed. Baseline: 8.47% annualized return, 46.64% maximum drawdown. It failed the drawdown and factor-alpha checks. This separate annual-data study is exploratory; no fresh holdout was used.</p><a href="annual.html">See all results and charts →</a> · <a href="updates.html">What we built →</a></aside>
   </section>
 
@@ -63,7 +63,7 @@
     <div class="section-head">
       <div>
         <h2>Growth of $100,000</h2>
-        <p class="sub">The shortlist, after trading costs, against the S&amp;P 500 total return. Strategies marked "as held" use crash protection. Shaded bands are market crises; a hatched band is a sealed holdout, a dotted one an after-check that was not sealed. Archived ideas can be added from the chips.</p>
+        <p class="sub">The shortlist, after trading costs, against the S&amp;P 500 total return. Strategies marked "as held" use crash protection. Shaded bands are market crises; evaluation bands show historical results; after-checks and re-scores are exploratory. Archived ideas can be added from the chips.</p>
       </div>
       <div class="controls">
         <div class="seg" id="range">
@@ -96,7 +96,7 @@
     <div class="grid-3 guard">
       <div class="panel pad"><h3>Crash protection</h3><p>A long stock strategy may be held with one fixed rule: if the S&amp;P 500 ends a month below its 200-day average, move to T-bills until a month ends back above it. The −35% limit applies to the portfolio as held. The rule is never tuned per strategy.</p></div>
       <div class="panel pad"><h3>An edge of its own</h3><p>The rule alone makes the index look good, so a strategy must also beat the six-factor model on its own picks (alpha t-stat ≥ 1.5), measured without protection. Holding the index with the rule cannot pass.</p></div>
-      <div class="panel pad"><h3>Holdout: did it break?</h3><p>The sealed years now fail a strategy only when it does clearly worse than its research predicts, allowing for how noisy a few years are. A pass means paper trading, not proof: no strategy kept a factor edge after its research years.</p></div>
+      <div class="panel pad"><h3>Holdout: did it break?</h3><p>The consistency screen rejects clear deterioration relative to research; a pass can still include negative returns or Sharpe. A pass means paper trading, not proof: no strategy kept a factor edge after its research years.</p></div>
     </div>
     <div class="grid-2 rules-grid">
       <div class="panel pad"><h3>Does stepping aside in a crash work?</h3><div id="cp-kpis" class="kpi-row"></div><p class="note" id="cp-note"></p></div>
@@ -161,13 +161,13 @@
       <li><b>Backtest ×3</b><span>A reference engine, vectorbt and NautilusTrader must reconcile on the same orders.</span></li>
       <li><b>Critique</b><span>Claude and Codex each propose falsifiable fixes. At most two rounds, and every version is counted.</span></li>
       <li><b>Gates</b><span>Sharpe ≥ 0.5 and worst drop ≥ −35% as held, a six-factor alpha t ≥ 1.5, then doubled costs and nearby settings (Sharpe ≥ 0.3).</span></li>
-      <li><b>Holdout</b><span>A sealed later period is opened once and must be consistent with research. There is no re-tuning after it is seen.</span></li>
+      <li><b>Holdout</b><span>A separate historical evaluation checks for deterioration. Previously examined years cannot become independent evidence by creating a new experiment.</span></li>
       <li><b>Paper</b><span>Survivors trade on an Interactive Brokers paper account before any real money.</span></li>
     </ol>
     <div class="grid-3 guard">
       <div class="panel pad"><h3>Data timing and revisions</h3><p>CRSP daily prices including delisted companies and delisting returns, point-in-time S&amp;P 500 membership, and Compustat fundamentals used with availability lags. Report-date lags do not remove later revisions; without historical vintages, these fundamentals are not guaranteed to be first-reported. See the separate annual research page for its data limits.</p></div>
       <div class="panel pad"><h3>Realistic execution</h3><p>Decisions are made at the close and filled at the next open. Costs include commissions, the quoted spread, size-based market impact and a borrow fee on shorts. Cash earns no interest, which understates hedged strategies.</p></div>
-      <div class="panel pad"><h3>Honest statistics</h3><p>Pass/fail rules are set before results are seen. They changed once (version 2, above), written down before any re-scoring, and re-scored verdicts are labelled. Alpha is measured against six factors, every tried version counts toward a deflated Sharpe ratio, and the holdout is locked by the engine itself.</p></div>
+      <div class="panel pad"><h3>Honest statistics</h3><p>Pass/fail rules are set before results are seen. They changed once (version 2, above), written down before any re-scoring, and re-scored verdicts are labelled. Alpha is measured against six factors, the research registry records tried versions and statistical diagnostics, and the engine enforces an application date guard; the separate research generation also uses physically truncated data and requires OS isolation.</p></div>
     </div>
   </section>
 </main>
