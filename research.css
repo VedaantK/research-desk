@@ -7,3 +7,4 @@
 @media(max-width:640px){.nav nav{display:flex;gap:14px}.nav nav a{font-size:13px;white-space:nowrap}.nav nav .home{display:none}.nav .icon-btn{margin-left:0}}
 #annual-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:860px){#annual-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}#annual-kpis .stat:last-child{grid-column:auto}}
 .research-page h3{margin-top:28px}
+.note-card{display:block;margin-top:16px;text-decoration:none;color:inherit;border-left:4px solid var(--warn)}.note-card h3{margin:8px 0}.note-card p{color:var(--ink-2);line-height:1.6;max-width:90ch}.note-card .note-link{font-weight:600;color:var(--accent)}.note-card:hover{border-color:var(--ink-3)}

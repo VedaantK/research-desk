@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css?v=a6077b73a7">
-<link rel="stylesheet" href="research.css?v=e2fe009676">
+<link rel="stylesheet" href="research.css?v=dccf27d296">
 <script src="theme.js?v=d756ea93c9"></script>
 </head>
 <body>
@@ -27,7 +27,7 @@
       <a class="sec" href="#strategies">Strategies</a>
       <a class="sec" href="#method">Method</a>
       <span class="nav-sep" aria-hidden="true"></span>
-      <a href="annual.html">Annual research</a>
+      <a href="annual.html">Research notes</a>
       <a href="updates.html">Updates</a>
     </nav>
     <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
@@ -41,7 +41,7 @@
     <p class="eyebrow"><span id="live-dot" class="dot"></span><span id="live-text">Research desk</span></p>
     <h1>Most trading ideas don't survive real data.<br><span class="accent">This machine finds out which ones do.</span></h1>
     <p class="lede">Colloquy is an autonomous research loop. You describe a strategy in plain English. Claude turns it into a specification, Codex writes the code, and three independent backtest engines must agree on every trade. The two models then critique the result, and it has to clear risk gates before it is checked on a separate stretch of history. Those historical years have now all been looked at, so only trading going forward counts as truly new evidence. Every idea is shown here, including the ones that failed.</p>
-    <div class="stats" id="stats"></div><aside class="research-banner"><p class="eyebrow">NEW · OCTOBER 21, 2026</p><h2>Annual research: 11 runs complete, no strategy advances</h2><p>The original seven runs and four component-control tests are complete, with three engines agreeing. Profitability alone returned 8.75% a year with a 42.59% worst drawdown; the combination returned 8.47% with a 46.64% drawdown. Neither passed. This is exploratory historical evidence; no fresh holdout was used.</p><a href="annual.html">See all results and charts →</a> · <a href="updates.html">What we built →</a></aside>
+    <div class="stats" id="stats"></div>
   </section>
 
   <section id="live" class="wrap section">
@@ -152,6 +152,12 @@
       <summary><span><b>Archive</b> · <span id="archive-count"></span></span><span class="sub">Rejected or not worth pursuing, kept for the record</span></summary>
       <div class="table-wrap"><table class="versions archive-table" id="archive-table"></table></div>
     </details>
+    <a class="panel pad note-card" href="annual.html">
+      <span class="eyebrow">Research note 001 · Oct 21, 2026</span>
+      <h3>Value then profitability, retested on sealed yearly data</h3>
+      <p>A stricter rebuild of the small &amp; mid cap idea in the archive: yearly accounting data, a June rebalance, data physically cut off at 2019 and sandboxed code. Eleven runs, three engines agreeing on each. It returned 8.5% a year but fell 47% at worst, and its edge over known factors was nil (alpha t −0.24). Profitability on its own did slightly better and still failed. The earlier quarterly screen looked much stronger (alpha t 2.4); the two designs differ, and that gap is not yet explained.</p>
+      <span class="note-link">Read the study →</span>
+    </a>
   </section>
 
   <section id="method" class="wrap section">
@@ -181,6 +187,6 @@
 </footer>
 
 <script src="echarts.min.js?v=e84270bd0c"></script>
-<script src="site.js?v=e26f803a74"></script>
+<script src="site.js?v=615af49113"></script>
 </body>
 </html>

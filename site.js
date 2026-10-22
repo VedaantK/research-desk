@@ -17,7 +17,7 @@ const pct = (v, d = 1, sign = true) =>
 const num = (v, d = 2) => (v == null || !isFinite(v) ? "–" : (v < 0 ? "−" : "") + Math.abs(v).toFixed(d));
 const money = (v) => "$" + (v >= 1e6 ? (v / 1e6).toFixed(2) + "M" : Math.round(v / 1000) + "k");
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-const verdictClass = (v) => (v.startsWith("Passed") ? "Passed" : v === "Archived" ? "Archived" : v === "Rejected" || v === "Not testable yet" ? "Rejected" : "Running");
+const verdictClass = (v) => (v.startsWith("Passed") ? "Passed" : v === "Archived" || v === "Superseded" ? "Archived" : v === "Rejected" || v === "Not testable yet" ? "Rejected" : "Running");
 const shortlist = () => state.data.experiments.filter((e) => e.tier === "shortlist");
 const SP_PROT = "sp-protected";
 
@@ -453,7 +453,7 @@ function renderArchive() {
       <td class="num">${pct(m.cagr)}</td><td class="num">${pct(m.benchmark_cagr)}</td>
       <td class="num">${num(m.sharpe)}</td><td class="num">${pct(m.max_drawdown, 0)}</td>
       <td class="num">${num(m.factor_alpha_t, 1)}</td>
-      <td class="why">${esc(e.takeaway || e.reason || "")}</td></tr>`;
+      <td class="why">${esc(e.takeaway || e.reason || "")}${e.link ? ` <a href="${esc(e.link)}">See the study →</a>` : ""}</td></tr>`;
   }).join("");
   $("#archive-table").innerHTML = head + `<tbody>${body}</tbody>`;
 }
