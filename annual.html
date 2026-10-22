@@ -1,4 +1,35 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Annual value research · Colloquy</title><link rel="stylesheet" href="site.css?v=a6077b73a7"><link rel="stylesheet" href="research.css?v=b928d4b1fb"></head><body><header class="nav"><div class="wrap nav-inner"><a class="brand" href="index.html">Colloquy</a><nav aria-label="Main navigation"><a href="index.html">Research Desk</a><a href="annual.html">Annual research</a><a href="updates.html">Updates</a></nav></div></header><main class="wrap research-page">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Annual value research · Colloquy</title>
+<meta name="description" content="Annual value-then-profitability research on US stocks outside the S&amp;P 500: every run, the component controls, charts and why nothing advanced.">
+<meta property="og:title" content="Annual value research · Colloquy">
+<meta property="og:description" content="Annual value-then-profitability research on US stocks outside the S&amp;P 500: every run, the component controls, charts and why nothing advanced.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=a6077b73a7">
+<link rel="stylesheet" href="research.css?v=e2fe009676">
+<script src="theme.js?v=d756ea93c9"></script>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Colloquy</a>
+    <nav aria-label="Main navigation">
+      <a class="home" href="index.html">Research desk</a>
+      <a href="annual.html" aria-current="page">Annual research</a>
+      <a href="updates.html">Updates</a>
+    </nav>
+    <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="wrap research-page">
 <p class="eyebrow">RESEARCH NOTE 001 · OCTOBER 21, 2026</p><h1>Annual value → profitability</h1><p class="lede">A working research pipeline. A strategy that did not clear its advancement criteria.</p>
 <p><a href="#comparison">Compare the three portfolios</a> · <a href="#improvements">Potential research improvements</a> · <a href="updates.html#component-review">Latest build notes</a></p>
 <div id="research-status" role="status" aria-live="polite">Loading verified results…</div>
@@ -12,4 +43,7 @@
 <section class="section" id="improvements"><h2>What could improve the research?</h2><p class="sub">These are proposed next steps after reviewing the results. No new strategy tests or parameter search were run for this review.</p><div class="grid-3"><div class="panel pad"><h3>1. Use a matched benchmark</h3><p>Test an equal-weight portfolio from the same eligible stocks, with the same timing, exposure and costs. The S&amp;P 500 is not a matched universe for these non-S&amp;P stocks. Six-factor alpha already controls for broad exposures, but this benchmark would make the stock-selection comparison clearer.</p><p><b>Feasible with existing data; untested.</b></p></div><div class="panel pad"><h3>2. Diagnose risk before changing rules</h3><p>Review position concentration and losses during drawdowns. A fixed lower-exposure or broader-selection test could investigate risk, but reducing exposure does not by itself establish a stock-picking edge. Do not choose a setting just because it makes the historical drawdown pass.</p><p><b>Feasible with existing data; untested.</b></p></div><div class="panel pad"><h3>3. Strengthen the data checks</h3><p>Audit financial availability and the three listing-gap exits in the value control. Industry-neutral ranking would need historical industry labels; the sealed names table does not contain them. First-reported validation would need historical fundamental vintages.</p><p><b>Partly feasible; missing data remains a limit.</b></p></div></div><h3>What this review does not justify</h3><ul><li>Promoting profitability alone as a validated winner: its alpha t-statistic is 0.97, below the unchanged 1.5 requirement, and its drawdown is 42.59%.</li><li>Tuning value cutoffs or adding a trend filter until a historical test passes.</li><li>Treating cheaper execution as the main fix: doubled costs reduced annual returns by only 0.15–0.23 percentage points across the three portfolios.</li><li>Calling previously examined history a fresh holdout. Any follow-up requires a fixed protocol and all attempts must remain visible.</li></ul></section>
 <section class="section"><h2>What changed in the system</h2><div class="grid-3"><div class="panel pad"><h3>Data</h3><p>Added a separate annual-lagged research path, explicit source checks and a 2019 cutoff.</p></div><div class="panel pad"><h3>Memory</h3><p>Moved large arrays to disk and processed assets and bars in batches. The full standalone baseline used about 16.1 GiB peak RAM.</p></div><div class="panel pad"><h3>Verification</h3><p>Ran three engines sequentially, reproduced the earlier baseline and recorded every robustness run.</p></div></div><p><a href="updates.html">Read the build notes →</a></p></section>
 <section class="section"><h2>Limits and next decision</h2><ul><li>The current version stops at the research stage. A new hypothesis needs a reason and criteria fixed before testing.</li><li>Annual data availability lags do not remove all restatement bias.</li><li>The original baseline includes one listing-gap exit and the value-only control includes three; the missing across-gap return remains a data limitation.</li><li>The memory change made these runs feasible on this machine; it is not a guarantee of staying below 16 GiB.</li></ul><details><summary>Run warnings and provenance</summary><div id="annual-warnings"></div><p id="annual-provenance"></p><p><a href="annual-data.json">Download the portfolio-level results JSON</a></p></details></section>
-</main><footer class="wrap footer"><p>Historical, hypothetical research. Only portfolio-level aggregates are published.</p><a href="updates.html">What changed</a> · <a href="index.html">Research Desk</a></footer><script src="echarts.min.js?v=e84270bd0c"></script><script src="research.js?v=84d4e69f38"></script><script src="comparison.js?v=ee8131a52c"></script></body></html>
+</main><footer class="wrap footer">
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Research desk</a> · <a href="annual.html">Annual research</a> · <a href="updates.html">Updates</a></p>
+  <p class="fine">Backtested and hypothetical results. Not investment advice. Past performance, simulated or real, does not guarantee future returns. Data: CRSP and Compustat via WRDS (only portfolio-level aggregates are published) and Kenneth French's data library.</p>
+</footer><script src="echarts.min.js?v=e84270bd0c"></script><script src="research.js?v=c5ec98c83b"></script><script src="comparison.js?v=0c755781e9"></script></body></html>

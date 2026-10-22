@@ -537,14 +537,22 @@ function renderPaper() {
   $("#trend").classList.toggle("chart-empty", !p.trend);
   const g = chart("paper-growth");
   if (p.growth) {
-    const toPts = (arr) => arr.map(([d, v]) => [d, (v - 1)]);
+    // Few points: a time axis would label hours, so use one category per trading day.
+    const days = p.growth.length < 15 ? p.growth.map(([d]) => d) : null;
+    const toPts = (arr) => {
+      if (!days) return arr.map(([d, v]) => [d, v - 1]);
+      const byDay = new Map(arr);
+      return days.map((d) => (byDay.has(d) ? byDay.get(d) - 1 : null));
+    };
     const pick = state.data.experiments.find((e) => e.title === p.title) || shortlist()[0];
     g.setOption({
       textStyle: t.text,
-      grid: { left: 52, right: 16, top: 36, bottom: 28 },
+      grid: { left: 52, right: 28, top: 36, bottom: 28 },
       legend: { top: 4, textStyle: { color: t.ink2 }, itemWidth: 14, itemHeight: 3 },
       tooltip: { ...t.tooltip, trigger: "axis", valueFormatter: (v) => pct(v) },
-      xAxis: { type: "time", axisLabel: { color: t.ink3 }, axisLine: { lineStyle: { color: t.line } } },
+      xAxis: days
+        ? { type: "category", boundaryGap: false, data: days, axisLabel: { color: t.ink3, formatter: (d) => new Date(d + "T12:00").toLocaleDateString(undefined, { month: "short", day: "numeric" }) }, axisLine: { lineStyle: { color: t.line } } }
+        : { type: "time", axisLabel: { color: t.ink3 }, axisLine: { lineStyle: { color: t.line } } },
       yAxis: { type: "value", scale: true, axisLabel: { color: t.ink3, formatter: (v) => pct(v, Math.abs(v) < 0.02 ? 2 : 0) }, splitLine: { lineStyle: { color: t.line } } },
       series: [
         { name: pilot ? "Pilot (paper)" : "Paper portfolio", type: "line", data: toPts(p.growth), showSymbol: false, lineStyle: { width: 2.4, color: pick ? pick.color : t.accent }, itemStyle: { color: pick ? pick.color : t.accent }, areaStyle: { color: pick ? pick.color : t.accent, opacity: 0.08 } },
@@ -564,7 +572,7 @@ function renderPaper() {
     const band = p.trend.sma.filter((x) => x[1] != null).map(([d, v]) => [d, v * p.trend.band]);
     tr.setOption({
       textStyle: t.text,
-      grid: { left: 52, right: 16, top: 36, bottom: 28 },
+      grid: { left: 52, right: 28, top: 36, bottom: 28 },
       legend: { top: 4, textStyle: { color: t.ink2 }, itemWidth: 14, itemHeight: 3 },
       tooltip: { ...t.tooltip, trigger: "axis", valueFormatter: (v) => num(v, 3) },
       xAxis: { type: "time", axisLabel: { color: t.ink3 }, axisLine: { lineStyle: { color: t.line } } },
@@ -644,18 +652,8 @@ function segmented(id, key, after) {
 }
 
 function initTheme() {
-  const saved = store("theme");
-  if (saved) document.documentElement.dataset.theme = saved;
-  $("#theme").addEventListener("click", () => {
-    const dark = document.documentElement.dataset.theme
-      ? document.documentElement.dataset.theme === "dark"
-      : matchMedia("(prefers-color-scheme: dark)").matches;
-    const next = dark ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    store("theme", next);
-    if (state.data) renderAll();
-  });
-  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => state.data && renderAll());
+  // theme.js owns the toggle and the saved choice; redraw the charts when it changes.
+  window.addEventListener("themechange", () => state.data && renderAll());
 }
 
 async function main() {

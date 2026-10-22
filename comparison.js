@@ -21,13 +21,18 @@
     $("comparison-warnings").innerHTML='<h3>Execution warnings</h3><ul>'+runs.map(r=>`<li><b>${esc(shortName(r))}, ${r.phase==="stress"?"doubled costs":"normal costs"}:</b> ${r.warnings.length?r.warnings.map(esc).join("; "):"No execution warnings recorded."}</li>`).join("")+'</ul><p>Stress checks require Sharpe ≥ 0.3 and at least 30 fills; they do not override failed baseline checks. Factor alpha uses the same FF5 + momentum model as the original study.</p>';
     if (!window.echarts) throw new Error("Charts unavailable; comparison tables remain available");
     const color=["#10b981","#f59e0b","#6366f1"];
-    const ink=getComputedStyle(document.documentElement).getPropertyValue("--ink-2").trim();
-    const line=getComputedStyle(document.documentElement).getPropertyValue("--line").trim();
-    const common={animation:false,textStyle:{color:ink,fontFamily:"system-ui"},tooltip:{trigger:"axis"},legend:{textStyle:{color:ink},type:"scroll"},grid:{left:65,right:25,top:55,bottom:45},xAxis:{type:"time",splitLine:{show:false}},yAxis:{type:"value",splitLine:{lineStyle:{color:line}}}};
-    const growth=echarts.init($("comparison-growth"));
-    growth.setOption({...common,yAxis:{...common.yAxis,axisLabel:{formatter:v=>"$"+v.toFixed(1)}},series:[...main.map((r,i)=>({name:shortName(r),type:"line",showSymbol:false,itemStyle:{color:color[i]},data:r.curve.map(p=>[p[0],p[1]])})),{name:"S&P 500 reference",type:"line",showSymbol:false,lineStyle:{type:"dashed"},itemStyle:{color:"#94a3b8"},data:main[0].curve.map(p=>[p[0],p[2]])}]});
-    const drawdown=echarts.init($("comparison-drawdown"));
-    drawdown.setOption({...common,yAxis:{...common.yAxis,axisLabel:{formatter:v=>(100*v).toFixed(0)+"%"}},series:main.map((r,i)=>({name:shortName(r),type:"line",showSymbol:false,itemStyle:{color:color[i]},data:r.curve.map(p=>[p[0],p[3]]),...(i===0?{markLine:{symbol:"none",label:{formatter:"35% limit",position:"insideEndTop"},lineStyle:{type:"dashed",color:"#dc2626"},data:[{yAxis:-.35}]}}:{})}))});
+    let growth, drawdown;
+    const draw=()=>{
+      const t=chartTheme();
+      const {accent, bad, warn, ink3, ...common}=t;
+      [growth, drawdown].forEach(c=>c&&c.dispose());
+      growth=echarts.init($("comparison-growth"));
+      growth.setOption({...common,yAxis:{...common.yAxis,axisLabel:{...common.yAxis.axisLabel,formatter:v=>"$"+v.toFixed(1)}},tooltip:{...common.tooltip,valueFormatter:v=>"$"+v.toFixed(2)},series:[...main.map((r,i)=>({name:shortName(r),type:"line",showSymbol:false,lineStyle:{width:2,color:color[i]},itemStyle:{color:color[i]},data:r.curve.map(p=>[p[0],p[1]])})),{name:"S&P 500 reference",type:"line",showSymbol:false,lineStyle:{width:1.4,type:"dashed",color:ink3},itemStyle:{color:ink3},data:main[0].curve.map(p=>[p[0],p[2]])}]});
+      drawdown=echarts.init($("comparison-drawdown"));
+      drawdown.setOption({...common,yAxis:{...common.yAxis,axisLabel:{...common.yAxis.axisLabel,formatter:v=>(100*v).toFixed(0)+"%"}},tooltip:{...common.tooltip,valueFormatter:pct},series:main.map((r,i)=>({name:shortName(r),type:"line",showSymbol:false,lineStyle:{width:1.6,color:color[i]},itemStyle:{color:color[i]},data:r.curve.map(p=>[p[0],p[3]]),...(i===0?{markLine:{symbol:"none",label:{formatter:"−35% limit",position:"insideEndTop",color:warn},lineStyle:{type:"dashed",color:warn},data:[{yAxis:-.35}]}}:{})}))});
+    };
+    draw();
+    window.addEventListener("themechange",draw);
     window.addEventListener("resize",()=>{growth.resize();drawdown.resize();});
   } catch(error) {
     $("comparison-status").textContent="Unable to display the full comparison: "+error.message+". Download the results JSON below or refresh.";

@@ -11,21 +11,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css?v=a6077b73a7"><link rel="stylesheet" href="research.css?v=b928d4b1fb">
+<link rel="stylesheet" href="site.css?v=a6077b73a7">
+<link rel="stylesheet" href="research.css?v=e2fe009676">
+<script src="theme.js?v=d756ea93c9"></script>
 </head>
 <body>
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Colloquy</a>
-    <nav>
+    <nav aria-label="Main navigation">
+      <a class="sec" href="#live">Live</a>
+      <a class="sec" href="#performance">Performance</a>
+      <a class="sec" href="#rules">Rules</a>
+      <a class="sec" href="#search">Search</a>
+      <a class="sec" href="#strategies">Strategies</a>
+      <a class="sec" href="#method">Method</a>
+      <span class="nav-sep" aria-hidden="true"></span>
       <a href="annual.html">Annual research</a>
       <a href="updates.html">Updates</a>
-      <a href="#live">Live</a>
-      <a href="#performance">Performance</a>
-      <a href="#rules">Rules</a>
-      <a href="#search">Search</a>
-      <a href="#strategies">Strategies</a>
-      <a href="#method">Method</a>
     </nav>
     <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -37,7 +40,7 @@
   <section class="hero wrap">
     <p class="eyebrow"><span id="live-dot" class="dot"></span><span id="live-text">Research desk</span></p>
     <h1>Most trading ideas don't survive real data.<br><span class="accent">This machine finds out which ones do.</span></h1>
-    <p class="lede">Colloquy is an autonomous research loop. You describe a strategy in plain English. Claude turns it into a specification, Codex writes the code, and three independent backtest engines must agree on every trade. The two models then critique the result, and it has to clear risk gates before a separate historical evaluation is opened. These historical years have been examined; prospective validation starts only after a new protocol is frozen. Every idea is shown here, including the ones that failed.</p>
+    <p class="lede">Colloquy is an autonomous research loop. You describe a strategy in plain English. Claude turns it into a specification, Codex writes the code, and three independent backtest engines must agree on every trade. The two models then critique the result, and it has to clear risk gates before it is checked on a separate stretch of history. Those historical years have now all been looked at, so only trading going forward counts as truly new evidence. Every idea is shown here, including the ones that failed.</p>
     <div class="stats" id="stats"></div><aside class="research-banner"><p class="eyebrow">NEW · OCTOBER 21, 2026</p><h2>Annual research: 11 runs complete, no strategy advances</h2><p>The original seven runs and four component-control tests are complete, with three engines agreeing. Profitability alone returned 8.75% a year with a 42.59% worst drawdown; the combination returned 8.47% with a 46.64% drawdown. Neither passed. This is exploratory historical evidence; no fresh holdout was used.</p><a href="annual.html">See all results and charts →</a> · <a href="updates.html">What we built →</a></aside>
   </section>
 
@@ -63,7 +66,7 @@
     <div class="section-head">
       <div>
         <h2>Growth of $100,000</h2>
-        <p class="sub">The shortlist, after trading costs, against the S&amp;P 500 total return. Strategies marked "as held" use crash protection. Shaded bands are market crises; evaluation bands show historical results; after-checks and re-scores are exploratory. Archived ideas can be added from the chips.</p>
+        <p class="sub">The shortlist, after trading costs, against the S&amp;P 500 total return. Strategies marked "as held" use crash protection. Shaded bands are market crises; a hatched band marks a strategy's holdout years and a dotted one an after-check. After-checks and re-scores are exploratory. Archived ideas can be added from the chips.</p>
       </div>
       <div class="controls">
         <div class="seg" id="range">
@@ -96,7 +99,7 @@
     <div class="grid-3 guard">
       <div class="panel pad"><h3>Crash protection</h3><p>A long stock strategy may be held with one fixed rule: if the S&amp;P 500 ends a month below its 200-day average, move to T-bills until a month ends back above it. The −35% limit applies to the portfolio as held. The rule is never tuned per strategy.</p></div>
       <div class="panel pad"><h3>An edge of its own</h3><p>The rule alone makes the index look good, so a strategy must also beat the six-factor model on its own picks (alpha t-stat ≥ 1.5), measured without protection. Holding the index with the rule cannot pass.</p></div>
-      <div class="panel pad"><h3>Holdout: did it break?</h3><p>The consistency screen rejects clear deterioration relative to research; a pass can still include negative returns or Sharpe. A pass means paper trading, not proof: no strategy kept a factor edge after its research years.</p></div>
+      <div class="panel pad"><h3>Holdout: did it break?</h3><p>The later years fail a strategy only when it does clearly worse than its research predicted; a pass can still include losing years. A pass means paper trading, not proof: no strategy kept a factor edge after its research years.</p></div>
     </div>
     <div class="grid-2 rules-grid">
       <div class="panel pad"><h3>Does stepping aside in a crash work?</h3><div id="cp-kpis" class="kpi-row"></div><p class="note" id="cp-note"></p></div>
@@ -161,13 +164,13 @@
       <li><b>Backtest ×3</b><span>A reference engine, vectorbt and NautilusTrader must reconcile on the same orders.</span></li>
       <li><b>Critique</b><span>Claude and Codex each propose falsifiable fixes. At most two rounds, and every version is counted.</span></li>
       <li><b>Gates</b><span>Sharpe ≥ 0.5 and worst drop ≥ −35% as held, a six-factor alpha t ≥ 1.5, then doubled costs and nearby settings (Sharpe ≥ 0.3).</span></li>
-      <li><b>Holdout</b><span>A separate historical evaluation checks for deterioration. Previously examined years cannot become independent evidence by creating a new experiment.</span></li>
+      <li><b>Holdout</b><span>A separate stretch of history checks that the result did not break. Years already looked at never count as fresh evidence again.</span></li>
       <li><b>Paper</b><span>Survivors trade on an Interactive Brokers paper account before any real money.</span></li>
     </ol>
     <div class="grid-3 guard">
-      <div class="panel pad"><h3>Data timing and revisions</h3><p>CRSP daily prices including delisted companies and delisting returns, point-in-time S&amp;P 500 membership, and Compustat fundamentals used with availability lags. Report-date lags do not remove later revisions; without historical vintages, these fundamentals are not guaranteed to be first-reported. See the separate annual research page for its data limits.</p></div>
+      <div class="panel pad"><h3>Data timing and revisions</h3><p>CRSP daily prices including delisted companies and delisting returns, point-in-time S&amp;P 500 membership, and Compustat fundamentals used with availability lags. Waiting for the report date does not undo later corrections, so these numbers may not be exactly what was first published. The <a href="annual.html">annual research page</a> lists its own data limits.</p></div>
       <div class="panel pad"><h3>Realistic execution</h3><p>Decisions are made at the close and filled at the next open. Costs include commissions, the quoted spread, size-based market impact and a borrow fee on shorts. Cash earns no interest, which understates hedged strategies.</p></div>
-      <div class="panel pad"><h3>Honest statistics</h3><p>Pass/fail rules are set before results are seen. They changed once (version 2, above), written down before any re-scoring, and re-scored verdicts are labelled. Alpha is measured against six factors, the research registry records tried versions and statistical diagnostics, and the engine enforces an application date guard; the separate research generation also uses physically truncated data and requires OS isolation.</p></div>
+      <div class="panel pad"><h3>Honest statistics</h3><p>Pass/fail rules are set before results are seen. They changed once (version 2, above), written down before any re-scoring, and re-scored verdicts are labelled. Alpha is measured against six factors and every version tried is recorded. The engine refuses to read data past the allowed date, and the annual study went further: its data was physically cut off at the end of 2019 and its code ran sandboxed.</p></div>
     </div>
   </section>
 </main>
@@ -178,6 +181,6 @@
 </footer>
 
 <script src="echarts.min.js?v=e84270bd0c"></script>
-<script src="site.js?v=0da7d843d8"></script>
+<script src="site.js?v=e26f803a74"></script>
 </body>
 </html>
