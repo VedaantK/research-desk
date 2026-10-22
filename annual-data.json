@@ -5,6 +5,7 @@
   "runs": [
     {
       "label": "Baseline",
+      "study": "Combined value \u2192 profitability",
       "phase": "research",
       "status": "ok",
       "metrics": {
@@ -16,7 +17,11 @@
         "benchmark_cagr": 0.07885661696807822,
         "n_fills": 4780,
         "start": "1998-01-02",
-        "end": "2019-12-31"
+        "end": "2019-12-31",
+        "vol": 0.16450668524448142,
+        "annual_turnover": 0.7996083600364098,
+        "avg_gross_exposure": 0.7653325887751773,
+        "listing_gap_exits": 1
       },
       "thresholds_met": false,
       "checks": [
@@ -55,7 +60,7 @@
       ],
       "engine_agreement": true,
       "warnings": [
-        "One position exited at the last price before a listing gap; the across-gap return is unavailable."
+        "1 position(s) exited at the last price before a listing gap; the across-gap return is unavailable."
       ],
       "curve": [
         [
@@ -6962,6 +6967,7 @@
     },
     {
       "label": "Doubled trading costs",
+      "study": "Combined value \u2192 profitability",
       "phase": "stress",
       "status": "ok",
       "metrics": {
@@ -6973,7 +6979,11 @@
         "benchmark_cagr": 0.07885661696807822,
         "n_fills": 4780,
         "start": "1998-01-02",
-        "end": "2019-12-31"
+        "end": "2019-12-31",
+        "vol": 0.16493809935138123,
+        "annual_turnover": 0.8006080935574643,
+        "avg_gross_exposure": 0.7667950616612019,
+        "listing_gap_exits": 1
       },
       "thresholds_met": true,
       "checks": [
@@ -6998,11 +7008,12 @@
       ],
       "engine_agreement": true,
       "warnings": [
-        "One position exited at the last price before a listing gap; the across-gap return is unavailable."
+        "1 position(s) exited at the last price before a listing gap; the across-gap return is unavailable."
       ]
     },
     {
       "label": "Cheapest 40%",
+      "study": "Combined value \u2192 profitability",
       "phase": "sensitivity:value_fraction:0.4",
       "status": "ok",
       "metrics": {
@@ -7014,7 +7025,11 @@
         "benchmark_cagr": 0.07885661696807822,
         "n_fills": 3901,
         "start": "1998-01-02",
-        "end": "2019-12-31"
+        "end": "2019-12-31",
+        "vol": 0.16706628324640913,
+        "annual_turnover": 0.8467674707000921,
+        "avg_gross_exposure": 0.7660200250041092,
+        "listing_gap_exits": null
       },
       "thresholds_met": true,
       "checks": [
@@ -7042,6 +7057,7 @@
     },
     {
       "label": "Cheapest 60%",
+      "study": "Combined value \u2192 profitability",
       "phase": "sensitivity:value_fraction:0.6",
       "status": "ok",
       "metrics": {
@@ -7053,7 +7069,11 @@
         "benchmark_cagr": 0.07885661696807822,
         "n_fills": 5633,
         "start": "1998-01-02",
-        "end": "2019-12-31"
+        "end": "2019-12-31",
+        "vol": 0.16168720208675758,
+        "annual_turnover": 0.7511822775870106,
+        "avg_gross_exposure": 0.7625921950736624,
+        "listing_gap_exits": 1
       },
       "thresholds_met": true,
       "checks": [
@@ -7078,11 +7098,12 @@
       ],
       "engine_agreement": true,
       "warnings": [
-        "One position exited at the last price before a listing gap; the across-gap return is unavailable."
+        "1 position(s) exited at the last price before a listing gap; the across-gap return is unavailable."
       ]
     },
     {
       "label": "1998\u20132004",
+      "study": "Combined value \u2192 profitability",
       "phase": "walk_forward:0",
       "status": "ok",
       "metrics": {
@@ -7094,7 +7115,11 @@
         "benchmark_cagr": 0.05079555915473999,
         "n_fills": 1828,
         "start": "1998-01-02",
-        "end": "2004-12-31"
+        "end": "2004-12-31",
+        "vol": 0.14757120042561772,
+        "annual_turnover": 0.8532228920337556,
+        "avg_gross_exposure": 0.7222057351681427,
+        "listing_gap_exits": 1
       },
       "thresholds_met": true,
       "checks": [
@@ -7119,11 +7144,12 @@
       ],
       "engine_agreement": true,
       "warnings": [
-        "One position exited at the last price before a listing gap; the across-gap return is unavailable."
+        "1 position(s) exited at the last price before a listing gap; the across-gap return is unavailable."
       ]
     },
     {
       "label": "2005\u20132011",
+      "study": "Combined value \u2192 profitability",
       "phase": "walk_forward:1",
       "status": "ok",
       "metrics": {
@@ -7135,7 +7161,11 @@
         "benchmark_cagr": 0.03489846177832634,
         "n_fills": 1315,
         "start": "2005-02-01",
-        "end": "2011-12-30"
+        "end": "2011-12-30",
+        "vol": 0.20979901245366048,
+        "annual_turnover": 0.8261287405296953,
+        "avg_gross_exposure": 0.735432868451875,
+        "listing_gap_exits": null
       },
       "thresholds_met": true,
       "checks": [
@@ -7163,6 +7193,7 @@
     },
     {
       "label": "2012\u20132019",
+      "study": "Combined value \u2192 profitability",
       "phase": "walk_forward:2",
       "status": "ok",
       "metrics": {
@@ -7174,7 +7205,11 @@
         "benchmark_cagr": 0.14115751473081284,
         "n_fills": 1519,
         "start": "2012-02-01",
-        "end": "2019-12-31"
+        "end": "2019-12-31",
+        "vol": 0.12371350935766592,
+        "annual_turnover": 0.7842901456017638,
+        "avg_gross_exposure": 0.7475860215260446,
+        "listing_gap_exits": null
       },
       "thresholds_met": true,
       "checks": [

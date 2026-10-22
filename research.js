@@ -12,7 +12,7 @@
     const baseline = data.runs.find(r => r.phase === "research");
     if (!baseline) throw new Error("Baseline result is missing");
     const m = baseline.metrics;
-    $("research-status").textContent = `${data.runs.filter(r => r.status === "ok").length} / ${data.runs.length} runs completed · ${data.runs.filter(r => r.engine_agreement).length} / ${data.runs.length} reconciled across all three engines`;
+    $("research-status").textContent = `Original batch: ${data.runs.filter(r => r.status === "ok").length} / ${data.runs.length} runs completed · ${data.runs.filter(r => r.engine_agreement).length} / ${data.runs.length} reconciled across all three engines`;
     $("annual-kpis").innerHTML = [["Annualized return",pct(m.cagr)],["Sharpe ratio",num(m.sharpe)],["Maximum drawdown",pct(m.max_drawdown)],["Annual factor alpha",pct(m.factor_alpha_annual)]].map(([label,v])=>`<div class="stat"><b>${v}</b><span>${label}</span></div>`).join("");
     $("annual-gates").innerHTML += '<thead><tr><th scope="col">Check</th><th scope="col">Required</th><th scope="col">Actual</th><th scope="col">Result</th></tr></thead><tbody>' + baseline.checks.map(c=>{
       const metric = c.metric || c.rule;

@@ -500,11 +500,21 @@ function renderPaper() {
     : `${title}running forward on an Interactive Brokers paper account since ${esc(p.started)}. Returns and weights only. Data through ${esc(p.feed_as_of || "–")}.`;
 
   const last = (arr) => (arr && arr.length ? arr[arr.length - 1][1] - 1 : null);
-  const ret = last(p.growth), spy = last(p.spy), bm = last(p.beta_matched);
+  // Benchmarks come from the daily feed and can lag the portfolio by a session, so
+  // compare on the latest date both series have rather than mixing dates.
+  const versus = (arr) => {
+    if (!p.growth || !arr || !arr.length) return null;
+    const ours = new Map(p.growth);
+    const common = arr.filter(([d]) => ours.has(d));
+    if (common.length < 2) return null;
+    const [d, v] = common[common.length - 1];
+    return ours.get(d) - v;
+  };
+  const ret = last(p.growth), spy = versus(p.spy), bm = versus(p.beta_matched);
   const tiles = p.growth ? [
     [pct(ret), "return since start", ret >= 0],
-    [spy == null ? "–" : pct(ret - spy), "vs S&P 500"],
-    ...(bm == null ? [] : [[pct(ret - bm), `vs ${Math.round((p.benchmark_beta || 0) * 100)}% S&P (benchmark)`, ret - bm >= 0]]),
+    [spy == null ? "–" : pct(spy), "vs S&P 500"],
+    ...(bm == null ? [] : [[pct(bm), `vs ${Math.round((p.benchmark_beta || 0) * 100)}% S&P (benchmark)`, bm >= 0]]),
     [String((p.holdings || []).length), "holdings"],
     [p.book_matches == null ? "–" : p.book_matches ? "Yes" : `${p.book_diff} off`, pilot ? "holding matches the rule" : "book matches backtest", p.book_matches],
     ...(pilot && p.next_rebalance ? [[new Date(p.next_rebalance + "T12:00").toLocaleDateString(undefined, { month: "short", day: "numeric" }), "next month-end check"]] : []),
@@ -535,7 +545,7 @@ function renderPaper() {
       legend: { top: 4, textStyle: { color: t.ink2 }, itemWidth: 14, itemHeight: 3 },
       tooltip: { ...t.tooltip, trigger: "axis", valueFormatter: (v) => pct(v) },
       xAxis: { type: "time", axisLabel: { color: t.ink3 }, axisLine: { lineStyle: { color: t.line } } },
-      yAxis: { type: "value", axisLabel: { color: t.ink3, formatter: (v) => Math.round(v * 100) + "%" }, splitLine: { lineStyle: { color: t.line } } },
+      yAxis: { type: "value", scale: true, axisLabel: { color: t.ink3, formatter: (v) => pct(v, Math.abs(v) < 0.02 ? 2 : 0) }, splitLine: { lineStyle: { color: t.line } } },
       series: [
         { name: pilot ? "Pilot (paper)" : "Paper portfolio", type: "line", data: toPts(p.growth), showSymbol: false, lineStyle: { width: 2.4, color: pick ? pick.color : t.accent }, itemStyle: { color: pick ? pick.color : t.accent }, areaStyle: { color: pick ? pick.color : t.accent, opacity: 0.08 } },
         p.beta_matched && { name: `${Math.round((p.benchmark_beta || 0) * 100)}% S&P + cash`, type: "line", data: toPts(p.beta_matched), showSymbol: false, lineStyle: { width: 1.6, color: t.ink2 }, itemStyle: { color: t.ink2 } },

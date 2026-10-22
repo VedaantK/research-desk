@@ -1,0 +1,143 @@
+{
+  "period": [
+    "1998-01-02",
+    "2019-12-31"
+  ],
+  "sessions": 5535,
+  "daily_return_correlations": {
+    "Combined": {
+      "Combined": 1.0,
+      "Value alone \u00b7 cheapest 10%": 0.934518,
+      "Profitability alone \u00b7 top 10%": 0.943172
+    },
+    "Value alone \u00b7 cheapest 10%": {
+      "Combined": 0.934518,
+      "Value alone \u00b7 cheapest 10%": 1.0,
+      "Profitability alone \u00b7 top 10%": 0.864204
+    },
+    "Profitability alone \u00b7 top 10%": {
+      "Combined": 0.943172,
+      "Value alone \u00b7 cheapest 10%": 0.864204,
+      "Profitability alone \u00b7 top 10%": 1.0
+    }
+  },
+  "calendar_years": {
+    "1998": {
+      "Combined": -0.05574997213689126,
+      "Value alone \u00b7 cheapest 10%": -0.12858196121059862,
+      "Profitability alone \u00b7 top 10%": -0.024401772960469303
+    },
+    "1999": {
+      "Combined": 0.05696654484694941,
+      "Value alone \u00b7 cheapest 10%": -0.06251201541532414,
+      "Profitability alone \u00b7 top 10%": 0.34600929019531823
+    },
+    "2000": {
+      "Combined": 0.14005421835977527,
+      "Value alone \u00b7 cheapest 10%": 0.09298895208009572,
+      "Profitability alone \u00b7 top 10%": -0.06695319824970458
+    },
+    "2001": {
+      "Combined": 0.21057904405595806,
+      "Value alone \u00b7 cheapest 10%": 0.12920227079911673,
+      "Profitability alone \u00b7 top 10%": 0.09487528298385439
+    },
+    "2002": {
+      "Combined": -0.11650546144115925,
+      "Value alone \u00b7 cheapest 10%": -0.14466384164084845,
+      "Profitability alone \u00b7 top 10%": -0.14043697307171754
+    },
+    "2003": {
+      "Combined": 0.33976292766924,
+      "Value alone \u00b7 cheapest 10%": 0.4148246501366919,
+      "Profitability alone \u00b7 top 10%": 0.34589504123409776
+    },
+    "2004": {
+      "Combined": 0.14220874231000868,
+      "Value alone \u00b7 cheapest 10%": 0.22069279030539457,
+      "Profitability alone \u00b7 top 10%": 0.17342316657012158
+    },
+    "2005": {
+      "Combined": 0.10055391925261548,
+      "Value alone \u00b7 cheapest 10%": 0.08111274136890612,
+      "Profitability alone \u00b7 top 10%": 0.05271707593463493
+    },
+    "2006": {
+      "Combined": 0.19095098416370626,
+      "Value alone \u00b7 cheapest 10%": 0.17427511282994246,
+      "Profitability alone \u00b7 top 10%": 0.08055298027095881
+    },
+    "2007": {
+      "Combined": -0.04058581054232513,
+      "Value alone \u00b7 cheapest 10%": -0.14301959211175097,
+      "Profitability alone \u00b7 top 10%": -0.00166947616128732
+    },
+    "2008": {
+      "Combined": -0.25102037232953844,
+      "Value alone \u00b7 cheapest 10%": -0.2376159730256101,
+      "Profitability alone \u00b7 top 10%": -0.23745110136449155
+    },
+    "2009": {
+      "Combined": 0.39003255762143607,
+      "Value alone \u00b7 cheapest 10%": 0.2489536391686531,
+      "Profitability alone \u00b7 top 10%": 0.35143206496915047
+    },
+    "2010": {
+      "Combined": 0.2225570353739379,
+      "Value alone \u00b7 cheapest 10%": 0.23898251918668412,
+      "Profitability alone \u00b7 top 10%": 0.2720631380497376
+    },
+    "2011": {
+      "Combined": -0.03854903848266422,
+      "Value alone \u00b7 cheapest 10%": -0.05418641605229935,
+      "Profitability alone \u00b7 top 10%": 0.049412950998377614
+    },
+    "2012": {
+      "Combined": 0.12765345742766598,
+      "Value alone \u00b7 cheapest 10%": 0.12424669580181535,
+      "Profitability alone \u00b7 top 10%": 0.09086960163741309
+    },
+    "2013": {
+      "Combined": 0.28852791615495255,
+      "Value alone \u00b7 cheapest 10%": 0.2796132382318146,
+      "Profitability alone \u00b7 top 10%": 0.33623036870848333
+    },
+    "2014": {
+      "Combined": 0.05499771836527367,
+      "Value alone \u00b7 cheapest 10%": 0.03777193138243917,
+      "Profitability alone \u00b7 top 10%": 0.047349100887681184
+    },
+    "2015": {
+      "Combined": -0.045175318016452914,
+      "Value alone \u00b7 cheapest 10%": -0.08605577485514782,
+      "Profitability alone \u00b7 top 10%": -0.047454777164116946
+    },
+    "2016": {
+      "Combined": 0.16382728726369433,
+      "Value alone \u00b7 cheapest 10%": 0.26867316342920855,
+      "Profitability alone \u00b7 top 10%": 0.09390062899131313
+    },
+    "2017": {
+      "Combined": 0.09288752464124728,
+      "Value alone \u00b7 cheapest 10%": 0.08328886040659245,
+      "Profitability alone \u00b7 top 10%": 0.16453476664091293
+    },
+    "2018": {
+      "Combined": -0.06705442367133141,
+      "Value alone \u00b7 cheapest 10%": -0.06384505243184935,
+      "Profitability alone \u00b7 top 10%": 0.009890946796822453
+    },
+    "2019": {
+      "Combined": 0.19799659862293173,
+      "Value alone \u00b7 cheapest 10%": 0.09808202767821639,
+      "Profitability alone \u00b7 top 10%": 0.1860455172007942
+    }
+  },
+  "profitability_beats_combined_years": 11,
+  "calendar_year_count": 22,
+  "profitability_minus_combined_cagr_pp": 0.28185503685353996,
+  "profitability_drawdown_reduction_pp": 4.047457544976973,
+  "finding": "Neither control nor the combined strategy qualifies for advancement. Profitability alone has slightly higher historical CAGR and a smaller drawdown than the combination, with essentially the same Sharpe; this does not establish a reliable improvement.",
+  "independent_evidence": false,
+  "new_strategy_tests_run": false
+}
