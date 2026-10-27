@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css?v=a6077b73a7">
-<link rel="stylesheet" href="research.css?v=566b8f76c9">
+<link rel="stylesheet" href="research.css?v=69d4c94711">
 <script src="theme.js?v=d756ea93c9"></script>
 </head>
 <body>
@@ -21,8 +21,8 @@
     <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Atlas</a>
     <nav aria-label="Main navigation">
       <a href="index.html" aria-current="page">Backtests</a>
-      <a href="beacon.html">Company research</a>
-      <a href="tide.html">Intraday research</a>
+      <a href="beacon.html">Beacon</a>
+      <a href="tide.html">Tide</a>
       <a href="notes.html">Research notes</a>
       <a href="updates.html">Updates</a>
     </nav>
@@ -53,6 +53,6 @@
 <section class="section"><h2>What changed in the system</h2><div class="grid-3"><div class="panel pad"><h3>Data</h3><p>Added a separate annual-lagged research path, explicit source checks and a 2019 cutoff.</p></div><div class="panel pad"><h3>Memory</h3><p>Moved large arrays to disk and processed assets and bars in batches. The full standalone baseline used about 16.1 GiB peak RAM.</p></div><div class="panel pad"><h3>Verification</h3><p>Ran three engines sequentially, reproduced the earlier baseline and recorded every robustness run.</p></div></div><p><a href="updates.html">Read the build notes →</a></p></section>
 <section class="section"><h2>Limits and next decision</h2><ul><li>The current version stops at the research stage. A new hypothesis needs a reason and criteria fixed before testing.</li><li>Annual data availability lags do not remove all restatement bias.</li><li>The original baseline includes one listing-gap exit and the value-only control includes three; the missing across-gap return remains a data limitation.</li><li>The memory change made these runs feasible on this machine; it is not a guarantee of staying below 16 GiB.</li></ul><details><summary>Run warnings and provenance</summary><div id="annual-warnings"></div><p id="annual-provenance"></p><p><a href="annual-data.json">Download the portfolio-level results JSON</a></p></details></section>
 </main><footer class="wrap footer">
-  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Backtests</a> · <a href="beacon.html">Company research</a> · <a href="tide.html">Intraday research</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Backtests</a> · <a href="beacon.html">Beacon</a> · <a href="tide.html">Tide</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
   <p class="fine">Backtested and hypothetical results. Not investment advice. Past performance, simulated or real, does not guarantee future returns. Data: CRSP and Compustat via WRDS (only portfolio-level aggregates are published) and Kenneth French's data library.</p>
 </footer><script src="echarts.min.js?v=e84270bd0c"></script><script src="research.js?v=33c97ba6bb"></script><script src="comparison.js?v=d96ed56b44"></script></body></html>

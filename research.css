@@ -34,3 +34,11 @@
 .suite-status{margin:14px 0}
 @media(max-width:640px){.nav nav{overflow-x:auto;scrollbar-width:none}}
 #beacon-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:860px){#beacon-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Home page spacing: tighter hero, even gaps between sections, stat labels with a steady line height. */
+.hero{padding-top:56px;padding-bottom:20px}
+.hero h1{margin-bottom:20px}
+.hero .lede{margin-bottom:28px}
+.stat span{display:block;margin-top:6px;line-height:1.35}
+.section{padding-top:40px;padding-bottom:0}
+.section-head{margin-bottom:20px}
+.section-head .sub{margin-top:8px}
