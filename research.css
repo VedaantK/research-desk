@@ -10,3 +10,27 @@
 .note-card{display:block;margin-top:16px;text-decoration:none;color:inherit;border-left:4px solid var(--warn)}.note-card h3{margin:8px 0}.note-card p{color:var(--ink-2);line-height:1.6;max-width:90ch}.note-card .note-link{font-weight:600;color:var(--accent)}.note-card:hover{border-color:var(--ink-3)}
 .research-page th .sub{display:block;font-weight:400;white-space:normal;font-size:13px;margin-top:2px;max-width:34ch}
 .research-page td.wrap{white-space:normal;min-width:24ch}
+
+.research-page .status{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid var(--warn);border-radius:999px;background:var(--panel);font-weight:600;font-size:13px}
+.research-page .status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--warn)}
+.research-page .grid-3,.research-page .grid-2{margin:22px 0}
+.research-page .panel{height:100%}
+.research-page .panel p,.research-page .panel li{color:var(--ink-2)}
+.research-page code{font-family:"JetBrains Mono",monospace;font-size:.9em;background:var(--bg-2);padding:2px 5px;border-radius:4px}
+.research-page .steps{counter-reset:step;list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.research-page .steps li{counter-increment:step;margin:0;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+.research-page .steps li::before{content:"0" counter(step);display:block;color:var(--accent);font:500 12px "JetBrains Mono",monospace;margin-bottom:9px}
+.research-page .steps strong{display:block;color:var(--ink);margin-bottom:5px}
+@media(max-width:700px){.research-page .steps{grid-template-columns:1fr}.research-page .grid-3,.research-page .grid-2{grid-template-columns:1fr}}
+
+.research-page .note{color:var(--ink-2);font-size:14px;line-height:1.6;max-width:90ch}
+.research-page section{margin-top:44px}
+.suite{display:grid;gap:16px;margin:32px 0 8px}
+.suite-card{display:block;text-decoration:none;color:inherit;border-left:4px solid var(--accent)}
+.suite-card h2{margin:8px 0 10px;font-size:24px}
+.suite-card p{color:var(--ink-2);line-height:1.6;max-width:80ch}
+.suite-card:hover{border-color:var(--ink-3)}
+.suite-card .note-link{font-weight:600;color:var(--accent)}
+.suite-status{margin:14px 0}
+@media(max-width:640px){.nav nav{overflow-x:auto;scrollbar-width:none}}
+#beacon-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:860px){#beacon-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}

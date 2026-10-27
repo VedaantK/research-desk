@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Company Research · Atlas</title>
+<meta name="description" content="Beacon: an AI analyst rating S&amp;P 500 companies from filings available on the day, scored against later returns.">
+<meta property="og:title" content="Company Research · Atlas">
+<meta property="og:description" content="What Tide can do, which WRDS TAQ exports it needs, and what remains before the first results.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=a6077b73a7">
+<link rel="stylesheet" href="research.css?v=ae31e5e896">
+<script src="theme.js?v=d756ea93c9"></script>
+</head>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Atlas</a>
+    <nav aria-label="Main navigation">
+      <a href="backtests.html">Backtests</a>
+      <a href="beacon.html" aria-current="page">Company research</a>
+      <a href="tide.html">Intraday research</a>
+      <a href="notes.html">Research notes</a>
+      <a href="updates.html">Updates</a>
+    </nav>
+    <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="wrap research-page ">
+<p class="eyebrow">COMPANY RESEARCH</p>
+  <h1>Beacon asks whether an AI analyst&rsquo;s ratings tell you anything.</h1>
+  <p class="lede">For each company it assembles the facts that were public on a chosen date, asks two models for a rating, and checks the ratings against what the stock did afterward. The dates are chosen after the models&rsquo; training cutoffs so they cannot simply remember the outcome.</p>
+  <p><span class="status">Phase 1 &middot; one batch scored, a second in progress</span></p>
+
+  <section class="decision">
+    <strong>So far the ratings are inconclusive.</strong>
+    <p>In the first batch both models&rsquo; rank correlation with later returns (IC) was about 0.05 on 60 companies, with a confidence range that includes zero. The pre-registered bar for &ldquo;encouraging&rdquo; was above 0.10. The models also mostly answered &ldquo;hold,&rdquo; which limits what the test can show.</p>
+  </section>
+
+  <section>
+    <h2>Batch 1 &middot; rated as of 14 Aug 2026</h2>
+    <div class="stats" id="beacon-kpis">
+      <div class="stat"><b>0.055</b><span>Claude IC, 60 companies</span></div>
+      <div class="stat"><b>0.054</b><span>Codex IC, 60 companies</span></div>
+      <div class="stat"><b>0.31</b><span>Named vs hidden-name agreement (needs &ge; 0.5)</span></div>
+      <div class="stat"><b>47 of 60</b><span>Claude ratings that were &ldquo;hold&rdquo;</span></div>
+    </div>
+    <p class="note">Scored on closes from 17 Aug to 26 Oct 2026. The memory check asks each model to rate the same company with and without its name; low agreement means the name changes the answer, so the models may be recalling rather than analysing. A second batch dated 15 Jul 2026 is being rated now and will be added here once it is scored.</p>
+  </section>
+
+  <section>
+    <h2>How a batch works</h2>
+    <ol class="steps">
+      <li><strong>Screen</strong>Point-in-time SEC XBRL fundamentals rank S&amp;P 500 companies on a quality composite. The top 60 are rated.</li>
+      <li><strong>Fact sheet</strong>Financials plus the latest 10-K and 10-Q text, built twice: once with the company name and once with it hidden.</li>
+      <li><strong>Freeze</strong>The universe, prompts, models and success rules are hashed and recorded before any rating is made.</li>
+      <li><strong>Rate</strong>Claude and Codex each give 3-month and 12-month ratings. Any answer that used tools or commands is rejected.</li>
+      <li><strong>Score</strong>Ratings are compared with later returns, the screen&rsquo;s own top 10 and random baskets of the same size.</li>
+      <li><strong>Benchmark</strong>Value Line&rsquo;s published Timeliness rank is recorded for the same names as an outside reference.</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>What would count as success</h2>
+    <div class="grid-3">
+      <article class="panel pad"><h3>Phase 1</h3><p>Encouraging if IC is above 0.10 and the AI&rsquo;s top 10 beats both the screen&rsquo;s top 10 and the 75th percentile of random baskets. An IC below zero means stop treating the ratings as a signal.</p></article>
+      <article class="panel pad"><h3>Long run</h3><p>Monthly batches for 24 months. IC above 0.03 in at least 60% of months. If IC is zero or negative at 18 months, retire the ratings.</p></article>
+      <article class="panel pad"><h3>Memory check</h3><p>Named and hidden-name ratings must correlate at 0.5 or more, otherwise the results are treated as possibly contaminated.</p></article>
+    </div>
+  </section>
+
+  <section class="research-banner">
+    <h2>Limits</h2>
+    <p>Sixty companies over ten weeks is a small sample, and these companies were chosen by a quality screen, not at random. One batch cannot show skill; the monthly series is what will. Fundamentals come from SEC filings, so they may differ slightly from other vendors&rsquo; versions. Per-company ratings are not published.</p>
+  </section>
+</main>
+<footer class="wrap footer">
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Atlas</a> · <a href="backtests.html">Backtests</a> · <a href="beacon.html">Company research</a> · <a href="tide.html">Intraday research</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
+  <p class="fine">Beacon describes a research test on historical dates. Ratings are not investment advice and the sample so far is small.</p>
+</footer>
+</body>
+</html>

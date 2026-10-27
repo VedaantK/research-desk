@@ -14,27 +14,15 @@
 <link rel="stylesheet" href="site.css?v=a6077b73a7">
 <link rel="stylesheet" href="research.css?v=ae31e5e896">
 <script src="theme.js?v=d756ea93c9"></script>
-<style>
-.tide-page .status{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid var(--warn);border-radius:999px;background:var(--panel);font-weight:600;font-size:13px}
-.tide-page .status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--warn)}
-.tide-page .grid-3,.tide-page .grid-2{margin:22px 0}
-.tide-page .panel{height:100%}
-.tide-page .panel p,.tide-page .panel li{color:var(--ink-2)}
-.tide-page code{font-family:"JetBrains Mono",monospace;font-size:.9em;background:var(--bg-2);padding:2px 5px;border-radius:4px}
-.tide-page .steps{counter-reset:step;list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.tide-page .steps li{counter-increment:step;margin:0;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
-.tide-page .steps li::before{content:"0" counter(step);display:block;color:var(--accent);font:500 12px "JetBrains Mono",monospace;margin-bottom:9px}
-.tide-page .steps strong{display:block;color:var(--ink);margin-bottom:5px}
-@media(max-width:700px){.tide-page .steps{grid-template-columns:1fr}.tide-page .grid-3,.tide-page .grid-2{grid-template-columns:1fr}}
-</style>
 </head>
 <body>
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Atlas</a>
     <nav aria-label="Main navigation">
-      <a class="home" href="index.html">Research desk</a>
-      <a href="tide.html" aria-current="page">Tide</a>
+      <a href="backtests.html">Backtests</a>
+      <a href="beacon.html">Company research</a>
+      <a href="tide.html" aria-current="page">Intraday research</a>
       <a href="notes.html">Research notes</a>
       <a href="updates.html">Updates</a>
     </nav>
@@ -91,7 +79,7 @@
   </section>
 </main>
 <footer class="wrap footer">
-  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Research desk</a> · <a href="tide.html">Tide</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Atlas</a> · <a href="backtests.html">Backtests</a> · <a href="beacon.html">Company research</a> · <a href="tide.html">Intraday research</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
   <p class="fine">Tide describes a historical research process. No strategy results are available yet. Any future backtest is hypothetical and does not guarantee future performance.</p>
 </footer>
 </body>
