@@ -1,4 +1,4 @@
-# Colloquy research desk
+# Atlas research desk
 
 [![Site checks](https://github.com/VedaantK/research-desk/actions/workflows/ci.yml/badge.svg)](https://github.com/VedaantK/research-desk/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -6,8 +6,8 @@
 **Live site: <https://vedaantk.github.io/research-desk/>**
 
 Every systematic strategy I've tested, published with the same detail whether it worked or
-not. The results come from **Colloquy**, an autonomous research loop, running on
-**Concordance**, a backtester that only accepts a result when three independent engines agree.
+not. The results come from **Atlas**, an autonomous research loop, running on
+**Horizon**, a backtester that only accepts a result when three independent engines agree.
 
 ## How a strategy gets here
 
