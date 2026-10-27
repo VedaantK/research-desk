@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tide · Intraday research</title>
+<meta name="description" content="Tide researches intraday stock patterns. The research engine is built; licensed minute and quote data are needed before results can be produced.">
+<meta property="og:title" content="Tide · Intraday research">
+<meta property="og:description" content="What Tide can do, what data it needs, and what remains before the first research results.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=a6077b73a7">
+<link rel="stylesheet" href="research.css?v=ae31e5e896">
+<script src="theme.js?v=d756ea93c9"></script>
+<style>
+.tide-page .status{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid var(--warn);border-radius:999px;background:var(--panel);font-weight:600;font-size:13px}
+.tide-page .status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--warn)}
+.tide-page .grid-3,.tide-page .grid-2{margin:22px 0}
+.tide-page .panel{height:100%}
+.tide-page .panel p,.tide-page .panel li{color:var(--ink-2)}
+.tide-page code{font-family:"JetBrains Mono",monospace;font-size:.9em;background:var(--bg-2);padding:2px 5px;border-radius:4px}
+.tide-page .steps{counter-reset:step;list-style:none;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tide-page .steps li{counter-increment:step;margin:0;padding:20px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius)}
+.tide-page .steps li::before{content:"0" counter(step);display:block;color:var(--accent);font:500 12px "JetBrains Mono",monospace;margin-bottom:9px}
+.tide-page .steps strong{display:block;color:var(--ink);margin-bottom:5px}
+@media(max-width:700px){.tide-page .steps{grid-template-columns:1fr}.tide-page .grid-3,.tide-page .grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Atlas</a>
+    <nav aria-label="Main navigation">
+      <a class="home" href="index.html">Research desk</a>
+      <a href="tide.html" aria-current="page">Tide</a>
+      <a href="notes.html">Research notes</a>
+      <a href="updates.html">Updates</a>
+    </nav>
+    <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="wrap research-page tide-page">
+  <p class="eyebrow">INTRADAY PATTERN RESEARCH</p>
+  <h1>Tide looks for repeatable moves inside the trading day.</h1>
+  <p class="lede">It tests defined entry patterns, measures what prices do afterward, and compares exit rules on data kept separate for development, validation, and a final holdout.</p>
+  <p><span class="status">Research engine built · waiting for licensed market data</span></p>
+
+  <section class="decision">
+    <strong>No Tide research results have been produced yet.</strong>
+    <p>The code is ready to analyze inputs, but this project has no minute bars or study runs. A result page will be meaningful only after the source data is licensed, cleaned, checked, and processed through the full validation workflow.</p>
+  </section>
+
+  <section>
+    <h2>What is already built</h2>
+    <div class="grid-3">
+      <article class="panel pad"><h3>Setup research</h3><p>Ten candidate rules cover VWAP reclaim and reversion, opening range, volume breakout, and consolidation patterns in both directions, using 1, 5, and 15-minute signals.</p></article>
+      <article class="panel pad"><h3>Exits and validation</h3><p>Measures forward returns and favorable/adverse excursions, compares stop and target rules, and separates development, validation, and final test months. Matched random entries provide a baseline.</p></article>
+      <article class="panel pad"><h3>Execution bridge</h3><p>Prepared signals can run through Horizon’s intraday simulator, which models prior-minute quotes, costs, gaps, session exits, and conservative handling when a bar touches both stop and target.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>What is needed before a study can run</h2>
+    <div class="grid-2">
+      <article class="panel pad"><h3>1. Licensed intraday data</h3><p>At least 12 months of regular-session 1-minute trades and valid NBBO quotes for a point-in-time large-cap universe, plus SPY and QQQ. Twelve months supports Tide’s initial 6-month development, 3-month validation, and 3-month untouched test split; longer history is needed to judge different market regimes.</p><p>WRDS TAQ access and export entitlement have not been confirmed. Any source must permit this research and retain its cleaning and provenance records.</p></article>
+      <article class="panel pad"><h3>2. Clean identifiers and timestamps</h3><p>Trade corrections, sale conditions, and quote validity must be handled before import. Data needs exchange timestamps, a consistent ticker-to-PERMNO map, split-aware price-scale breaks, complete XNYS sessions, and coverage checks including early closes.</p></article>
+      <article class="panel pad"><h3>3. Matching historical reference data</h3><p>Tide uses Horizon’s CRSP prices and historical S&amp;P 500 membership to avoid selecting today’s winners for an older study. The local CRSP daily file currently ends on December 31, 2025. Refresh it and membership data for any study window beyond that date.</p></article>
+      <article class="panel pad"><h3>4. Execution assumptions</h3><p>Set and record realistic commissions, spread, slippage, and market impact. Short setups also need separate historical borrow and locate evidence before they can pass the advancement gate.</p></article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Path from data to findings</h2>
+    <ol class="steps">
+      <li><strong>Confirm access and dates</strong>Choose an authorized TAQ source and a study period covered by both intraday data and Horizon reference data.</li>
+      <li><strong>Clean and map the inputs</strong>Produce minute bars with OHLCV and valid NBBO, then check ticker identities, corporate actions, session coverage, and source history.</li>
+      <li><strong>Run the bounded study</strong>Build the point-in-time universe, calculate signals and excursions, and compare exit rules with transaction costs.</li>
+      <li><strong>Check unseen periods</strong>Review matched baselines, walk-forward periods, final holdout results, per-stock performance, and nearby parameter settings.</li>
+      <li><strong>Review candidates</strong>Inspect the generated report and configuration. Tide labels candidates for manual review; it does not promote them automatically.</li>
+      <li><strong>Paper trade separately</strong>Only candidates that pass predefined evidence checks should move to paper execution and live-simulation monitoring.</li>
+    </ol>
+  </section>
+
+  <section class="research-banner">
+    <h2>Current data boundary</h2>
+    <p>Tide’s required intraday bars and quotes are not present in the workspace, and the TAQ license has not been verified. Until those inputs are available, there are no measured win rates, returns, or validated strategies to display. The page will be updated when a reproducible study has completed.</p>
+  </section>
+</main>
+<footer class="wrap footer">
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Research desk</a> · <a href="tide.html">Tide</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
+  <p class="fine">Tide describes a historical research process. No strategy results are available yet. Any future backtest is hypothetical and does not guarantee future performance.</p>
+</footer>
+</body>
+</html>
