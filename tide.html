@@ -52,30 +52,18 @@
   </section>
 
   <section>
-    <h2>What is needed before a study can run</h2>
-    <div class="grid-2">
-      <article class="panel pad"><h3>1. Licensed intraday data</h3><p>At least 12 months of regular-session trades and consolidated quotes for a point-in-time large-cap universe, plus SPY and QQQ. Twelve months supports Tide’s initial 6-month development, 3-month validation, and 3-month untouched test split; longer history is needed to judge different market regimes.</p><p>Your WRDS TAQ access covers the needed source. Export the relevant dates and symbols, then retain the source and cleaning details with the study.</p></article>
-      <article class="panel pad"><h3>2. Clean identifiers and timestamps</h3><p>Trade corrections, sale conditions, and quote validity must be handled before import. Data needs exchange timestamps, a consistent ticker-to-PERMNO map, split-aware price-scale breaks, complete XNYS sessions, and coverage checks including early closes.</p></article>
-      <article class="panel pad"><h3>3. Matching historical reference data</h3><p>Tide uses Horizon’s CRSP prices and historical S&amp;P 500 membership to avoid selecting today’s winners for an older study. The local CRSP daily file currently ends on December 31, 2025. Refresh it and membership data for any study window beyond that date.</p></article>
-      <article class="panel pad"><h3>4. Execution assumptions</h3><p>Set and record realistic commissions, spread, slippage, and market impact. Short setups also need separate historical borrow and locate evidence before they can pass the advancement gate.</p></article>
-    </div>
-  </section>
-
-  <section>
-    <h2>Path from data to findings</h2>
+    <details><summary><b>What is needed before a study can run, and the path to findings</b></summary>
+    <h2>Needed first</h2>
+    <ul><li>At least 12 months of regular-session trades and consolidated quotes for a point-in-time large-cap universe, plus SPY and QQQ (WRDS TAQ covers this).</li><li>Clean timestamps and a consistent ticker-to-PERMNO map, with trade corrections and sale conditions handled before import.</li><li>CRSP prices and S&amp;P 500 membership refreshed to cover the study window.</li><li>Recorded cost assumptions; short setups also need historical borrow evidence.</li></ul>
+    <h2>Path</h2>
     <ol class="steps">
-      <li><strong>Choose dates and make a sample export</strong>Start with one regular session and a few symbols, including SPY, to confirm the WRDS columns and quote coverage.</li>
-      <li><strong>Clean and map the inputs</strong>Produce minute bars with OHLCV and valid NBBO, then check ticker identities, corporate actions, session coverage, and source history.</li>
-      <li><strong>Run the bounded study</strong>Build the point-in-time universe, calculate signals and excursions, and compare exit rules with transaction costs.</li>
-      <li><strong>Check unseen periods</strong>Review matched baselines, walk-forward periods, final holdout results, per-stock performance, and nearby parameter settings.</li>
-      <li><strong>Review candidates</strong>Inspect the generated report and configuration. Tide labels candidates for manual review; it does not promote them automatically.</li>
-      <li><strong>Paper trade separately</strong>Only candidates that pass predefined evidence checks should move to paper execution and live-simulation monitoring.</li>
+      <li><strong>Sample export</strong>One session, a few symbols including SPY, to confirm columns and quote coverage.</li>
+      <li><strong>Clean and map</strong>Minute bars with valid NBBO, then identity, corporate-action and session checks.</li>
+      <li><strong>Bounded study</strong>Signals, excursions and exit rules compared with costs.</li>
+      <li><strong>Unseen periods</strong>Matched baselines, walk-forward and final holdout.</li>
+      <li><strong>Review and paper trade</strong>Candidates are labelled for manual review; only those passing predefined checks move to paper.</li>
     </ol>
-  </section>
-
-  <section class="research-banner">
-    <h2>Current data boundary</h2>
-    <p>The WRDS TAQ source is selected, but the exports are not yet in Tide’s workspace. There are still no measured win rates, returns, or validated strategies to display. The next milestone is a checked sample export followed by the full study dataset.</p>
+    </details>
   </section>
 </main>
 <footer class="wrap footer">

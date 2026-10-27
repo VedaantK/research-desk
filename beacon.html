@@ -49,10 +49,11 @@
       <div class="stat"><b>0.31</b><span>Named vs hidden-name agreement (needs &ge; 0.5)</span></div>
       <div class="stat"><b>47 of 60</b><span>Claude ratings that were &ldquo;hold&rdquo;</span></div>
     </div>
-    <p class="note">Scored on closes from 17 Aug to 26 Oct 2026. The memory check asks each model to rate the same company with and without its name; low agreement means the name changes the answer, so the models may be recalling rather than analysing. A second batch dated 15 Jul 2026 is being rated now and will be added here once it is scored.</p>
+    <p class="note">Scored on closes from 17 Aug to 26 Oct 2026. Low named/hidden agreement means the models may be recalling rather than analysing. A second batch dated 15 Jul 2026 will be added once scored.</p>
   </section>
 
   <section>
+    <details><summary><b>How a batch works, what counts as success, and limits</b></summary>
     <h2>How a batch works</h2>
     <ol class="steps">
       <li><strong>Screen</strong>Point-in-time SEC XBRL fundamentals rank S&amp;P 500 companies on a quality composite. The top 60 are rated.</li>
@@ -62,20 +63,16 @@
       <li><strong>Score</strong>Ratings are compared with later returns, the screen&rsquo;s own top 10 and random baskets of the same size.</li>
       <li><strong>Benchmark</strong>Value Line&rsquo;s published Timeliness rank is recorded for the same names as an outside reference.</li>
     </ol>
-  </section>
-
-  <section>
     <h2>What would count as success</h2>
     <div class="grid-3">
       <article class="panel pad"><h3>Phase 1</h3><p>Encouraging if IC is above 0.10 and the AI&rsquo;s top 10 beats both the screen&rsquo;s top 10 and the 75th percentile of random baskets. An IC below zero means stop treating the ratings as a signal.</p></article>
       <article class="panel pad"><h3>Long run</h3><p>Monthly batches for 24 months. IC above 0.03 in at least 60% of months. If IC is zero or negative at 18 months, retire the ratings.</p></article>
       <article class="panel pad"><h3>Memory check</h3><p>Named and hidden-name ratings must correlate at 0.5 or more, otherwise the results are treated as possibly contaminated.</p></article>
     </div>
-  </section>
 
-  <section class="research-banner">
-    <h2>Limits</h2>
+  <h2>Limits</h2>
     <p>Sixty companies over ten weeks is a small sample, and these companies were chosen by a quality screen, not at random. One batch cannot show skill; the monthly series is what will. Fundamentals come from SEC filings, so they may differ slightly from other vendors&rsquo; versions. Per-company ratings are not published.</p>
+    </details>
   </section>
 </main>
 <footer class="wrap footer">
