@@ -4,76 +4,198 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Atlas Research Desk</title>
-<meta name="description" content="Three research areas: systematic strategy backtests, an AI company analyst, and intraday pattern research.">
+<meta name="description" content="An autonomous research loop that tests systematic S&amp;P 500 strategies on survivorship-free data, three reconciling backtest engines and recorded historical evaluations.">
 <meta property="og:title" content="Atlas Research Desk">
-<meta property="og:description" content="What Tide can do, which WRDS TAQ exports it needs, and what remains before the first results.">
+<meta property="og:description" content="Every trading idea tested, including the ones that failed, against the S&amp;P 500.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css?v=a6077b73a7">
-<link rel="stylesheet" href="research.css?v=ae31e5e896">
+<link rel="stylesheet" href="research.css?v=566b8f76c9">
 <script src="theme.js?v=d756ea93c9"></script>
 </head>
+<body>
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Atlas</a>
+    <a class="brand" href="#top"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Atlas</a>
     <nav aria-label="Main navigation">
-      <a href="backtests.html">Backtests</a>
+      <a href="index.html" aria-current="page">Backtests</a>
       <a href="beacon.html">Company research</a>
       <a href="tide.html">Intraday research</a>
       <a href="notes.html">Research notes</a>
       <a href="updates.html">Updates</a>
+      <span class="nav-sep" aria-hidden="true"></span>
+      <a class="sec" href="#live">Live</a>
+      <a class="sec" href="#performance">Performance</a>
+      <a class="sec" href="#rules">Rules</a>
+      <a class="sec" href="#search">Search</a>
+      <a class="sec" href="#strategies">Strategies</a>
+      <a class="sec" href="#method">Method</a>
     </nav>
     <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
     </button>
   </div>
 </header>
-<main class="wrap research-page landing">
-<p class="eyebrow">ATLAS · RESEARCH DESK</p>
-  <h1>Three ways of finding out whether a trading idea is real.</h1>
-  <p class="lede">Each one is held to the same rule: write down what counts as success before looking, record every attempt, and publish the failures next to the wins. They are kept apart because they test different things on different data.</p>
 
-  <div class="suite">
-    <a class="panel pad suite-card" href="backtests.html">
-      <span class="eyebrow">01 · Backtests</span>
-      <h2>Systematic strategies on the S&amp;P 500</h2>
-      <p>An autonomous loop (Atlas) turns plain-English ideas into code and tests them on survivorship-free daily data. Horizon&rsquo;s three engines must agree on every fill. Strategies that clear fixed gates get a one-time holdout, then paper trading.</p>
-      <p class="suite-status"><span id="home-bt" class="status">Loading</span></p>
-      <span class="note-link">Open backtests &rarr;</span>
-    </a>
-    <a class="panel pad suite-card" href="beacon.html">
-      <span class="eyebrow">02 · Company research</span>
-      <h2>An AI analyst rating one company at a time</h2>
-      <p>Beacon builds a fact sheet for each company from SEC filings available on the day, asks Claude and Codex for a rating, and scores those ratings against what the stocks did afterward. The dates are set after the models&rsquo; training cutoffs.</p>
-      <p class="suite-status"><span class="status">One batch scored, one in progress &middot; inconclusive so far</span></p>
-      <span class="note-link">Open company research &rarr;</span>
-    </a>
-    <a class="panel pad suite-card" href="tide.html">
-      <span class="eyebrow">03 · Intraday research</span>
-      <h2>Repeatable moves inside the trading day</h2>
-      <p>Tide tests defined entry patterns on minute bars, measures what prices do next, and compares exit rules on data split into development, validation and a final untouched test.</p>
-      <p class="suite-status"><span class="status">Engine built &middot; waiting for data</span></p>
-      <span class="note-link">Open intraday research &rarr;</span>
-    </a>
-  </div>
+<main id="top">
+  <section class="hero wrap">
+    <p class="eyebrow"><span id="live-dot" class="dot"></span><span id="live-text">Research desk</span></p>
+    <h1>Most trading ideas don't survive real data.<br><span class="accent">This machine finds out which ones do.</span></h1>
+    <p class="lede">Atlas is an autonomous research loop. You describe a strategy in plain English. Claude turns it into a specification, Codex writes the code, and three independent backtest engines must agree on every trade. The two models then critique the result, and it has to clear risk gates before it is checked on a separate stretch of history. Those historical years have now all been looked at, so only trading going forward counts as truly new evidence. Every idea is shown here, including the ones that failed.</p>
+    <div class="stats" id="stats"></div>
+  </section>
 
-  <section>
-    <h2>How they fit together</h2>
-    <div class="grid-3">
-      <article class="panel pad"><h3>Shared referee</h3><p>Horizon is the backtester under both Atlas and Tide. It refuses a result unless independent engines reconcile.</p></article>
-      <article class="panel pad"><h3>Rules before results</h3><p>Gates, trial budgets and holdouts are fixed in advance. Beacon&rsquo;s are hash-chained and frozen before any rating is made.</p></article>
-      <article class="panel pad"><h3>Honest status</h3><p>A page says &ldquo;no results yet&rdquo; when that is true. Nothing here is investment advice.</p></article>
+  <section id="live" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Live paper portfolio <span id="paper-badge" class="badge Running">Not started</span></h2>
+        <p class="sub" id="paper-sub">The strategy that passed its holdout, running forward on an Interactive Brokers paper account. Returns and weights only.</p>
+      </div>
+    </div>
+    <div id="paper-kpis" class="stats"></div>
+    <div class="grid-2 live-grid">
+      <div class="panel"><div class="chart-label pad-top">Since start · paper vs benchmarks</div><div id="paper-growth" class="chart chart-mid"></div></div>
+      <div class="panel"><div class="chart-label pad-top" id="trend-label">Market filter</div><div id="trend" class="chart chart-mid"></div></div>
+    </div>
+    <div class="panel holdings-panel">
+      <div class="holdings-head"><h3>Holdings</h3><span class="sub" id="holdings-note"></span></div>
+      <div class="table-wrap"><table class="holdings" id="holdings"></table></div>
     </div>
   </section>
-  <script>
-  fetch("data.json").then(r=>r.json()).then(d=>{var e=document.getElementById("home-bt");if(!e)return;var n=(d.experiments||[]).length;e.textContent=n?n+" experiments recorded":"Results published";}).catch(function(){var e=document.getElementById("home-bt");if(e)e.textContent="Results published";});
-  </script>
+
+  <section id="performance" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Growth of $100,000</h2>
+        <p class="sub">The shortlist, after trading costs, against the S&amp;P 500 total return. Strategies marked "as held" use crash protection. Shaded bands are market crises; a hatched band marks a strategy's holdout years and a dotted one an after-check. After-checks and re-scores are exploratory. Archived ideas can be added from the chips.</p>
+      </div>
+      <div class="controls">
+        <div class="seg" id="range">
+          <button data-range="all" class="on">All</button>
+          <button data-range="2000-2009">2000s</button>
+          <button data-range="2010-2019">2010s</button>
+          <button data-range="2020-2025">2020s</button>
+        </div>
+        <div class="seg" id="scale">
+          <button data-scale="log" class="on">Log</button>
+          <button data-scale="value">Linear</button>
+        </div>
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="panel">
+      <div id="growth" class="chart chart-tall"></div>
+      <div class="chart-label">Drawdown from peak</div>
+      <div id="drawdown" class="chart chart-short"></div>
+    </div>
+  </section>
+
+  <section id="rules" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>The rules changed once <span class="badge Running">20 Oct 2026</span></h2>
+        <p class="sub">The original rules rejected any stock strategy that fell more than 35%, which in practice meant any strategy that stayed invested through 2008, however good its stock picks. They also asked three holdout years to clear a fixed Sharpe target, which a genuinely good strategy fails about half the time by luck. Version 2 was written down before anything was re-scored with it:</p>
+      </div>
+    </div>
+    <div class="grid-3 guard">
+      <div class="panel pad"><h3>Crash protection</h3><p>A long stock strategy may be held with one fixed rule: if the S&amp;P 500 ends a month below its 200-day average, move to T-bills until a month ends back above it. The −35% limit applies to the portfolio as held. The rule is never tuned per strategy.</p></div>
+      <div class="panel pad"><h3>An edge of its own</h3><p>The rule alone makes the index look good, so a strategy must also beat the six-factor model on its own picks (alpha t-stat ≥ 1.5), measured without protection. Holding the index with the rule cannot pass.</p></div>
+      <div class="panel pad"><h3>Holdout: did it break?</h3><p>The later years fail a strategy only when it does clearly worse than its research predicted; a pass can still include losing years. A pass means paper trading, not proof: no strategy kept a factor edge after its research years.</p></div>
+    </div>
+    <div class="grid-2 rules-grid">
+      <div class="panel pad"><h3>Does stepping aside in a crash work?</h3><div id="cp-kpis" class="kpi-row"></div><p class="note" id="cp-note"></p></div>
+      <div class="panel pad"><h3>Through each crisis</h3><div class="table-wrap"><table class="versions" id="episodes"></table></div><p class="note">Bonds rallied in 2000–02 and 2008 but fell with stocks in 2022, so the rules use T-bills.</p></div>
+    </div>
+  </section>
+
+  <section id="search" class="wrap section">
+    <div class="grid-2">
+      <div>
+        <div class="section-head compact">
+          <div>
+            <h2>The whole search, not the highlight reel</h2>
+            <p class="sub">Every strategy version the loop tested, on research data. The green box is Sharpe ≥ 0.5 with a worst drop no deeper than −35%. Archived ideas are grey; a ringed point is a shortlisted strategy as held with crash protection. Hover for details.</p>
+          </div>
+        </div>
+        <div class="panel"><div id="scatter" class="chart chart-mid"></div></div>
+      </div>
+      <div>
+        <div class="section-head compact">
+          <div>
+            <h2>Skill or luck?</h2>
+            <p class="sub">Shortlist only. Annual return left over after removing exposure to the market, size, value, profitability, investment and momentum factors (Fama–French 5 + momentum), measured on the strategy itself, without crash protection. Solid bars are statistically significant (|t| ≥ 2).</p>
+          </div>
+        </div>
+        <div class="panel"><div id="alpha" class="chart chart-mid"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Year by year</h2>
+        <p class="sub">Calendar-year returns of the shortlist as held. The S&amp;P 500 rows are the yardstick; years outside a strategy's test window are blank.</p>
+      </div>
+    </div>
+    <div class="panel"><div id="heatmap-wrap"><div id="heatmap" class="chart"></div></div></div>
+  </section>
+
+  <section id="strategies" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Shortlist</h2>
+        <p class="sub">Strategies that pass the current rules, newest first. Open a card for the original hypothesis, every version that was tried, and how it was judged.</p>
+      </div>
+    </div>
+    <div class="cards" id="cards"></div>
+    <details class="panel archive" id="archive">
+      <summary><span><b>Archive</b> · <span id="archive-count"></span></span><span class="sub">Rejected or not worth pursuing, kept for the record</span></summary>
+      <div class="table-wrap"><table class="versions archive-table" id="archive-table"></table></div>
+    </details>
+    <a class="panel pad note-card" href="annual.html">
+      <span class="eyebrow">Research note 001 · Oct 21, 2026</span>
+      <h3>Value then profitability, retested on sealed yearly data</h3>
+      <p>A stricter rebuild of the small &amp; mid cap idea in the archive: yearly accounting data, a June rebalance, data physically cut off at 2019 and sandboxed code. Eleven runs, three engines agreeing on each. It returned 8.5% a year but fell 47% at worst, and its edge over known factors was nil (alpha t −0.24). Profitability on its own did slightly better and still failed. The earlier quarterly screen looked much stronger (alpha t 2.4); rerunning its own rules on this data recovers about half of that (alpha t 1.2), still a fail.</p>
+      <span class="note-link">Read the study →</span>
+    </a>
+    <a class="panel pad note-card" href="smallcaps.html">
+      <span class="eyebrow">Research note 002 · Oct 22, 2026</span>
+      <h3>Small caps, 20 names at a time</h3>
+      <p>Five ideas with strong published evidence (momentum, net payout, sales-to-price, asset turnover, gross profitability), each built as a 20-stock portfolio a small account could hold in whole shares. All five failed on sealed 1998–2019 data: no edge beyond known factors, and worst drops of 56–88%.</p>
+      <span class="note-link">Read the note →</span>
+    </a>
+  </section>
+
+  <section id="method" class="wrap section">
+    <div class="section-head"><div><h2>How an idea is tested</h2>
+      <p class="sub">The loop is designed to reject ideas cheaply. It stops early when a strategy is far from the targets, and the holdout can be spent only once.</p></div></div>
+    <ol class="pipeline">
+      <li><b>Describe</b><span>A strategy in plain English, with the reason it should work.</span></li>
+      <li><b>Formalize</b><span>Claude writes a precise spec: universe, signals, timing, sizing, exits.</span></li>
+      <li><b>Implement</b><span>Codex writes the code. A validator replays it on synthetic markets to catch lookahead.</span></li>
+      <li><b>Backtest ×3</b><span>A reference engine, vectorbt and NautilusTrader must reconcile on the same orders.</span></li>
+      <li><b>Critique</b><span>Claude and Codex each propose falsifiable fixes. At most two rounds, and every version is counted.</span></li>
+      <li><b>Gates</b><span>Sharpe ≥ 0.5 and worst drop ≥ −35% as held, a six-factor alpha t ≥ 1.5, then doubled costs and nearby settings (Sharpe ≥ 0.3).</span></li>
+      <li><b>Holdout</b><span>A separate stretch of history checks that the result did not break. Years already looked at never count as fresh evidence again.</span></li>
+      <li><b>Paper</b><span>Survivors trade on an Interactive Brokers paper account before any real money.</span></li>
+    </ol>
+    <div class="grid-3 guard">
+      <div class="panel pad"><h3>Data timing and revisions</h3><p>CRSP daily prices including delisted companies and delisting returns, point-in-time S&amp;P 500 membership, and Compustat fundamentals used with availability lags. Waiting for the report date does not undo later corrections, so these numbers may not be exactly what was first published. The <a href="annual.html">annual research page</a> lists its own data limits.</p></div>
+      <div class="panel pad"><h3>Realistic execution</h3><p>Decisions are made at the close and filled at the next open. Costs include commissions, the quoted spread, size-based market impact and a borrow fee on shorts. Cash earns no interest, which understates hedged strategies.</p></div>
+      <div class="panel pad"><h3>Honest statistics</h3><p>Pass/fail rules are set before results are seen. They changed once (version 2, above), written down before any re-scoring, and re-scored verdicts are labelled. Alpha is measured against six factors and every version tried is recorded. The engine refuses to read data past the allowed date, and the annual study went further: its data was physically cut off at the end of 2019 and its code ran sandboxed.</p></div>
+    </div>
+  </section>
 </main>
+
 <footer class="wrap footer">
-  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Atlas</a> · <a href="backtests.html">Backtests</a> · <a href="beacon.html">Company research</a> · <a href="tide.html">Intraday research</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
-  <p class="fine">Backtested and hypothetical results where shown. Not investment advice. Past performance, simulated or real, does not guarantee future returns.</p>
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. Updated automatically from the research machine. <span id="generated"></span></p>
+  <p class="fine">Backtested and hypothetical results. Not investment advice. Past performance, simulated or real, does not guarantee future returns. Data: CRSP and Compustat via WRDS (only portfolio-level aggregates are published) and Kenneth French's data library.</p>
 </footer>
+
+<script src="echarts.min.js?v=e84270bd0c"></script>
+<script src="site.js?v=615af49113"></script>
 </body>
 </html>
