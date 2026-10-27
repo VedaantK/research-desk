@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Tide · Intraday research</title>
-<meta name="description" content="Tide researches intraday stock patterns. The research engine is built; licensed minute and quote data are needed before results can be produced.">
+<meta name="description" content="Tide researches intraday stock patterns. The research engine is built; the WRDS TAQ source is selected, and data exports are the next step.">
 <meta property="og:title" content="Tide · Intraday research">
-<meta property="og:description" content="What Tide can do, what data it needs, and what remains before the first research results.">
+<meta property="og:description" content="What Tide can do, which WRDS TAQ exports it needs, and what remains before the first results.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,11 +47,11 @@
   <p class="eyebrow">INTRADAY PATTERN RESEARCH</p>
   <h1>Tide looks for repeatable moves inside the trading day.</h1>
   <p class="lede">It tests defined entry patterns, measures what prices do afterward, and compares exit rules on data kept separate for development, validation, and a final holdout.</p>
-  <p><span class="status">Research engine built · waiting for licensed market data</span></p>
+  <p><span class="status">Research engine built · WRDS TAQ source selected · export pending</span></p>
 
   <section class="decision">
     <strong>No Tide research results have been produced yet.</strong>
-    <p>The code is ready to analyze inputs, but this project has no minute bars or study runs. A result page will be meaningful only after the source data is licensed, cleaned, checked, and processed through the full validation workflow.</p>
+    <p>The code is ready to analyze inputs, and the selected WRDS TAQ product provides consolidated trades and quotes. No exports have been added to Tide yet, so it has no minute bars or study runs. A result page will be meaningful after the data is exported, cleaned, checked, and processed through validation.</p>
   </section>
 
   <section>
@@ -66,7 +66,7 @@
   <section>
     <h2>What is needed before a study can run</h2>
     <div class="grid-2">
-      <article class="panel pad"><h3>1. Licensed intraday data</h3><p>At least 12 months of regular-session 1-minute trades and valid NBBO quotes for a point-in-time large-cap universe, plus SPY and QQQ. Twelve months supports Tide’s initial 6-month development, 3-month validation, and 3-month untouched test split; longer history is needed to judge different market regimes.</p><p>WRDS TAQ access and export entitlement have not been confirmed. Any source must permit this research and retain its cleaning and provenance records.</p></article>
+      <article class="panel pad"><h3>1. Licensed intraday data</h3><p>At least 12 months of regular-session trades and consolidated quotes for a point-in-time large-cap universe, plus SPY and QQQ. Twelve months supports Tide’s initial 6-month development, 3-month validation, and 3-month untouched test split; longer history is needed to judge different market regimes.</p><p>Your WRDS TAQ access covers the needed source. Export the relevant dates and symbols, then retain the source and cleaning details with the study.</p></article>
       <article class="panel pad"><h3>2. Clean identifiers and timestamps</h3><p>Trade corrections, sale conditions, and quote validity must be handled before import. Data needs exchange timestamps, a consistent ticker-to-PERMNO map, split-aware price-scale breaks, complete XNYS sessions, and coverage checks including early closes.</p></article>
       <article class="panel pad"><h3>3. Matching historical reference data</h3><p>Tide uses Horizon’s CRSP prices and historical S&amp;P 500 membership to avoid selecting today’s winners for an older study. The local CRSP daily file currently ends on December 31, 2025. Refresh it and membership data for any study window beyond that date.</p></article>
       <article class="panel pad"><h3>4. Execution assumptions</h3><p>Set and record realistic commissions, spread, slippage, and market impact. Short setups also need separate historical borrow and locate evidence before they can pass the advancement gate.</p></article>
@@ -76,7 +76,7 @@
   <section>
     <h2>Path from data to findings</h2>
     <ol class="steps">
-      <li><strong>Confirm access and dates</strong>Choose an authorized TAQ source and a study period covered by both intraday data and Horizon reference data.</li>
+      <li><strong>Choose dates and make a sample export</strong>Start with one regular session and a few symbols, including SPY, to confirm the WRDS columns and quote coverage.</li>
       <li><strong>Clean and map the inputs</strong>Produce minute bars with OHLCV and valid NBBO, then check ticker identities, corporate actions, session coverage, and source history.</li>
       <li><strong>Run the bounded study</strong>Build the point-in-time universe, calculate signals and excursions, and compare exit rules with transaction costs.</li>
       <li><strong>Check unseen periods</strong>Review matched baselines, walk-forward periods, final holdout results, per-stock performance, and nearby parameter settings.</li>
@@ -87,7 +87,7 @@
 
   <section class="research-banner">
     <h2>Current data boundary</h2>
-    <p>Tide’s required intraday bars and quotes are not present in the workspace, and the TAQ license has not been verified. Until those inputs are available, there are no measured win rates, returns, or validated strategies to display. The page will be updated when a reproducible study has completed.</p>
+    <p>The WRDS TAQ source is selected, but the exports are not yet in Tide’s workspace. There are still no measured win rates, returns, or validated strategies to display. The next milestone is a checked sample export followed by the full study dataset.</p>
   </section>
 </main>
 <footer class="wrap footer">
