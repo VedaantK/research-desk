@@ -74,7 +74,7 @@
   <p class="eyebrow">OPTIONS RESEARCH</p>
   <h1>Sextant tests options strategies against real trading costs.</h1>
   <p class="lede">Every idea is scored before it is tested: published evidence, who pays the premium and why, edge after a post-publication haircut, and edge measured against the bid-ask spread we would actually pay. Strategies that pass are pre-registered and run on OptionMetrics data through an engine checked against Cboe's published indexes.</p>
-  <p><span class="status">12 tests run · engine validated · paper replications waiting on data</span></p>
+  <p><span class="status">12 tests run · engine validated · 3 of 4 paper replications reproduced</span></p>
 
   <section class="decision">
     <strong>Nothing has passed yet, and costs are the main reason.</strong>
@@ -133,17 +133,17 @@
         <p style="margin-top:12px">Annualized returns over the full overlap. CNDR tracks less closely because Cboe picks its strikes by intraday delta and we only have closing prices.</p>
       </article>
       <article class="panel pad">
-        <h3>Next: replicate the papers in their own years</h3>
+        <h3>Replicating the papers in their own years</h3>
         <div class="sx-scroll"><table>
-          <thead><tr><th>Paper, 1996–2004</th><th>Published H−L</th></tr></thead>
+          <thead><tr><th>Paper, 1996–2004</th><th>Published</th><th>Ours</th></tr></thead>
           <tbody>
-            <tr><td>Option momentum (Heston et al.)</td><td class="n">+6.22%/mo</td></tr>
-            <tr><td>IV − HV (Goyal &amp; Saretto)</td><td class="n">−10.34%/mo</td></tr>
-            <tr><td>Size → call writing (Zhan et al.)</td><td class="n">+4.12%/mo</td></tr>
-            <tr><td>Idio. vol → call writing</td><td class="n">+4.36%/mo</td></tr>
+            <tr><td>Option momentum (Heston et al.)</td><td class="n">+6.22%/mo</td><td class="n">+7.30%, t 3.7</td></tr>
+            <tr><td>IV − HV (Goyal &amp; Saretto)</td><td class="n">−10.34%/mo</td><td class="n">needs data</td></tr>
+            <tr><td>Size → call writing (Zhan et al.)</td><td class="n">+4.12%/mo</td><td class="n">+2.17%, t 7.6</td></tr>
+            <tr><td>Idio. vol → call writing</td><td class="n">+4.36%/mo</td><td class="n">+3.86%, t 9.6</td></tr>
           </tbody>
         </table></div>
-        <p style="margin-top:12px">Pass rules were fixed before any 1996–2004 data existed on the machine. A miss means a bug to find, not an idea to drop.</p>
+        <p style="margin-top:12px">Pass rules were fixed before any 1996–2004 data existed on the machine. Momentum first missed (t 2.15); the published paper requires every formation month, and with that correction it passes. Our universe is S&amp;P 500 only, so smaller spreads are expected.</p>
       </article>
     </div>
   </section>
