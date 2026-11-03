@@ -1,0 +1,166 @@
+{
+ "updated": "2026-11-03T20:33:31+00:00",
+ "summary": [
+  {
+   "predictor": "Claude",
+   "resolved": 0,
+   "open": 5,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Checklist, same calls",
+   "resolved": 0,
+   "open": null,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Checklist, all flags",
+   "resolved": 0,
+   "open": 90,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Random controls",
+   "resolved": 0,
+   "open": 30,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Local model",
+   "resolved": 0,
+   "open": 0,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  }
+ ],
+ "gates": [
+  {
+   "gate": "Small real stock trades",
+   "have": 0,
+   "need": 60,
+   "status": "collecting",
+   "rule": "60+ resolved Claude calls, beats base rate (skill > 0, p < 0.10)"
+  },
+  {
+   "gate": "Options with real money",
+   "have": 0,
+   "need": 40,
+   "status": "collecting",
+   "rule": "stock gate plus 40+ option legs with average P&L above 0"
+  },
+  {
+   "gate": "Keep paying for Claude picks",
+   "have": 0,
+   "need": 100,
+   "status": "collecting",
+   "rule": "at 100 calls Claude must beat the checklist on the same calls"
+  }
+ ],
+ "calls": [
+  {
+   "id": 125,
+   "day": "2026-11-03",
+   "ticker": "RVTY",
+   "vs": "XLV",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "confidence": 0.55,
+   "status": "open",
+   "rel_return_pct": null,
+   "reason": "Almost all of the move is company-specific. RVTY rose 9.95% on its own (4.4\u03c3) on 2.6x normal volume, after an earnings release (filing items 2.02 and 8.01), while the market and sector were flat. A clean earnings gap to a new 52-week high with strong 12-1 momentum fits post-earnings drift. The offsets are a stock already up 103% from its low, an extended price (49% above the 200-day average), and weakening credit. That makes this a modest edge over the roughly 50% base rate, not a strong one."
+  },
+  {
+   "id": 124,
+   "day": "2026-11-03",
+   "ticker": "ADM",
+   "vs": "XLP",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "confidence": 0.53,
+   "status": "open",
+   "rel_return_pct": null,
+   "reason": "Almost all of today's -7.7% is company-specific (-4.5\u03c3, 3.2x volume) on the earnings release, so this is a fundamental reset. For ADM that most likely means weaker crush or processing margins and a lower outlook, and analysts usually revise estimates down over several weeks. The base rate leans slightly to underperformance. A 27% one-month lag versus the sector and a strong XLP raise the odds of a bounce, so I keep conviction close to 50%."
+  },
+  {
+   "id": 123,
+   "day": "2026-11-03",
+   "ticker": "DD",
+   "vs": "XLI",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "confidence": 0.55,
+   "status": "open",
+   "rel_return_pct": null,
+   "reason": "A 6-sigma, company-specific earnings jump on 6x volume to a new 52-week high fits the pattern of post-earnings drift, backed by positive 12-month momentum. Low implied volatility means options don't price a reversal. Against that, the stock had already beaten its sector by 18% in a month, sits 16% above its 50-day average, and credit is weakening. That makes some profit-taking likely and limits the edge to a modest tilt above the roughly 50% base rate."
+  },
+  {
+   "id": 122,
+   "day": "2026-11-03",
+   "ticker": "FISV",
+   "vs": "XLF",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "confidence": 0.55,
+   "status": "open",
+   "rel_return_pct": null,
+   "reason": "This is purely a company move: a 14% idiosyncratic jump (6.4\u03c3) on an earnings release with 4.8x volume, while the sector fell. For a stock that reset guidance and has lagged badly (12-1 momentum \u221231%, 16% below its high), a strong print likely signals the turnaround is working. Underweight investors may keep buying after a big surprise, which supports modest outperformance over 20 days. Risks: profit-taking after a 27% one-month run, and widening credit spreads."
+  },
+  {
+   "id": 121,
+   "day": "2026-11-03",
+   "ticker": "SYY",
+   "vs": "XLP",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "confidence": 0.54,
+   "status": "open",
+   "rel_return_pct": null,
+   "reason": "Almost all of the drop is company-specific: -7.6% idiosyncratic, about -7\u03c3, on 4.8x normal volume, at earnings. The 8-K pairing of results (2.02) with an officer or director change (5.02) and a Reg FD disclosure (7.01) suggests a guidance cut or leadership shake-up, not a one-off miss. The stock was already 14% behind XLP over the past month and is below both moving averages. The XLP rally is lifting peers without lifting SYY. Post-earnings drift favors continued modest underperformance."
+  }
+ ],
+ "progress": []
+}

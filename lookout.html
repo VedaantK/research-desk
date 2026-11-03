@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Market Indicator · Atlas</title>
+<meta name="description" content="Lookout: Claude flags unusual S&amp;P 500 moves each trading day, predicts whether the stock beats its sector, and every call is scored in the open.">
+<meta property="og:title" content="Market Indicator · Atlas">
+<meta property="og:description" content="A forward-tested AI market indicator: dated sector-relative calls on S&amp;P 500 stocks, scored against history and a fixed checklist.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=a6077b73a7">
+<link rel="stylesheet" href="research.css?v=1adaa0968d">
+<script src="theme.js?v=d756ea93c9"></script>
+<style>
+#lookout-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:860px){#lookout-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){#lookout-kpis{grid-template-columns:1fr}}
+.lk-pill{display:inline-block;font:600 12px Inter,sans-serif;padding:2px 9px;border-radius:999px;white-space:nowrap;color:var(--ink-3);background:var(--bg-2)}
+.lk-pill.hit,.lk-pill.passed{color:var(--accent);background:var(--accent-soft)}
+.lk-pill.miss,.lk-pill.stop{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.lk-good{color:var(--accent)}.lk-bad{color:var(--bad)}
+.lk-scroll{max-height:560px;overflow:auto}
+table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Atlas</a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Compass</a>
+      <a href="beacon.html">Beacon</a>
+      <a href="lookout.html" aria-current="page">Lookout</a>
+      <a href="tide.html">Tide</a>
+      <a href="theta.html">Theta</a>
+      <a href="notes.html">Research notes</a>
+      <a href="updates.html">Updates</a>
+    </nav>
+    <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="wrap research-page ">
+  <p class="eyebrow">MARKET INDICATOR</p>
+  <h1>Lookout asks whether an AI can read a stock&rsquo;s move better than history can.</h1>
+  <p class="lede">Every trading day a fixed scanner flags S&amp;P 500 stocks that moved unusually: a large company-specific move, a volume spike, an earnings reaction or a material filing. Claude studies the top five and predicts whether each will beat or lag its sector ETF over the next 5, 10 or 20 sessions. Every call is logged before the close and scored when its horizon ends. Nothing is traded.</p>
+  <p><span class="status" id="lookout-status">Loading results&hellip;</span></p>
+
+  <section class="decision">
+    <strong>The bar is close to a coin flip.</strong>
+    <p>From 2010 to 2025, after the same kinds of moves, 44&ndash;53% of S&amp;P 500 stocks went on to beat their industry over the next 5&ndash;20 sessions. Claude has to beat that base rate, and a fixed checklist built from published research, on the same calls before any of this is used with real money.</p>
+  </section>
+
+  <section>
+    <h2>Claude so far</h2>
+    <div class="stats" id="lookout-kpis">
+      <div class="stat"><b>—</b><span>Resolved calls (60 needed)</span></div>
+      <div class="stat"><b>—</b><span>Hit rate</span></div>
+      <div class="stat"><b>—</b><span>Expected from base rates</span></div>
+      <div class="stat"><b>—</b><span>Skill vs base rate</span></div>
+    </div>
+    <p class="note">Hit rate is the share of calls where the stock moved the way the call said, measured against its sector ETF. Skill is 1 minus Claude&rsquo;s Brier score over the base rate&rsquo;s; above zero is better than history, and it rewards honest confidence as well as direction.</p>
+  </section>
+
+  <section>
+    <h2>Who predicts better</h2>
+    <p class="note">The checklist scores every flagged stock with fixed, literature-based adjustments (momentum, one-month reversal, post-earnings drift, 52-week-high proximity, idiosyncratic volatility, high volume). Random controls are unflagged stocks scored the same way, which tests whether flagging itself carries information.</p>
+    <div class="table-wrap">
+      <table class="holdings" id="lookout-compare">
+        <thead><tr><th>Predictor</th><th class="num">Resolved</th><th class="num">Open</th><th class="num">Hit rate</th><th class="num">Expected</th><th class="num">p</th><th class="num">Skill</th><th class="num">Avg edge</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Gates</h2>
+    <p class="note">Fixed before the first call. Options are only considered after paper spreads, bought at the ask and sold at the bid, show a profit.</p>
+    <div class="table-wrap">
+      <table class="holdings" id="lookout-gates">
+        <thead><tr><th>Gate</th><th class="num">Have</th><th class="num">Need</th><th>Status</th><th>Rule</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Claude&rsquo;s calls</h2>
+    <p class="note">Newest first. &ldquo;Beat&rdquo; or &ldquo;lag&rdquo; is against the sector ETF shown, measured from that day&rsquo;s close.</p>
+    <div class="table-wrap lk-scroll">
+      <table class="holdings" id="lookout-calls">
+        <thead><tr><th>Day</th><th>Stock</th><th>Call</th><th>Vs</th><th class="num">Days</th><th class="num">Conf.</th><th>Result</th><th class="num">Rel. return</th><th>Reason</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <details><summary><b>How it works, and limits</b></summary>
+    <ol class="steps">
+      <li><strong>Scan</strong>Three times a day on delayed data, each move is split into market, sector and company parts.</li>
+      <li><strong>Flag</strong>Fixed rules, set in advance, pick unusual names. Five random names are also scored as controls.</li>
+      <li><strong>Fact sheet</strong>The same fifteen or so fields for every name: the move split, trend, momentum, earnings timing, filings, volatility and macro.</li>
+      <li><strong>Predict</strong>The checklist scores every flag. Claude takes the top five and must explain where it disagrees with the checklist.</li>
+      <li><strong>Log</strong>Calls go into a hash-chained ledger before the close, so none can be edited later.</li>
+      <li><strong>Score</strong>When the horizon ends, each call settles against its sector ETF with dividends included.</li>
+    </ol>
+    <h2>Limits</h2>
+    <p>Model judgment is only tested forward, because any backtest would overlap the model&rsquo;s training data. The historical base rates use an industry benchmark rather than sector ETFs. There is no news feed, so Claude sees only the numbers and filings in the fact sheet. Results need at least 60 resolved calls before they mean much.</p>
+    </details>
+  </section>
+</main>
+<footer class="wrap footer">
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Compass</a> · <a href="beacon.html">Beacon</a> · <a href="lookout.html">Lookout</a> · <a href="tide.html">Tide</a> · <a href="theta.html">Theta</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
+  <p class="fine">Lookout publishes research predictions, not investment advice. No trades are placed.</p>
+</footer>
+<script src="lookout.js"></script>
+</body>
+</html>
