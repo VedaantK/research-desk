@@ -89,6 +89,17 @@
     <div class="stat"><b>0.992</b><span>correlation with Cboe PUT and BXM</span></div>
   </div>
 
+  <section id="premium-screen">
+    <h2>Is selling options paying right now?</h2>
+    <p class="note">A daily readout, not a tested strategy. <b>VAY</b> (volatility-adjusted yield, an idea from DefineYourRisk) is the price of a one-month at-the-money call divided by what that call is worth if the stock keeps moving as it did over the last 21 trading days: 1.00 is fair, above 1 means sellers are paid more than recent movement justifies. <b>IVx</b> is 30-day implied volatility, <b>IV rank</b> where it sits in its one-year range (0–100), <b>IV percentile</b> the share of the past year's days it was lower. Highlighted rows have IV rank ≥ 50 and VAY ≥ 1.2. Our own test of the implied-minus-realized trade did not earn twice its trading costs, so a rich reading is a starting point, not a signal.</p>
+    <p><span class="status" id="ps-status">Loading…</span></p>
+    <div class="panel"><div class="sx-scroll"><table id="ps-table">
+      <thead><tr><th>Ticker</th><th>VAY</th><th>IVx</th><th>21-day realized</th><th>IVx − realized</th><th>IV rank</th><th>IV pctl</th><th>Call yield, annualized</th><th>Days</th></tr></thead>
+      <tbody></tbody>
+    </table></div></div>
+    <p class="note">Prices are 15-minute delayed IBKR quotes taken at about 3:40 pm ET on trading days; VAY uses the bid/ask midpoint and is left blank when there was none. Call yield is premium ÷ stock price × 365 ÷ days to expiry.</p>
+  </section>
+
   <section>
     <h2>What each structure pays at expiry</h2>
     <p class="note">Profit or loss per share against the stock price at expiry, with the stock at 100 today. Premiums are illustrative; the rows under each diagram are the tests we ran with that structure. Hover or drag across a diagram to read it.</p>
@@ -166,6 +177,34 @@
   </section>
 </main>
 <div id="sx-tip" hidden></div>
+<style>
+#ps-table tr.ps-hit td { background: color-mix(in srgb, var(--accent) 10%, transparent) }
+#ps-table tr.ps-hit td:first-child { box-shadow: inset 3px 0 0 var(--accent) }
+#ps-table th { white-space: nowrap }
+</style>
+<script>
+(async function () {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+  const f = (v, d, suf = "") => v == null ? "—" : Number(v).toFixed(d) + suf;
+  try {
+    const res = await fetch("theta-screen.json", {cache: "no-store"});
+    if (!res.ok) throw new Error(res.status);
+    const d = await res.json();
+    const hits = d.rows.filter(r => r.pass).length;
+    const when = new Date(d.updated).toLocaleString("en-US", {month: "short", day: "numeric", hour: "numeric", minute: "2-digit"});
+    $("ps-status").textContent = `${hits} of ${d.rows.length} names pass · updated ${when}`;
+    $("ps-table").querySelector("tbody").innerHTML = d.rows.map(r =>
+      `<tr${r.pass ? ' class="ps-hit"' : ""}><td><b>${esc(r.symbol)}</b></td><td class="n">${f(r.vay, 2)}</td>`
+      + `<td class="n">${f(r.ivx, 1, "%")}</td><td class="n">${f(r.rv21, 1, "%")}</td>`
+      + `<td class="n">${r.vrp == null ? "—" : (r.vrp > 0 ? "+" : "") + r.vrp.toFixed(1) + " pts"}</td>`
+      + `<td class="n">${f(r.ivr, 0)}</td><td class="n">${f(r.ivp, 0)}</td>`
+      + `<td class="n">${f(r.ann_yield, 1, "%")}</td><td class="n">${r.dte ?? "—"}</td></tr>`).join("");
+  } catch (e) {
+    $("ps-status").textContent = "No screen published yet; it runs after 3:40 pm ET on trading days.";
+  }
+})();
+</script>
 <footer class="wrap footer">
   <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Compass</a> · <a href="beacon.html">Beacon</a> · <a href="lookout.html">Lookout</a> · <a href="tide.html">Tide</a> · <a href="theta.html">Theta</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
   <p class="fine">Theta describes historical research on options. Backtests are hypothetical, options can lose more than the premium paid, and nothing here is investment advice.</p>
