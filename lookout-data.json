@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T01:00:22+00:00",
+ "updated": "2026-11-04T01:12:40+00:00",
  "summary": [
   {
    "predictor": "Claude",
@@ -212,5 +212,12 @@
    "wrong_if": "SYY recovers half the gap (closes back above ~7% below the pre-earnings close, i.e. regains about 4% relative to XLP) within 10 sessions."
   }
  ],
- "progress": []
+ "progress": [],
+ "size_check": [
+  {
+   "n": 0,
+   "need": 30,
+   "status": "collecting"
+  }
+ ]
 }

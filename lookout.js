@@ -27,6 +27,16 @@
     $("lookout-gates").querySelector("tbody").innerHTML = d.gates.map(g => `<tr><td>${esc(g.gate)}</td>`
       + `<td class="num">${g.have}</td><td class="num">${g.need}</td>`
       + `<td><span class="lk-pill ${esc(g.status)}">${esc(g.status)}</span></td><td class="wrap">${esc(g.rule)}</td></tr>`).join("");
+    const sz = (d.size_check || [])[0] || {n: 0, need: 30};
+    const ready = sz.status === "ready";
+    $("lookout-size-status").textContent = ready ? `Based on ${sz.n} settled calls.`
+      : `Shown from ${sz.need} settled calls; ${sz.n} so far.`;
+    const mag = (v) => v == null ? "—" : Math.abs(v).toFixed(1) + "%";
+    const sv = [[ready ? mag(sz.expected_pct) : "—", "Claude’s average estimate"],
+                [ready ? sgn(sz.realized_on_hits_pct, 1) : "—", "Actual, when the call was right"],
+                [ready ? sgn(sz.realized_pct, 1) : "—", "Actual, all calls"],
+                [ready ? mag(sz.typical_abs_pct) : "—", "Typical size of a move, either way"]];
+    $("lookout-size").innerHTML = sv.map(([v, l]) => `<div class="stat"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("");
     const card = (c) => {
       const up = c.call === "beat";
       const mv = c.expected_move_pct == null ? "" : ` by ~${Math.abs(c.expected_move_pct)}%`;

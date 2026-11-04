@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="research.css?v=1adaa0968d">
 <script src="theme.js?v=d756ea93c9"></script>
 <style>
-#lookout-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:860px){#lookout-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){#lookout-kpis{grid-template-columns:1fr}}
+#lookout-kpis,#lookout-size{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:860px){#lookout-kpis,#lookout-size{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){#lookout-kpis,#lookout-size{grid-template-columns:1fr}}
 .lk-pill{display:inline-block;font:600 12px Inter,sans-serif;padding:2px 9px;border-radius:999px;white-space:nowrap;color:var(--ink-3);background:var(--bg-2)}
 .lk-pill.hit,.lk-pill.passed{color:var(--accent);background:var(--accent-soft)}
 .lk-pill.miss,.lk-pill.stop{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
@@ -106,6 +106,17 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   </section>
 
   <section>
+    <h2>Does Claude size moves right?</h2>
+    <p class="note">Each call also estimates how far the stock will move against its sector if the call is right. This compares those estimates with what actually happened, in the called direction. It is descriptive only and never counts toward a gate, but it matters for options: each spread&rsquo;s strikes are set from this estimate. <span id="lookout-size-status"></span></p>
+    <div class="stats" id="lookout-size">
+      <div class="stat"><b>—</b><span>Claude&rsquo;s average estimate</span></div>
+      <div class="stat"><b>—</b><span>Actual, when the call was right</span></div>
+      <div class="stat"><b>—</b><span>Actual, all calls</span></div>
+      <div class="stat"><b>—</b><span>Typical size of a move, either way</span></div>
+    </div>
+  </section>
+
+  <section>
     <h2>Claude&rsquo;s calls</h2>
     <p class="note">Newest first. Every call is against the stock&rsquo;s sector ETF: <b class="lk-up">&#9650; beat</b> means Claude expects the stock to do better than its sector, <b class="lk-down">&#9660; lag</b> means worse. The move is Claude&rsquo;s estimate of the gap to the sector by the due date, measured from the close on the day of the call.</p>
     <div class="lk-cards" id="lookout-calls"><p class="note">Loading&hellip;</p></div>
@@ -131,6 +142,6 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Compass</a> · <a href="beacon.html">Beacon</a> · <a href="lookout.html">Lookout</a> · <a href="tide.html">Tide</a> · <a href="theta.html">Theta</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
   <p class="fine">Lookout publishes research predictions, not investment advice. No trades are placed.</p>
 </footer>
-<script src="lookout.js?v=7d04c99555"></script>
+<script src="lookout.js?v=de4e6c5df2"></script>
 </body>
 </html>
