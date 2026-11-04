@@ -117,6 +117,17 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   </section>
 
   <section>
+    <h2>What would the calls earn as trades?</h2>
+    <p class="note">The calls predict a stock beating or lagging its sector, but a small account would usually just buy the stock. This shows each settled call as a $250 position three ways, after fixed costs (10 bp per leg round trip, 0.5%/yr borrow on shorts). The checklist on the same calls is the comparison. Drawdown is the worst run of losses across positions, and adverse is the worst close while a position was held. Descriptive only, never a gate. <span id="lookout-trade-status"></span></p>
+    <div class="table-wrap">
+      <table class="holdings" id="lookout-trade">
+        <thead><tr><th>Predictor</th><th>Trade</th><th class="num">n</th><th class="num">Avg net</th><th class="num">Win rate</th><th class="num">Worst</th><th class="num">Total $</th><th class="num">Drawdown $</th><th class="num">Worst adverse</th></tr></thead>
+        <tbody><tr><td colspan="9" class="note">Loading&hellip;</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
     <h2>Claude&rsquo;s calls</h2>
     <p class="note">Newest first. Every call is against the stock&rsquo;s sector ETF: <b class="lk-up">&#9650; beat</b> means Claude expects the stock to do better than its sector, <b class="lk-down">&#9660; lag</b> means worse. The move is Claude&rsquo;s estimate of the gap to the sector by the due date, measured from the close on the day of the call.</p>
     <div class="lk-cards" id="lookout-calls"><p class="note">Loading&hellip;</p></div>
@@ -142,6 +153,6 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Compass</a> · <a href="beacon.html">Beacon</a> · <a href="lookout.html">Lookout</a> · <a href="tide.html">Tide</a> · <a href="theta.html">Theta</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
   <p class="fine">Lookout publishes research predictions, not investment advice. No trades are placed.</p>
 </footer>
-<script src="lookout.js?v=de4e6c5df2"></script>
+<script src="lookout.js?v=bac298f75f"></script>
 </body>
 </html>

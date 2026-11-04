@@ -37,6 +37,20 @@
                 [ready ? sgn(sz.realized_pct, 1) : "—", "Actual, all calls"],
                 [ready ? mag(sz.typical_abs_pct) : "—", "Typical size of a move, either way"]];
     $("lookout-size").innerHTML = sv.map(([v, l]) => `<div class="stat"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("");
+    const tc = d.trade_check || [];
+    const names = {long_only: "Buy on beat, skip lag", directional: "Buy or short the stock", hedged: "Stock vs sector ETF"};
+    const usd = (v) => v == null ? "—" : (v < 0 ? "−$" : "$") + Math.abs(v).toFixed(0);
+    const tcN = tc.length ? tc[0] : {n: 0, need: 30};
+    const claudeN = Math.max(0, ...tc.filter(r => r.predictor === "Claude").map(r => r.n || 0));
+    const tReady = tc.length && tc[0].status === "ready";
+    $("lookout-trade-status").textContent = tReady ? `Based on ${claudeN} settled calls.`
+      : `Read from ${tcN.need} settled calls; ${claudeN} so far.`;
+    $("lookout-trade").querySelector("tbody").innerHTML = tc.length ? tc.map(r => `<tr><td>${esc(r.predictor)}</td>`
+      + `<td>${esc(names[r.expression] || r.expression)}</td><td class="num">${r.n}</td>`
+      + `<td class="num ${cls(r.mean_net_pct)}">${sgn(r.mean_net_pct)}</td><td class="num">${pct(r.win_rate, 0)}</td>`
+      + `<td class="num">${sgn(r.worst_pct)}</td><td class="num ${cls(r.total_usd)}">${usd(r.total_usd)}</td>`
+      + `<td class="num">${usd(r.max_drawdown_usd)}</td><td class="num">${sgn(r.worst_adverse_pct)}</td></tr>`).join("")
+      : `<tr><td colspan="9" class="note">No trade data yet.</td></tr>`;
     const card = (c) => {
       const up = c.call === "beat";
       const mv = c.expected_move_pct == null ? "" : ` by ~${Math.abs(c.expected_move_pct)}%`;
