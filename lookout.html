@@ -106,18 +106,6 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   </section>
 
   <section>
-    <h2>Resolved predictions over time</h2>
-    <p class="note">Cumulative settled calls by the day each horizon ended, Claude vs. the checklist. The dashed line is the 60 calls the first gate needs. <span id="lookout-progress-status"></span></p>
-    <div class="panel"><div id="lookout-progress" class="chart chart-mid" role="img" aria-label="Cumulative resolved predictions over time"></div></div>
-  </section>
-
-  <section>
-    <h2>Current standing, open calls</h2>
-    <p class="note">Mark-to-market sector-relative return since entry, from the nightly bar refresh &mdash; informal, long before a call's 5&ndash;20 session settlement. Green tracks the call&rsquo;s own direction, red runs against it. <span id="lookout-standing-status"></span></p>
-    <div class="panel"><div id="lookout-standing" class="chart" role="img" aria-label="Current sector-relative return of open calls"></div></div>
-  </section>
-
-  <section>
     <h2>Does Claude size moves right?</h2>
     <p class="note">Each call also estimates how far the stock will move against its sector if the call is right. This compares those estimates with what actually happened, in the called direction. It is descriptive only and never counts toward a gate, but it matters for options: each spread&rsquo;s strikes are set from this estimate. <span id="lookout-size-status"></span></p>
     <div class="stats" id="lookout-size">
@@ -165,7 +153,6 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Compass</a> · <a href="beacon.html">Beacon</a> · <a href="lookout.html">Lookout</a> · <a href="tide.html">Tide</a> · <a href="theta.html">Theta</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
   <p class="fine">Lookout publishes research predictions, not investment advice. No trades are placed.</p>
 </footer>
-<script src="echarts.min.js?v=e84270bd0c"></script>
-<script src="lookout.js?v=afa018774f"></script>
+<script src="lookout.js?v=bac298f75f"></script>
 </body>
 </html>
