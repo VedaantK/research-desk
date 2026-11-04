@@ -21,6 +21,25 @@
 .lk-pill.miss,.lk-pill.stop{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
 .lk-good{color:var(--accent)}.lk-bad{color:var(--bad)}
 .lk-scroll{max-height:560px;overflow:auto}
+.lk-up{color:var(--accent)}.lk-down{color:var(--bad)}
+.lk-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:12px}
+.lk-card{border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;background:var(--panel);display:flex;flex-direction:column;gap:10px;min-width:0}
+.lk-top{display:flex;align-items:center;gap:10px}
+.lk-arrow{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:18px;line-height:1}
+.lk-arrow.up{color:var(--accent);background:var(--accent-soft)}
+.lk-arrow.down{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.lk-id{min-width:0;flex:1}.lk-id b{font-size:18px;letter-spacing:.01em}
+.lk-id span{display:block;color:var(--ink-2);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lk-head{font-size:16px;font-weight:600;margin:0}
+.lk-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-2);margin:0}
+.lk-meta b{color:var(--ink);font-weight:600}
+.research-page .lk-card ul{margin:0;padding-left:18px;font-size:14px}.research-page .lk-card li{margin:3px 0;line-height:1.45;color:var(--ink)}
+
+.lk-wrong{font-size:13px;color:var(--ink-2);margin:0}.lk-wrong b{color:var(--ink)}
+.research-page .lk-card details{font-size:13px;color:var(--ink-2);padding:0;background:none;border:0;border-radius:0}.lk-card summary{cursor:pointer;color:var(--ink)}
+.lk-card details p{margin:6px 0 0;line-height:1.5}
+.lk-more{font:600 14px Inter,sans-serif;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);cursor:pointer}
+@media(max-width:480px){.lk-cards{grid-template-columns:1fr}}
 table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
 </style>
 </head>
@@ -88,13 +107,9 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
 
   <section>
     <h2>Claude&rsquo;s calls</h2>
-    <p class="note">Newest first. &ldquo;Beat&rdquo; or &ldquo;lag&rdquo; is against the sector ETF shown, measured from that day&rsquo;s close.</p>
-    <div class="table-wrap lk-scroll">
-      <table class="holdings" id="lookout-calls">
-        <thead><tr><th>Day</th><th>Stock</th><th>Call</th><th>Vs</th><th class="num">Days</th><th class="num">Conf.</th><th>Result</th><th class="num">Rel. return</th><th>Reason</th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
+    <p class="note">Newest first. Every call is against the stock&rsquo;s sector ETF: <b class="lk-up">&#9650; beat</b> means Claude expects the stock to do better than its sector, <b class="lk-down">&#9660; lag</b> means worse. The move is Claude&rsquo;s estimate of the gap to the sector by the due date, measured from the close on the day of the call.</p>
+    <div class="lk-cards" id="lookout-calls"><p class="note">Loading&hellip;</p></div>
+    <p><button type="button" class="lk-more" id="lookout-more" hidden>Show all calls</button></p>
   </section>
 
   <section>
@@ -116,6 +131,6 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Compass</a> · <a href="beacon.html">Beacon</a> · <a href="lookout.html">Lookout</a> · <a href="tide.html">Tide</a> · <a href="theta.html">Theta</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
   <p class="fine">Lookout publishes research predictions, not investment advice. No trades are placed.</p>
 </footer>
-<script src="lookout.js"></script>
+<script src="lookout.js?v=7d04c99555"></script>
 </body>
 </html>

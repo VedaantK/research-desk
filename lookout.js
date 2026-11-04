@@ -27,12 +27,34 @@
     $("lookout-gates").querySelector("tbody").innerHTML = d.gates.map(g => `<tr><td>${esc(g.gate)}</td>`
       + `<td class="num">${g.have}</td><td class="num">${g.need}</td>`
       + `<td><span class="lk-pill ${esc(g.status)}">${esc(g.status)}</span></td><td class="wrap">${esc(g.rule)}</td></tr>`).join("");
-    const calls = $("lookout-calls").querySelector("tbody");
-    calls.innerHTML = d.calls.length ? d.calls.map(c => `<tr><td>${esc(day(c.day))}</td><td><b>${esc(c.ticker)}</b></td>`
-      + `<td>${esc(c.call)}</td><td>${esc(c.vs)}</td><td class="num">${c.horizon_days}</td>`
-      + `<td class="num">${pct(c.confidence, 0)}</td><td><span class="lk-pill ${esc(c.status)}">${esc(c.status)}</span></td>`
-      + `<td class="num">${sgn(c.rel_return_pct)}</td><td class="wrap">${esc(c.reason)}</td></tr>`).join("")
-      : `<tr><td colspan="9">The first calls are made at 3:25 PM ET on the next trading day.</td></tr>`;
+    const card = (c) => {
+      const up = c.call === "beat";
+      const mv = c.expected_move_pct == null ? "" : ` by ~${Math.abs(c.expected_move_pct)}%`;
+      const done = c.status !== "open";
+      const result = done
+        ? `<span><span class="lk-pill ${esc(c.status)}">${esc(c.status)}</span> actual <b class="${cls(c.rel_return_pct)}">${sgn(c.rel_return_pct)}</b> vs ${esc(c.vs)}</span>`
+        : `<span><span class="lk-pill open">open</span> settles <b>${esc(day(c.due))}</b></span>`;
+      const why = (c.drivers || []).length
+        ? `<ul>${c.drivers.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
+      return `<article class="lk-card">`
+        + `<div class="lk-top"><span class="lk-arrow ${up ? "up" : "down"}" aria-hidden="true">${up ? "&#9650;" : "&#9660;"}</span>`
+        + `<div class="lk-id"><b>${esc(c.ticker)}</b><span>${esc(c.name || "")}${c.name ? " · " : ""}${esc(c.trigger)}</span></div></div>`
+        + `<p class="lk-head ${up ? "lk-up" : "lk-down"}">${up ? "Beat" : "Lag"} ${esc(c.vs)}${mv} over ${c.horizon_days} sessions</p>`
+        + `<p class="lk-meta"><span>Confidence <b>${pct(c.confidence, 0)}</b></span><span>Called <b>${esc(day(c.day))}</b></span>${result}</p>`
+        + why
+        + (c.wrong_if ? `<p class="lk-wrong"><b>Wrong if:</b> ${esc(c.wrong_if)}</p>` : "")
+        + (c.reason ? `<details><summary>Full reasoning</summary><p>${esc(c.reason)}</p></details>` : "")
+        + `</article>`;
+    };
+    const box = $("lookout-calls"), more = $("lookout-more"), FIRST = 12;
+    const draw = (all) => {
+      const list = all ? d.calls : d.calls.slice(0, FIRST);
+      box.innerHTML = list.length ? list.map(card).join("")
+        : `<p class="note">The first calls are made at 3:25 PM ET on the next trading day.</p>`;
+      more.hidden = all || d.calls.length <= FIRST;
+    };
+    more.addEventListener("click", () => draw(true));
+    draw(false);
   } catch (e) {
     $("lookout-status").textContent = e.message;
   }

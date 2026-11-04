@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-03T23:55:55+00:00",
+ "updated": "2026-11-04T01:00:22+00:00",
  "summary": [
   {
    "predictor": "Claude",
@@ -100,66 +100,116 @@
    "id": 125,
    "day": "2026-11-03",
    "ticker": "RVTY",
+   "name": "Revvity",
    "vs": "XLV",
    "trigger": "earnings up",
    "call": "beat",
    "horizon_days": 20,
+   "due": "2026-12-02",
    "confidence": 0.55,
+   "expected_move_pct": 2,
+   "drivers": [
+    "4.4\u03c3 company-specific earnings gap",
+    "post-earnings drift",
+    "breakout to new 52-week high with 12-1 momentum",
+    "extended after doubling off the low"
+   ],
    "status": "open",
    "rel_return_pct": null,
-   "reason": "Almost all of the move is company-specific. RVTY rose 9.95% on its own (4.4\u03c3) on 2.6x normal volume, after an earnings release (filing items 2.02 and 8.01), while the market and sector were flat. A clean earnings gap to a new 52-week high with strong 12-1 momentum fits post-earnings drift. The offsets are a stock already up 103% from its low, an extended price (49% above the 200-day average), and weakening credit. That makes this a modest edge over the roughly 50% base rate, not a strong one."
+   "reason": "Almost all of the move is company-specific. RVTY rose 9.95% on its own (4.4\u03c3) on 2.6x normal volume, after an earnings release (filing items 2.02 and 8.01), while the market and sector were flat. A clean earnings gap to a new 52-week high with strong 12-1 momentum fits post-earnings drift. The offsets are a stock already up 103% from its low, an extended price (49% above the 200-day average), and weakening credit. That makes this a modest edge over the roughly 50% base rate, not a strong one.",
+   "wrong_if": "RVTY gives back more than half of today's gap relative to XLV (underperforms XLV by over 5%) within 10 sessions, or closes below its pre-earnings price."
   },
   {
    "id": 124,
    "day": "2026-11-03",
    "ticker": "ADM",
+   "name": "Archer Daniels Midland",
    "vs": "XLP",
    "trigger": "earnings down",
    "call": "lag",
    "horizon_days": 20,
+   "due": "2026-12-02",
    "confidence": 0.53,
+   "expected_move_pct": -2,
+   "drivers": [
+    "4.5-sigma earnings-driven company move",
+    "post-earnings drift and estimate cuts",
+    "ag margin cycle downturn",
+    "offset: deeply oversold vs sector"
+   ],
    "status": "open",
    "rel_return_pct": null,
-   "reason": "Almost all of today's -7.7% is company-specific (-4.5\u03c3, 3.2x volume) on the earnings release, so this is a fundamental reset. For ADM that most likely means weaker crush or processing margins and a lower outlook, and analysts usually revise estimates down over several weeks. The base rate leans slightly to underperformance. A 27% one-month lag versus the sector and a strong XLP raise the odds of a bounce, so I keep conviction close to 50%."
+   "reason": "Almost all of today's -7.7% is company-specific (-4.5\u03c3, 3.2x volume) on the earnings release, so this is a fundamental reset. For ADM that most likely means weaker crush or processing margins and a lower outlook, and analysts usually revise estimates down over several weeks. The base rate leans slightly to underperformance. A 27% one-month lag versus the sector and a strong XLP raise the odds of a bounce, so I keep conviction close to 50%.",
+   "wrong_if": "ADM recovers half of today's drop (back above about 8.3% below the pre-earnings close) within 10 sessions, or management reaffirms full-year EPS guidance at a post-earnings conference."
   },
   {
    "id": 123,
    "day": "2026-11-03",
    "ticker": "DD",
+   "name": "DuPont",
    "vs": "XLI",
    "trigger": "earnings up",
    "call": "beat",
    "horizon_days": 20,
+   "due": "2026-12-02",
    "confidence": 0.55,
+   "expected_move_pct": 1.5,
+   "drivers": [
+    "post-earnings drift after 6-sigma beat",
+    "new 52-week high with 6x volume",
+    "stretched 1-month run limits upside",
+    "weaker credit is a cyclical headwind"
+   ],
    "status": "open",
    "rel_return_pct": null,
-   "reason": "A 6-sigma, company-specific earnings jump on 6x volume to a new 52-week high fits the pattern of post-earnings drift, backed by positive 12-month momentum. Low implied volatility means options don't price a reversal. Against that, the stock had already beaten its sector by 18% in a month, sits 16% above its 50-day average, and credit is weakening. That makes some profit-taking likely and limits the edge to a modest tilt above the roughly 50% base rate."
+   "reason": "A 6-sigma, company-specific earnings jump on 6x volume to a new 52-week high fits the pattern of post-earnings drift, backed by positive 12-month momentum. Low implied volatility means options don't price a reversal. Against that, the stock had already beaten its sector by 18% in a month, sits 16% above its 50-day average, and credit is weakening. That makes some profit-taking likely and limits the edge to a modest tilt above the roughly 50% base rate.",
+   "wrong_if": "DD gives back more than half of today's gap (closes below ~+4.5% from yesterday's close) within 5 sessions, or falls behind XLI by more than 3% over the next 10 sessions."
   },
   {
    "id": 122,
    "day": "2026-11-03",
    "ticker": "FISV",
+   "name": "Fiserv",
    "vs": "XLF",
    "trigger": "earnings up",
    "call": "beat",
    "horizon_days": 20,
+   "due": "2026-12-02",
    "confidence": 0.55,
+   "expected_move_pct": 3,
+   "drivers": [
+    "6.4\u03c3 company-specific earnings gap",
+    "post-earnings drift on turnaround",
+    "underweight positioning after guidance reset",
+    "risk: 1m reversal after 27% run"
+   ],
    "status": "open",
    "rel_return_pct": null,
-   "reason": "This is purely a company move: a 14% idiosyncratic jump (6.4\u03c3) on an earnings release with 4.8x volume, while the sector fell. For a stock that reset guidance and has lagged badly (12-1 momentum \u221231%, 16% below its high), a strong print likely signals the turnaround is working. Underweight investors may keep buying after a big surprise, which supports modest outperformance over 20 days. Risks: profit-taking after a 27% one-month run, and widening credit spreads."
+   "reason": "This is purely a company move: a 14% idiosyncratic jump (6.4\u03c3) on an earnings release with 4.8x volume, while the sector fell. For a stock that reset guidance and has lagged badly (12-1 momentum \u221231%, 16% below its high), a strong print likely signals the turnaround is working. Underweight investors may keep buying after a big surprise, which supports modest outperformance over 20 days. Risks: profit-taking after a 27% one-month run, and widening credit spreads.",
+   "wrong_if": "FISV gives back more than half of today's ~13% gain relative to XLF within 10 sessions (i.e., sector-relative return since the 11/3 close falls below about \u22126.5%)."
   },
   {
    "id": 121,
    "day": "2026-11-03",
    "ticker": "SYY",
+   "name": "Sysco",
    "vs": "XLP",
    "trigger": "earnings down",
    "call": "lag",
    "horizon_days": 20,
+   "due": "2026-12-02",
    "confidence": 0.54,
+   "expected_move_pct": -2,
+   "drivers": [
+    "-7\u03c3 company-specific earnings drop",
+    "Officer change filed with the results",
+    "Already weak relative to the sector",
+    "Post-earnings drift base rate below 50%"
+   ],
    "status": "open",
    "rel_return_pct": null,
-   "reason": "Almost all of the drop is company-specific: -7.6% idiosyncratic, about -7\u03c3, on 4.8x normal volume, at earnings. The 8-K pairing of results (2.02) with an officer or director change (5.02) and a Reg FD disclosure (7.01) suggests a guidance cut or leadership shake-up, not a one-off miss. The stock was already 14% behind XLP over the past month and is below both moving averages. The XLP rally is lifting peers without lifting SYY. Post-earnings drift favors continued modest underperformance."
+   "reason": "Almost all of the drop is company-specific: -7.6% idiosyncratic, about -7\u03c3, on 4.8x normal volume, at earnings. The 8-K pairing of results (2.02) with an officer or director change (5.02) and a Reg FD disclosure (7.01) suggests a guidance cut or leadership shake-up, not a one-off miss. The stock was already 14% behind XLP over the past month and is below both moving averages. The XLP rally is lifting peers without lifting SYY. Post-earnings drift favors continued modest underperformance.",
+   "wrong_if": "SYY recovers half the gap (closes back above ~7% below the pre-earnings close, i.e. regains about 4% relative to XLP) within 10 sessions."
   }
  ],
  "progress": []
