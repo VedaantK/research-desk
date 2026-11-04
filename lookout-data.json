@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-04T01:20:06+00:00",
+ "updated": "2026-11-04T22:03:59+00:00",
  "summary": [
   {
    "predictor": "Claude",
    "resolved": 0,
-   "open": 5,
+   "open": 0,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -32,7 +32,7 @@
   {
    "predictor": "Checklist, all flags",
    "resolved": 0,
-   "open": 90,
+   "open": 618,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -46,7 +46,7 @@
   {
    "predictor": "Random controls",
    "resolved": 0,
-   "open": 30,
+   "open": 72,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -61,6 +61,34 @@
    "predictor": "Local model",
    "resolved": 0,
    "open": 0,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Claude + checklist average",
+   "resolved": 0,
+   "open": null,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Claude, earlier prompt",
+   "resolved": 0,
+   "open": 10,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -97,6 +125,131 @@
  ],
  "calls": [
   {
+   "id": 700,
+   "day": "2026-11-04",
+   "ticker": "ZBH",
+   "name": "Zimmer Biomet",
+   "vs": "XLV",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "due": "2026-12-03",
+   "confidence": 0.56,
+   "expected_move_pct": 2,
+   "drivers": [
+    "7.4-sigma earnings gap on 3.5x volume",
+    "Post-earnings drift and estimate revisions",
+    "Breakout to 52-week high from depressed base",
+    "Stretched +17% vs 50-day limits upside"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "reason": "This is a company story: about 12 of today's 14.5 percentage points are company-specific (7.4 sigma) on 3.5x volume, set off by the earnings release. A beaten-down large-cap medtech (12-1 momentum still negative) that re-rates this hard on earnings usually reflects a real shift in growth or guidance. Analysts tend to revise estimates slowly, which supports modest drift. The risks are the stretch above the 50-day average (+17%) and possible mean reversion after the run-up, so the edge is small.",
+   "wrong_if": "ZBH gives back more than half of today's ~12% company-specific gain relative to XLV within 10 sessions, i.e. it trails XLV by more than 6% from today's close."
+  },
+  {
+   "id": 699,
+   "day": "2026-11-04",
+   "ticker": "CVS",
+   "name": "CVS Health",
+   "vs": "XLV",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-03",
+   "confidence": 0.55,
+   "expected_move_pct": -2.5,
+   "drivers": [
+    "8-sigma company-specific earnings drop",
+    "post-earnings drift after a negative surprise",
+    "low sector beta vs strong XLV rally",
+    "already oversold 1m caps conviction"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "reason": "Almost all of the -11.6% is company-specific: -12.9% at 8 sigma on 6x volume, on the earnings day itself, while XLV was up. That points to a fundamental reset, probably managed-care costs or guidance, not market noise. Large negative earnings surprises tend to drift lower, and CVS has a record of follow-on guide-downs. Its low 0.46 sector beta also drags against a strongly rallying XLV. The base rate leans slightly toward underperformance. The stock is already down 16% vs the sector over the month, which limits conviction.",
+   "wrong_if": "CVS recovers more than half of today's gap (closes above roughly 6% over today's close) relative to XLV within 10 sessions, or management reaffirms/raises guidance at an investor conference"
+  },
+  {
+   "id": 698,
+   "day": "2026-11-04",
+   "ticker": "SWK",
+   "name": "Stanley Black & Decker",
+   "vs": "XLI",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "due": "2026-12-03",
+   "confidence": 0.55,
+   "expected_move_pct": 2,
+   "drivers": [
+    "9-sigma company-specific earnings move",
+    "post-earnings drift",
+    "breakout to 52-week high on heavy volume",
+    "risk of giveback after extended run-up"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "reason": "The move is almost all company-specific: +14.9% at 9 sigma, on 6.7x volume, against a falling sector. The cause is the earnings release (8-K 2.02/7.01), which likely points to margin or guidance upside in SWK's cost-cutting turnaround. Large confirmed earnings surprises at 52-week highs tend to drift modestly in the same direction, and implied vol is low relative to realized. Offsetting that, the stock was already extended before the print, and the earnings_up base rate is about 50%. So this is a small edge.",
+   "wrong_if": "SWK gives back more than half of today's ~15% company-specific gain relative to XLI within 10 sessions, or closes below the pre-earnings level."
+  },
+  {
+   "id": 697,
+   "day": "2026-11-04",
+   "ticker": "TRMB",
+   "name": "Trimble Inc.",
+   "vs": "XLK",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-03",
+   "confidence": 0.56,
+   "expected_move_pct": -3,
+   "drivers": [
+    "-11 sigma idiosyncratic earnings drop",
+    "5.02 officer/director change day before results",
+    "post-earnings-announcement drift",
+    "weak 12-1 momentum, below 50/200 SMA"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "reason": "Almost all of the move is company-specific: -19.3% company return, -11.2 sigma, 6.6x normal volume, on a day the market and sector were up. The 5.02 officer/director change filed the day before earnings hints at a deeper problem, such as weaker guidance or a leadership exit. The stock was already below its 50- and 200-day averages, with -23% 12-1 momentum. Post-earnings drift and the base rate both point slightly toward continued underperformance. High realized volatility keeps confidence modest.",
+   "wrong_if": "TRMB wins back half of today's -15.6% drop (about +9% from today's close) within 10 sessions, or beats XLK by more than 3% over the 20 sessions."
+  },
+  {
+   "id": 696,
+   "day": "2026-11-04",
+   "ticker": "FIS",
+   "name": "Fidelity National Information Services",
+   "vs": "XLF",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-03",
+   "confidence": 0.55,
+   "expected_move_pct": -3.5,
+   "drivers": [
+    "Post-earnings drift after a -14 sigma miss",
+    "Likely guidance or thesis reset",
+    "Weak momentum, 52-week low",
+    "Strong sector benchmark"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "reason": "A -14 sigma company-specific earnings collapse with 8x volume, while the sector rose, points to a guidance or thesis reset, not noise. Prices tend to keep drifting after bad earnings, the stock is at its 52-week low with -44% 12-month momentum, and a strong XLF is a hard benchmark. Some bounce after capitulation is likely, which keeps conviction modest and close to the 48% base rate.",
+   "wrong_if": "FIS recovers more than half of today's 23% loss relative to XLF within 10 sessions (back above ~88% of the pre-earnings close), or management reaffirms or reframes guidance at an investor event."
+  },
+  {
    "id": 125,
    "day": "2026-11-03",
    "ticker": "RVTY",
@@ -116,6 +269,8 @@
    ],
    "status": "open",
    "rel_return_pct": null,
+   "elapsed_days": 1,
+   "current_rel_return_pct": -5.54,
    "reason": "Almost all of the move is company-specific. RVTY rose 9.95% on its own (4.4\u03c3) on 2.6x normal volume, after an earnings release (filing items 2.02 and 8.01), while the market and sector were flat. A clean earnings gap to a new 52-week high with strong 12-1 momentum fits post-earnings drift. The offsets are a stock already up 103% from its low, an extended price (49% above the 200-day average), and weakening credit. That makes this a modest edge over the roughly 50% base rate, not a strong one.",
    "wrong_if": "RVTY gives back more than half of today's gap relative to XLV (underperforms XLV by over 5%) within 10 sessions, or closes below its pre-earnings price."
   },
@@ -139,6 +294,8 @@
    ],
    "status": "open",
    "rel_return_pct": null,
+   "elapsed_days": 1,
+   "current_rel_return_pct": -3.02,
    "reason": "Almost all of today's -7.7% is company-specific (-4.5\u03c3, 3.2x volume) on the earnings release, so this is a fundamental reset. For ADM that most likely means weaker crush or processing margins and a lower outlook, and analysts usually revise estimates down over several weeks. The base rate leans slightly to underperformance. A 27% one-month lag versus the sector and a strong XLP raise the odds of a bounce, so I keep conviction close to 50%.",
    "wrong_if": "ADM recovers half of today's drop (back above about 8.3% below the pre-earnings close) within 10 sessions, or management reaffirms full-year EPS guidance at a post-earnings conference."
   },
@@ -162,6 +319,8 @@
    ],
    "status": "open",
    "rel_return_pct": null,
+   "elapsed_days": 1,
+   "current_rel_return_pct": -0.69,
    "reason": "A 6-sigma, company-specific earnings jump on 6x volume to a new 52-week high fits the pattern of post-earnings drift, backed by positive 12-month momentum. Low implied volatility means options don't price a reversal. Against that, the stock had already beaten its sector by 18% in a month, sits 16% above its 50-day average, and credit is weakening. That makes some profit-taking likely and limits the edge to a modest tilt above the roughly 50% base rate.",
    "wrong_if": "DD gives back more than half of today's gap (closes below ~+4.5% from yesterday's close) within 5 sessions, or falls behind XLI by more than 3% over the next 10 sessions."
   },
@@ -185,6 +344,8 @@
    ],
    "status": "open",
    "rel_return_pct": null,
+   "elapsed_days": 1,
+   "current_rel_return_pct": 2.74,
    "reason": "This is purely a company move: a 14% idiosyncratic jump (6.4\u03c3) on an earnings release with 4.8x volume, while the sector fell. For a stock that reset guidance and has lagged badly (12-1 momentum \u221231%, 16% below its high), a strong print likely signals the turnaround is working. Underweight investors may keep buying after a big surprise, which supports modest outperformance over 20 days. Risks: profit-taking after a 27% one-month run, and widening credit spreads.",
    "wrong_if": "FISV gives back more than half of today's ~13% gain relative to XLF within 10 sessions (i.e., sector-relative return since the 11/3 close falls below about \u22126.5%)."
   },
@@ -208,6 +369,8 @@
    ],
    "status": "open",
    "rel_return_pct": null,
+   "elapsed_days": 1,
+   "current_rel_return_pct": 0.46,
    "reason": "Almost all of the drop is company-specific: -7.6% idiosyncratic, about -7\u03c3, on 4.8x normal volume, at earnings. The 8-K pairing of results (2.02) with an officer or director change (5.02) and a Reg FD disclosure (7.01) suggests a guidance cut or leadership shake-up, not a one-off miss. The stock was already 14% behind XLP over the past month and is below both moving averages. The XLP rally is lifting peers without lifting SYY. Post-earnings drift favors continued modest underperformance.",
    "wrong_if": "SYY recovers half the gap (closes back above ~7% below the pre-earnings close, i.e. regains about 4% relative to XLP) within 10 sessions."
   }
@@ -218,6 +381,74 @@
    "n": 0,
    "need": 30,
    "status": "collecting"
+  }
+ ],
+ "trade_check": [
+  {
+   "predictor": "Claude",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "long_only",
+   "rule": "buy the stock on 'beat' calls; skip 'lag' calls",
+   "n": 0
+  },
+  {
+   "predictor": "Claude",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "directional",
+   "rule": "buy on 'beat', short on 'lag'; stock alone, no hedge",
+   "n": 0
+  },
+  {
+   "predictor": "Claude",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "hedged",
+   "rule": "stock against its sector ETF, equal dollars (what the calls predict)",
+   "n": 0
+  },
+  {
+   "predictor": "Checklist, same calls",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "long_only",
+   "rule": "buy the stock on 'beat' calls; skip 'lag' calls",
+   "n": 0
+  },
+  {
+   "predictor": "Checklist, same calls",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "directional",
+   "rule": "buy on 'beat', short on 'lag'; stock alone, no hedge",
+   "n": 0
+  },
+  {
+   "predictor": "Checklist, same calls",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "hedged",
+   "rule": "stock against its sector ETF, equal dollars (what the calls predict)",
+   "n": 0
   }
  ]
 }
