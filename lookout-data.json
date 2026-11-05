@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T22:03:59+00:00",
+ "updated": "2026-11-05T19:11:44+00:00",
  "summary": [
   {
    "predictor": "Claude",
@@ -32,7 +32,7 @@
   {
    "predictor": "Checklist, all flags",
    "resolved": 0,
-   "open": 618,
+   "open": 891,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -46,7 +46,7 @@
   {
    "predictor": "Random controls",
    "resolved": 0,
-   "open": 72,
+   "open": 87,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
