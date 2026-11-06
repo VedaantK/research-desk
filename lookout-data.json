@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-06T17:48:17+00:00",
+ "updated": "2026-11-06T20:27:17+00:00",
  "summary": [
   {
    "predictor": "Claude",
    "resolved": 0,
-   "open": 0,
+   "open": 4,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -32,7 +32,7 @@
   {
    "predictor": "Checklist, all flags",
    "resolved": 0,
-   "open": 1014,
+   "open": 1035,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -46,7 +46,7 @@
   {
    "predictor": "Random controls",
    "resolved": 0,
-   "open": 132,
+   "open": 147,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -130,7 +130,7 @@
   {
    "predictor": "Fade volume-up, fixed rule, 20d",
    "resolved": 0,
-   "open": 37,
+   "open": 38,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -194,6 +194,118 @@
   }
  ],
  "calls": [
+  {
+   "id": 1416,
+   "day": "2026-11-06",
+   "ticker": "SNDK",
+   "name": "Sandisk",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 10,
+   "due": "2026-11-20",
+   "confidence": 0.54,
+   "expected_move_pct": -3,
+   "drivers": [
+    "move is market beta, company part negative",
+    "post-earnings collapse, likely cycle de-rating",
+    "volume_up base rate ~44%",
+    "extreme beta adds two-sided risk"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "current_stock_return_pct": null,
+   "rel_change_1d_pct": null,
+   "marked": null,
+   "reason": "Today's +3.45% is all market beta. The company part was -1.55% (-0.34\u03c3), so the stock lagged on a strong up day even with 2.55x volume. It has fallen 48% in a month since the Oct 29 earnings and sits 64% below its 52-week high. That looks like a memory-cycle de-rating, not a temporary shock. The volume_up base rate is 44-46%. A beta of 4.4 in a stressed-VIX regime makes this close to a coin flip.",
+   "wrong_if": "SNDK beats XLK by more than 8% within 10 sessions, for example by recovering its 50-day average gap through a sharp memory-led rebound."
+  },
+  {
+   "id": 1415,
+   "day": "2026-11-06",
+   "ticker": "FSLR",
+   "name": "First Solar",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-07",
+   "confidence": 0.56,
+   "expected_move_pct": -3,
+   "drivers": [
+    "volume_up base rate 0.44",
+    "1m outperformance mostly from XLK falling",
+    "weak 12-1 momentum, 37% below 52w high",
+    "move was market beta, not company-specific"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "current_stock_return_pct": null,
+   "rel_change_1d_pct": null,
+   "marked": null,
+   "reason": "Today's move is mainly market beta (company sigma 0.39) on heavy volume, with no new filing; earnings were 8 days ago. The 30% 1-month lead over XLK comes largely from XLK falling 12.6% against SPY. FSLR has little sector beta, so a tech rebound would leave it behind. The base rate (0.44) and weak 12-month momentum favour underperformance. Its 2x market beta in a stressed VIX regime makes the result noisy, so I'm only modestly confident.",
+   "wrong_if": "FSLR outperforms XLK by more than 5% cumulatively over the next 10 sessions, or XLK keeps sliding versus SPY while FSLR holds its 1-month gains."
+  },
+  {
+   "id": 1414,
+   "day": "2026-11-06",
+   "ticker": "EME",
+   "name": "Emcor",
+   "vs": "XLI",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-07",
+   "confidence": 0.54,
+   "expected_move_pct": -2,
+   "drivers": [
+    "post-earnings negative drift",
+    "today's move is market beta, not company",
+    "base rate 44% outperform",
+    "near 52w low, below SMA50/200"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "current_stock_return_pct": null,
+   "rel_change_1d_pct": null,
+   "marked": null,
+   "reason": "Today's +2% is mostly market beta. The company part is only 0.42 sigma, so it's noise even on 3x volume. The real story is a 22% slide in the month after the Oct 29 earnings, 18% worse than the sector. That points to a guidance or margin reset, not a temporary shock. Post-earnings drift, a price near the 52-week low and a weak base rate for this trigger favour mild further underperformance. A short-term bounce could offset some of it, so confidence is low.",
+   "wrong_if": "EME beats XLI by more than 3% over the next 10 sessions, or recovers its 50-day moving average (about 17% above today's price) within 20 sessions."
+  },
+  {
+   "id": 1413,
+   "day": "2026-11-06",
+   "ticker": "NVDA",
+   "name": "Nvidia",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 5,
+   "due": "2026-11-13",
+   "confidence": 0.55,
+   "expected_move_pct": -1,
+   "drivers": [
+    "move mostly market beta, 1.1\u03c3 idio",
+    "volume_up base rate 0.44",
+    "downtrend below SMA50/200",
+    "no filing catalyst; earnings ~19d"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "current_stock_return_pct": null,
+   "rel_change_1d_pct": null,
+   "marked": null,
+   "reason": "The 3.7% gain is mostly high-beta market rebound; the company part is only 1.1\u03c3 with no filing or earnings catalyst. The volume_up base rate favors underperformance (44% outperform at 5d). The trend is weak (\u221214% vs SMA50, \u221218% in 1m) in a stressed-VIX tape with soft credit, so the bounce looks like relief rather than a thesis change. NVDA's large XLK weight mutes relative moves. Earnings in about 19 days make 20d noisy, so I chose 5d with modest conviction.",
+   "wrong_if": "NVDA outperforms XLK by more than 2% over the next 5 sessions, e.g. reclaiming its 50-day SMA on continued heavy volume."
+  },
   {
    "id": 1038,
    "day": "2026-11-05",
@@ -694,6 +806,58 @@
  "flags": [
   {
    "day": "2026-11-06",
+   "ticker": "FSLR",
+   "name": "First Solar",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "checklist_p": 0.437,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": "lag",
+   "claude_horizon": 20,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "NVDA",
+   "name": "Nvidia",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "checklist_p": 0.477,
+   "new": false,
+   "first_flagged": "2026-11-05",
+   "claude": "lag",
+   "claude_horizon": 5,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "EME",
+   "name": "Emcor",
+   "vs": "XLI",
+   "trigger": "volume up",
+   "checklist_p": 0.497,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": "lag",
+   "claude_horizon": 20,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "SNDK",
+   "name": "Sandisk",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "checklist_p": 0.497,
+   "new": false,
+   "first_flagged": "2026-11-05",
+   "claude": "lag",
+   "claude_horizon": 10,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
    "ticker": "CHTR",
    "name": "Charter Communications",
    "vs": "XLC",
@@ -720,6 +884,19 @@
   },
   {
    "day": "2026-11-06",
+   "ticker": "BEN",
+   "name": "Franklin Resources",
+   "vs": "XLF",
+   "trigger": "earnings up",
+   "checklist_p": 0.561,
+   "new": true,
+   "first_flagged": "2026-11-06",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
    "ticker": "HUM",
    "name": "Humana",
    "vs": "XLV",
@@ -735,6 +912,19 @@
    "day": "2026-11-06",
    "ticker": "AKAM",
    "name": "Akamai Technologies",
+   "vs": "XLK",
+   "trigger": "earnings up",
+   "checklist_p": 0.541,
+   "new": true,
+   "first_flagged": "2026-11-06",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "COHR",
+   "name": "Coherent Corp.",
    "vs": "XLK",
    "trigger": "earnings up",
    "checklist_p": 0.541,
@@ -876,19 +1066,6 @@
   },
   {
    "day": "2026-11-06",
-   "ticker": "FSLR",
-   "name": "First Solar",
-   "vs": "XLK",
-   "trigger": "volume up",
-   "checklist_p": 0.437,
-   "new": false,
-   "first_flagged": "2026-11-04",
-   "claude": null,
-   "claude_horizon": null,
-   "local": null
-  },
-  {
-   "day": "2026-11-06",
    "ticker": "SOLV",
    "name": "Solventum",
    "vs": "XLV",
@@ -928,6 +1105,32 @@
   },
   {
    "day": "2026-11-06",
+   "ticker": "CNC",
+   "name": "Centene Corporation",
+   "vs": "XLV",
+   "trigger": "idio down",
+   "checklist_p": 0.553,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "NRG",
+   "name": "NRG Energy",
+   "vs": "XLU",
+   "trigger": "idio up",
+   "checklist_p": 0.449,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
    "ticker": "APTV",
    "name": "Aptiv",
    "vs": "XLY",
@@ -959,6 +1162,19 @@
    "vs": "XLU",
    "trigger": "earnings up",
    "checklist_p": 0.541,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "ES",
+   "name": "Eversource Energy",
+   "vs": "XLU",
+   "trigger": "earnings down",
+   "checklist_p": 0.459,
    "new": false,
    "first_flagged": "2026-11-04",
    "claude": null,
@@ -1019,13 +1235,13 @@
   },
   {
    "day": "2026-11-06",
-   "ticker": "NVDA",
-   "name": "Nvidia",
-   "vs": "XLK",
-   "trigger": "volume up",
-   "checklist_p": 0.477,
+   "ticker": "SYY",
+   "name": "Sysco",
+   "vs": "XLP",
+   "trigger": "earnings up",
+   "checklist_p": 0.521,
    "new": false,
-   "first_flagged": "2026-11-05",
+   "first_flagged": "2026-11-03",
    "claude": null,
    "claude_horizon": null,
    "local": null
@@ -1052,19 +1268,6 @@
    "checklist_p": 0.493,
    "new": false,
    "first_flagged": "2026-11-04",
-   "claude": null,
-   "claude_horizon": null,
-   "local": null
-  },
-  {
-   "day": "2026-11-06",
-   "ticker": "SNDK",
-   "name": "Sandisk",
-   "vs": "XLK",
-   "trigger": "volume up",
-   "checklist_p": 0.497,
-   "new": false,
-   "first_flagged": "2026-11-05",
    "claude": null,
    "claude_horizon": null,
    "local": null
@@ -1117,23 +1320,23 @@
   },
   {
    "day": "2026-11-06",
-   "flagged": 31,
-   "new": 11,
-   "claude": 0
+   "flagged": 38,
+   "new": 13,
+   "claude": 4
   }
  ],
  "move_agreement": [
   {
    "prompts": "analyst_v2",
-   "n": 5,
+   "n": 9,
    "same": 5,
-   "share": 1.0
+   "share": 0.5556
   },
   {
    "prompts": "all",
-   "n": 15,
+   "n": 19,
    "same": 15,
-   "share": 1.0
+   "share": 0.7895
   }
  ],
  "factor_days": {
@@ -1148,7 +1351,7 @@
     "idio_flags": 18
    }
   ],
-  "claude_calls": 15,
+  "claude_calls": 19,
   "claude_calls_on_factor_days": 10
  },
  "economic": {
