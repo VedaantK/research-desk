@@ -45,11 +45,11 @@
         : `It went against the move ${mvAll.n - mvAll.same} time${mvAll.n - mvAll.same === 1 ? "" : "s"}; those calls decide whether its direction adds anything.`);
     const econ = d.economic || {};
     $("lookout-economic").textContent = econ.n
-      ? `After costs, the hedged book averages ${Number(econ.mean_net_pct).toFixed(2)}% per call on ${econ.n} settled calls. The gates do not use this number.`
-      : "Nothing has settled, so the after-cost number is empty. When it fills in, that hedged figure is the one to read. The gates do not use it.";
+      ? `After costs, the stock-versus-sector book averages ${Number(econ.mean_net_pct).toFixed(2)}% per settled call, across ${econ.n} calls. The pass/fail lines do not use this number.`
+      : "Nothing has settled, so there is no after-cost number yet. When one appears, it is the figure to read. The pass/fail lines do not use it.";
     const factor = d.factor_days || {days: [], limit: 15, claude_calls: 0, claude_calls_on_factor_days: 0};
-    const fd = (factor.days || []).map(x => `${day(x.day)} (${x.idio_flags})`).join(", ") || "none";
-    $("lookout-factor").textContent = `Factor days, more than ${factor.limit} idiosyncratic flags: ${fd}. Claude calls on those days: ${factor.claude_calls_on_factor_days} of ${factor.claude_calls}.`;
+    const fd = (factor.days || []).map(x => `${day(x.day)} (${x.idio_flags} names)`).join(", ") || "none so far";
+    $("lookout-factor").textContent = `Busy days, when more than ${factor.limit} stocks looked company-specific at once: ${fd}. Claude made ${factor.claude_calls_on_factor_days} of ${factor.claude_calls} calls on those days.`;
     $("lookout-gates").querySelector("tbody").innerHTML = d.gates.map(g => `<tr><td>${esc(g.gate)}</td>`
       + `<td class="num">${g.have}</td><td class="num">${g.need}</td>`
       + `<td><span class="lk-pill ${esc(g.status)}">${esc(g.status)}</span></td><td class="wrap">${esc(g.rule)}</td></tr>`).join("");

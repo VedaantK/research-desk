@@ -69,12 +69,25 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
 <main class="wrap research-page ">
   <p class="eyebrow">MARKET INDICATOR</p>
   <h1>Lookout asks whether an AI can read a stock&rsquo;s move better than history can.</h1>
-  <p class="lede">Every trading day a fixed scanner flags S&amp;P 500 stocks that moved unusually: a large company-specific move, a volume spike, an earnings reaction or a material filing. Claude studies the top five and predicts whether each will beat or lag its sector ETF over the next 5, 10 or 20 sessions. Every call is logged before the close and scored when its horizon ends. Nothing is traded.</p>
+  <p class="lede">Every trading day a fixed scanner flags S&amp;P 500 stocks that moved unusually. As of November 6, the bet being tested is a narrow one: a stock that jumped at least 2% on unusually high volume, and the day was not an earnings report. A fixed rule says that stock will lag its sector over the next month. Claude still reads up to five of those names a day, and that opinion is scored on its own. Nothing is traded.</p>
   <p><span class="status" id="lookout-status">Loading results&hellip;</span></p>
 
   <section class="decision">
     <strong>The bar is close to a coin flip.</strong>
-    <p>From 2010 to 2025, after the same kinds of moves, 44&ndash;53% of S&amp;P 500 stocks went on to beat their industry over the next 5&ndash;20 sessions. Claude has to beat that base rate, and a fixed checklist built from published research, on the same calls before any of this is used with real money.</p>
+    <p>From 2010 to 2025, after the same kinds of moves, 44&ndash;53% of S&amp;P 500 stocks went on to beat their industry over the next 5&ndash;20 sessions. A call has to beat that base rate, and a fixed checklist, before any of this is used with real money.</p>
+  </section>
+
+  <section>
+    <h2>What changed on November 6</h2>
+    <p>A check of S&amp;P 500 history from 2010 to 2025 found one pattern large enough to test live. When a stock rises at least 2% on about three times its normal volume, and that day is not an earnings report and not an even bigger company-specific shock, the stock has usually lagged its industry by about 1% over the next 20 trading days. The typical case was almost the same as the average, so a few crashes do not explain it. Ordinary up days, without the heavy volume, did not lag. About 1,100 cases, 14 of 16 years.</p>
+    <p>That is history. No live call on this page has finished yet, so the pattern is not a result. History of this kind often shrinks once you start keeping score.</p>
+    <ul>
+      <li><strong>The rule.</strong> Every stock that fits the volume pattern gets a paper bet that it will lag its sector. The confidence is fixed. This bet does not ask Claude.</li>
+      <li><strong>Claude, from here.</strong> The five daily reads are spent only on those volume-spike stocks. They start from zero toward the pass/fail lines.</li>
+      <li><strong>Claude, already made.</strong> The first fifteen calls were earnings days, and every one of them pointed the same way as that day&rsquo;s move. They still settle and stay on the page. They no longer count toward the pass/fail lines.</li>
+      <li><strong>Busy days.</strong> A day with more than 15 &ldquo;company-specific&rdquo; flags is marked. The scanner may be calling a market-wide shock fifteen different company stories. Those days are labeled, not thrown out.</li>
+    </ul>
+    <p class="note">The last of the current volume bets finishes its 20 trading days on December 7. The page is the place to read whether the live bets look like the history.</p>
   </section>
 
   <section>
@@ -183,12 +196,12 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
       <li><strong>Scan</strong>Three times a day on delayed data, each move is split into market, sector and company parts.</li>
       <li><strong>Flag</strong>Fixed rules, set in advance, pick unusual names. Five random names are also scored as controls.</li>
       <li><strong>Fact sheet</strong>The same fifteen or so fields for every name: the move split, trend, momentum, earnings timing, filings, volatility and macro.</li>
-      <li><strong>Predict</strong>The checklist scores every flag. Claude takes the top five and must explain where it disagrees with the checklist.</li>
+      <li><strong>Predict</strong>The checklist scores every flag. A volume spike also gets a fixed &ldquo;lag the sector&rdquo; bet. Claude is asked only about volume spikes, up to five a day.</li>
       <li><strong>Log</strong>Calls go into a hash-chained ledger before the close, so none can be edited later.</li>
       <li><strong>Score</strong>When the horizon ends, each call settles against its sector ETF with dividends included.</li>
     </ol>
     <h2>Limits</h2>
-    <p>Model judgment is only tested forward, because any backtest would overlap the model&rsquo;s training data. The historical base rates use an industry benchmark rather than sector ETFs. There is no news feed, so Claude sees only the numbers and filings in the fact sheet. Results need at least 60 resolved calls before they mean much.</p>
+    <p>Model judgment is only tested forward, because any backtest would overlap the model&rsquo;s training data. The volume rule is the exception that was measured on history, with the pass rules written down first, and it still has to repeat on the live page. The historical base rates use an industry benchmark rather than sector ETFs. There is no news feed and no analyst-estimate feed. Results need a finished sample before they mean much. The first gate is still 60 resolved calls.</p>
     </details>
   </section>
 </main>
@@ -197,6 +210,6 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   <p class="fine">Lookout publishes research predictions, not investment advice. No trades are placed.</p>
 </footer>
 <script src="echarts.min.js?v=e84270bd0c"></script>
-<script src="lookout.js?v=cb74baea14"></script>
+<script src="lookout.js?v=b9595e7858"></script>
 </body>
 </html>

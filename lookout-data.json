@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-06T17:31:03+00:00",
+ "updated": "2026-11-06T17:48:17+00:00",
  "summary": [
   {
    "predictor": "Claude",
    "resolved": 0,
-   "open": 5,
+   "open": 0,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -100,9 +100,65 @@
    "options_avg_pnl_pct": null
   },
   {
+   "predictor": "Fade the move, same calls",
+   "resolved": 0,
+   "open": null,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Fade volume and idiosyncratic shocks, 20d",
+   "resolved": 0,
+   "open": null,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Fade volume-up, fixed rule, 20d",
+   "resolved": 0,
+   "open": 37,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
    "predictor": "Claude, earlier prompt",
    "resolved": 0,
    "open": 10,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Claude, earlier rank (earnings book)",
+   "resolved": 0,
+   "open": 5,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -1079,5 +1135,28 @@
    "same": 15,
    "share": 1.0
   }
- ]
+ ],
+ "factor_days": {
+  "limit": 15,
+  "days": [
+   {
+    "day": "2026-11-04",
+    "idio_flags": 84
+   },
+   {
+    "day": "2026-11-05",
+    "idio_flags": 18
+   }
+  ],
+  "claude_calls": 15,
+  "claude_calls_on_factor_days": 10
+ },
+ "economic": {
+  "status": "collecting",
+  "n": 0,
+  "need": 30,
+  "mean_net_pct": null,
+  "win_rate": null,
+  "note": "Hedged stock against the sector ETF after 10 bp per leg and borrow. This is the number to read once calls settle. It is not a gate."
+ }
 }
