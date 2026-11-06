@@ -14,6 +14,21 @@
     const claude = d.summary.find(r => r.predictor === "Claude") || {};
     const open = d.calls.filter(c => c.status === "open").length;
     $("lookout-status").textContent = `${d.calls.length} calls made · ${claude.resolved || 0} resolved · ${open} open · updated ${new Date(d.updated).toLocaleString("en-US", {month: "short", day: "numeric", hour: "numeric", minute: "2-digit"})}`;
+    const flags = d.flags || [], fdays = d.flag_days || [];
+    const last = fdays[fdays.length - 1] || {};
+    $("lookout-flags-status").textContent = flags.length ? `Scan day ${day(last.day)}.` : "No scan yet.";
+    $("lookout-flag-kpis").innerHTML = [[last.flagged ?? "—", "Flagged"], [last.new ?? "—", "New names"],
+      [last.claude ?? "—", "Picked by Claude"], [fdays.length, "Days scanned"]]
+      .map(([v, l]) => `<div class="stat"><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join("");
+    const pick = (v, h) => v == null ? `<span class="note">—</span>`
+      : `<span class="${v === "beat" ? "lk-good" : "lk-bad"}">${v === "beat" ? "&#9650; beat" : "&#9660; lag"}${h ? ` ${h}d` : ""}</span>`;
+    $("lookout-flags").querySelector("tbody").innerHTML = flags.length ? flags.map(f => `<tr><td><b>${esc(f.ticker)}</b></td>`
+      + `<td class="nm">${esc(f.name)}</td><td>${esc(f.trigger)}</td>`
+      + `<td>${f.new ? `<span class="lk-pill new">new</span>` : `<span class="note" title="first flagged ${esc(f.first_flagged)}">since ${esc(day(f.first_flagged))}</span>`}</td>`
+      + `<td>${pick(f.claude, f.claude_horizon)}</td><td>${pick(f.local)}</td>`
+      + `<td class="num">${pct(f.checklist_p, 0)}</td><td>${esc(f.vs)}</td></tr>`).join("")
+      : `<tr><td colspan="8" class="note">No flags yet.</td></tr>`;
+
     const k = [[`${claude.resolved || 0} / 60`, "Resolved calls (60 needed)"],
                [pct(claude.hit_rate), "Hit rate"],
                [pct(claude.base_hit_rate), "Expected from base rates"],
@@ -104,6 +119,20 @@
       });
     };
     drawStanding();
+    const openAll = d.calls.filter(c => c.status === "open")
+      .sort((a, b) => (b.current_rel_return_pct ?? -1e9) - (a.current_rel_return_pct ?? -1e9));
+    const track = (c) => c.current_rel_return_pct == null ? `<span class="note">no close yet</span>`
+      : ((c.current_rel_return_pct > 0) === (c.call === "beat")
+        ? `<span class="lk-good">yes</span>` : `<span class="lk-bad">no</span>`);
+    const forCall = (c, v) => v == null ? "" : cls(c.call === "beat" ? v : -v);
+    $("lookout-open").querySelector("tbody").innerHTML = openAll.length ? openAll.map(c => `<tr><td><b>${esc(c.ticker)}</b></td>`
+      + `<td>${pick(c.call, c.horizon_days)} vs ${esc(c.vs)}</td>`
+      + `<td class="num">${c.elapsed_days ?? 0}/${c.horizon_days}</td>`
+      + `<td class="num ${forCall(c, c.current_rel_return_pct)}">${sgn(c.current_rel_return_pct)}</td>`
+      + `<td class="num ${forCall(c, c.rel_change_1d_pct)}">${sgn(c.rel_change_1d_pct)}</td>`
+      + `<td class="num">${sgn(c.current_stock_return_pct)}</td>`
+      + `<td>${esc(day(c.due))}</td><td>${track(c)}</td></tr>`).join("")
+      : `<tr><td colspan="8" class="note">No open calls.</td></tr>`;
     window.addEventListener("themechange", drawStanding);
     window.addEventListener("resize", () => standingChart && standingChart.resize());
 

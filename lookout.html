@@ -20,6 +20,8 @@
 .lk-pill.hit,.lk-pill.passed{color:var(--accent);background:var(--accent-soft)}
 .lk-pill.miss,.lk-pill.stop{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
 .lk-good{color:var(--accent)}.lk-bad{color:var(--bad)}
+.lk-pill.new{color:var(--accent);background:var(--accent-soft)}
+.lk-scroll{max-height:460px;overflow:auto}
 .lk-scroll{max-height:560px;overflow:auto}
 .lk-up{color:var(--accent)}.lk-down{color:var(--bad)}
 .lk-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:12px}
@@ -75,6 +77,23 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   </section>
 
   <section>
+    <h2>Latest scan</h2>
+    <p class="note">Every stock the scanner flagged on the latest scan day. <b>New</b> means it has never been flagged before. Claude&rsquo;s five picks are listed first; the local model and the checklist score the rest. Updated after each scan (10:00 and 12:30 ET), after Claude&rsquo;s calls (3:25 PM) and after the close. <span id="lookout-flags-status"></span></p>
+    <div class="stats" id="lookout-flag-kpis">
+      <div class="stat"><b>—</b><span>Flagged</span></div>
+      <div class="stat"><b>—</b><span>New names</span></div>
+      <div class="stat"><b>—</b><span>Picked by Claude</span></div>
+      <div class="stat"><b>—</b><span>Days scanned</span></div>
+    </div>
+    <div class="table-wrap lk-scroll">
+      <table class="holdings" id="lookout-flags">
+        <thead><tr><th>Ticker</th><th>Company</th><th>Trigger</th><th></th><th>Claude</th><th>Local model</th><th class="num">Checklist p(beat)</th><th>vs</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
     <h2>Claude so far</h2>
     <div class="stats" id="lookout-kpis">
       <div class="stat"><b>—</b><span>Resolved calls (60 needed)</span></div>
@@ -115,8 +134,14 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
 
   <section>
     <h2>Current standing, open calls</h2>
-    <p class="note">Mark-to-market sector-relative return since entry, from the nightly bar refresh &mdash; informal, long before a call's 5&ndash;20 session settlement. Green tracks the call&rsquo;s own direction, red runs against it. <span id="lookout-standing-status"></span></p>
+    <p class="note">Mark-to-market sector-relative return since entry, from the nightly bar refresh &mdash; informal, long before a call's 5&ndash;20 session settlement. Green tracks the call&rsquo;s own direction, red runs against it; the table colors each return the same way, and &ldquo;last session&rdquo; is the latest day&rsquo;s change. <span id="lookout-standing-status"></span></p>
     <div class="panel"><div id="lookout-standing" class="chart" role="img" aria-label="Current sector-relative return of open calls"></div></div>
+    <div class="table-wrap">
+      <table class="holdings" id="lookout-open">
+        <thead><tr><th>Ticker</th><th>Call</th><th class="num">Sessions</th><th class="num">Vs sector so far</th><th class="num">Last session</th><th class="num">Stock alone</th><th>Settles</th><th>On track</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </section>
 
   <section>
@@ -168,6 +193,6 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   <p class="fine">Lookout publishes research predictions, not investment advice. No trades are placed.</p>
 </footer>
 <script src="echarts.min.js?v=e84270bd0c"></script>
-<script src="lookout.js?v=1da88b2c55"></script>
+<script src="lookout.js?v=804bd36e1b"></script>
 </body>
 </html>
