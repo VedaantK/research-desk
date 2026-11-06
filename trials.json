@@ -1,0 +1,1398 @@
+{
+ "summary": {
+  "rows": 63,
+  "hypotheses": 60,
+  "families": 35,
+  "configs": 25567,
+  "by_source": {
+   "atlas": 19,
+   "options_registry": 20,
+   "manual": 21
+  },
+  "survivors": [
+   "CRASH-1X",
+   "LEV-2X",
+   "O2-IVSPREAD"
+  ],
+  "passed_older_rules": [
+   "X-3adf93d2",
+   "X-5bf24786",
+   "X-aa8e5aa2",
+   "X-e4f78b01"
+  ],
+  "bars": {
+   "families": {
+    "n": 35,
+    "bonferroni_t": 3.19,
+    "luck_sharpe_10y": 0.68,
+    "luck_sharpe_20y": 0.48
+   },
+   "configs": {
+    "n": 25567,
+    "bonferroni_t": 4.76,
+    "luck_sharpe_10y": 1.29,
+    "luck_sharpe_20y": 0.91
+   }
+  }
+ },
+ "curve": [
+  {
+   "n": 1,
+   "t": 1.96,
+   "s10": 0.0,
+   "s20": 0.0
+  },
+  {
+   "n": 2,
+   "t": 2.241,
+   "s10": 0.164,
+   "s20": 0.116
+  },
+  {
+   "n": 3,
+   "t": 2.394,
+   "s10": 0.27,
+   "s20": 0.191
+  },
+  {
+   "n": 4,
+   "t": 2.498,
+   "s10": 0.333,
+   "s20": 0.235
+  },
+  {
+   "n": 5,
+   "t": 2.576,
+   "s10": 0.377,
+   "s20": 0.267
+  },
+  {
+   "n": 6,
+   "t": 2.638,
+   "s10": 0.411,
+   "s20": 0.291
+  },
+  {
+   "n": 7,
+   "t": 2.69,
+   "s10": 0.439,
+   "s20": 0.31
+  },
+  {
+   "n": 8,
+   "t": 2.734,
+   "s10": 0.461,
+   "s20": 0.326
+  },
+  {
+   "n": 9,
+   "t": 2.773,
+   "s10": 0.481,
+   "s20": 0.34
+  },
+  {
+   "n": 10,
+   "t": 2.807,
+   "s10": 0.498,
+   "s20": 0.352
+  },
+  {
+   "n": 11,
+   "t": 2.838,
+   "s10": 0.513,
+   "s20": 0.363
+  },
+  {
+   "n": 12,
+   "t": 2.865,
+   "s10": 0.526,
+   "s20": 0.372
+  },
+  {
+   "n": 13,
+   "t": 2.891,
+   "s10": 0.539,
+   "s20": 0.381
+  },
+  {
+   "n": 14,
+   "t": 2.914,
+   "s10": 0.55,
+   "s20": 0.389
+  },
+  {
+   "n": 15,
+   "t": 2.935,
+   "s10": 0.56,
+   "s20": 0.396
+  },
+  {
+   "n": 16,
+   "t": 2.955,
+   "s10": 0.569,
+   "s20": 0.403
+  },
+  {
+   "n": 17,
+   "t": 2.974,
+   "s10": 0.578,
+   "s20": 0.409
+  },
+  {
+   "n": 18,
+   "t": 2.991,
+   "s10": 0.586,
+   "s20": 0.415
+  },
+  {
+   "n": 19,
+   "t": 3.008,
+   "s10": 0.594,
+   "s20": 0.42
+  },
+  {
+   "n": 20,
+   "t": 3.023,
+   "s10": 0.601,
+   "s20": 0.425
+  },
+  {
+   "n": 21,
+   "t": 3.038,
+   "s10": 0.608,
+   "s20": 0.43
+  },
+  {
+   "n": 22,
+   "t": 3.052,
+   "s10": 0.614,
+   "s20": 0.434
+  },
+  {
+   "n": 23,
+   "t": 3.065,
+   "s10": 0.62,
+   "s20": 0.439
+  },
+  {
+   "n": 24,
+   "t": 3.078,
+   "s10": 0.626,
+   "s20": 0.443
+  },
+  {
+   "n": 25,
+   "t": 3.09,
+   "s10": 0.632,
+   "s20": 0.447
+  },
+  {
+   "n": 26,
+   "t": 3.102,
+   "s10": 0.637,
+   "s20": 0.45
+  },
+  {
+   "n": 27,
+   "t": 3.113,
+   "s10": 0.642,
+   "s20": 0.454
+  },
+  {
+   "n": 28,
+   "t": 3.124,
+   "s10": 0.647,
+   "s20": 0.457
+  },
+  {
+   "n": 29,
+   "t": 3.134,
+   "s10": 0.651,
+   "s20": 0.46
+  },
+  {
+   "n": 30,
+   "t": 3.144,
+   "s10": 0.656,
+   "s20": 0.464
+  },
+  {
+   "n": 31,
+   "t": 3.154,
+   "s10": 0.66,
+   "s20": 0.467
+  },
+  {
+   "n": 32,
+   "t": 3.163,
+   "s10": 0.664,
+   "s20": 0.47
+  },
+  {
+   "n": 33,
+   "t": 3.172,
+   "s10": 0.668,
+   "s20": 0.472
+  },
+  {
+   "n": 34,
+   "t": 3.18,
+   "s10": 0.672,
+   "s20": 0.475
+  },
+  {
+   "n": 35,
+   "t": 3.189,
+   "s10": 0.676,
+   "s20": 0.478
+  },
+  {
+   "n": 36,
+   "t": 3.197,
+   "s10": 0.679,
+   "s20": 0.48
+  },
+  {
+   "n": 37,
+   "t": 3.205,
+   "s10": 0.683,
+   "s20": 0.483
+  },
+  {
+   "n": 38,
+   "t": 3.213,
+   "s10": 0.686,
+   "s20": 0.485
+  },
+  {
+   "n": 39,
+   "t": 3.22,
+   "s10": 0.689,
+   "s20": 0.487
+  },
+  {
+   "n": 40,
+   "t": 3.227,
+   "s10": 0.692,
+   "s20": 0.49
+  },
+  {
+   "n": 41,
+   "t": 3.234,
+   "s10": 0.695,
+   "s20": 0.492
+  },
+  {
+   "n": 42,
+   "t": 3.241,
+   "s10": 0.698,
+   "s20": 0.494
+  },
+  {
+   "n": 43,
+   "t": 3.248,
+   "s10": 0.701,
+   "s20": 0.496
+  },
+  {
+   "n": 44,
+   "t": 3.254,
+   "s10": 0.704,
+   "s20": 0.498
+  },
+  {
+   "n": 45,
+   "t": 3.261,
+   "s10": 0.707,
+   "s20": 0.5
+  },
+  {
+   "n": 46,
+   "t": 3.267,
+   "s10": 0.71,
+   "s20": 0.502
+  },
+  {
+   "n": 47,
+   "t": 3.273,
+   "s10": 0.712,
+   "s20": 0.504
+  },
+  {
+   "n": 48,
+   "t": 3.279,
+   "s10": 0.715,
+   "s20": 0.505
+  },
+  {
+   "n": 49,
+   "t": 3.285,
+   "s10": 0.717,
+   "s20": 0.507
+  },
+  {
+   "n": 50,
+   "t": 3.291,
+   "s10": 0.72,
+   "s20": 0.509
+  },
+  {
+   "n": 51,
+   "t": 3.296,
+   "s10": 0.722,
+   "s20": 0.511
+  },
+  {
+   "n": 52,
+   "t": 3.302,
+   "s10": 0.725,
+   "s20": 0.512
+  },
+  {
+   "n": 53,
+   "t": 3.307,
+   "s10": 0.727,
+   "s20": 0.514
+  },
+  {
+   "n": 54,
+   "t": 3.312,
+   "s10": 0.729,
+   "s20": 0.516
+  },
+  {
+   "n": 55,
+   "t": 3.317,
+   "s10": 0.731,
+   "s20": 0.517
+  },
+  {
+   "n": 56,
+   "t": 3.322,
+   "s10": 0.733,
+   "s20": 0.519
+  },
+  {
+   "n": 57,
+   "t": 3.327,
+   "s10": 0.736,
+   "s20": 0.52
+  },
+  {
+   "n": 58,
+   "t": 3.332,
+   "s10": 0.738,
+   "s20": 0.522
+  },
+  {
+   "n": 59,
+   "t": 3.337,
+   "s10": 0.74,
+   "s20": 0.523
+  },
+  {
+   "n": 60,
+   "t": 3.341,
+   "s10": 0.742,
+   "s20": 0.524
+  },
+  {
+   "n": 61,
+   "t": 3.346,
+   "s10": 0.744,
+   "s20": 0.526
+  },
+  {
+   "n": 62,
+   "t": 3.351,
+   "s10": 0.746,
+   "s20": 0.527
+  },
+  {
+   "n": 63,
+   "t": 3.355,
+   "s10": 0.747,
+   "s20": 0.529
+  },
+  {
+   "n": 64,
+   "t": 3.359,
+   "s10": 0.749,
+   "s20": 0.53
+  },
+  {
+   "n": 65,
+   "t": 3.364,
+   "s10": 0.751,
+   "s20": 0.531
+  },
+  {
+   "n": 66,
+   "t": 3.368,
+   "s10": 0.753,
+   "s20": 0.532
+  },
+  {
+   "n": 67,
+   "t": 3.372,
+   "s10": 0.755,
+   "s20": 0.534
+  },
+  {
+   "n": 68,
+   "t": 3.376,
+   "s10": 0.756,
+   "s20": 0.535
+  },
+  {
+   "n": 69,
+   "t": 3.38,
+   "s10": 0.758,
+   "s20": 0.536
+  },
+  {
+   "n": 70,
+   "t": 3.384,
+   "s10": 0.76,
+   "s20": 0.537
+  },
+  {
+   "n": 71,
+   "t": 3.388,
+   "s10": 0.761,
+   "s20": 0.538
+  },
+  {
+   "n": 72,
+   "t": 3.392,
+   "s10": 0.763,
+   "s20": 0.54
+  },
+  {
+   "n": 73,
+   "t": 3.396,
+   "s10": 0.765,
+   "s20": 0.541
+  },
+  {
+   "n": 74,
+   "t": 3.399,
+   "s10": 0.766,
+   "s20": 0.542
+  },
+  {
+   "n": 75,
+   "t": 3.403,
+   "s10": 0.768,
+   "s20": 0.543
+  },
+  {
+   "n": 76,
+   "t": 3.407,
+   "s10": 0.769,
+   "s20": 0.544
+  },
+  {
+   "n": 77,
+   "t": 3.41,
+   "s10": 0.771,
+   "s20": 0.545
+  },
+  {
+   "n": 78,
+   "t": 3.414,
+   "s10": 0.772,
+   "s20": 0.546
+  },
+  {
+   "n": 79,
+   "t": 3.417,
+   "s10": 0.774,
+   "s20": 0.547
+  },
+  {
+   "n": 80,
+   "t": 3.421,
+   "s10": 0.775,
+   "s20": 0.548
+  },
+  {
+   "n": 81,
+   "t": 3.424,
+   "s10": 0.777,
+   "s20": 0.549
+  },
+  {
+   "n": 82,
+   "t": 3.427,
+   "s10": 0.778,
+   "s20": 0.55
+  },
+  {
+   "n": 83,
+   "t": 3.431,
+   "s10": 0.779,
+   "s20": 0.551
+  },
+  {
+   "n": 84,
+   "t": 3.434,
+   "s10": 0.781,
+   "s20": 0.552
+  },
+  {
+   "n": 85,
+   "t": 3.437,
+   "s10": 0.782,
+   "s20": 0.553
+  },
+  {
+   "n": 86,
+   "t": 3.44,
+   "s10": 0.783,
+   "s20": 0.554
+  },
+  {
+   "n": 87,
+   "t": 3.443,
+   "s10": 0.785,
+   "s20": 0.555
+  },
+  {
+   "n": 88,
+   "t": 3.446,
+   "s10": 0.786,
+   "s20": 0.556
+  },
+  {
+   "n": 89,
+   "t": 3.449,
+   "s10": 0.787,
+   "s20": 0.557
+  },
+  {
+   "n": 90,
+   "t": 3.452,
+   "s10": 0.788,
+   "s20": 0.558
+  },
+  {
+   "n": 91,
+   "t": 3.455,
+   "s10": 0.79,
+   "s20": 0.558
+  },
+  {
+   "n": 92,
+   "t": 3.458,
+   "s10": 0.791,
+   "s20": 0.559
+  },
+  {
+   "n": 93,
+   "t": 3.461,
+   "s10": 0.792,
+   "s20": 0.56
+  },
+  {
+   "n": 94,
+   "t": 3.464,
+   "s10": 0.793,
+   "s20": 0.561
+  },
+  {
+   "n": 95,
+   "t": 3.467,
+   "s10": 0.795,
+   "s20": 0.562
+  },
+  {
+   "n": 96,
+   "t": 3.47,
+   "s10": 0.796,
+   "s20": 0.563
+  },
+  {
+   "n": 97,
+   "t": 3.473,
+   "s10": 0.797,
+   "s20": 0.563
+  },
+  {
+   "n": 98,
+   "t": 3.475,
+   "s10": 0.798,
+   "s20": 0.564
+  },
+  {
+   "n": 99,
+   "t": 3.478,
+   "s10": 0.799,
+   "s20": 0.565
+  },
+  {
+   "n": 100,
+   "t": 3.481,
+   "s10": 0.8,
+   "s20": 0.566
+  }
+ ],
+ "trials": [
+  {
+   "id": "IVR-S2",
+   "date": "2026-11-03",
+   "family": "single_stock_call_spread",
+   "title": "Same signal; $5k account; 0.50/0.30 call spread",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "best s20 5.7% DD -36%",
+   "counted": true
+  },
+  {
+   "id": "IVR-S1",
+   "date": "2026-11-03",
+   "family": "single_stock_long_call",
+   "title": "Same signal; $5k account; 1 new call/week",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "s20 15.1% DD -20% (control 12.2% DD -57%); after amendments dev 13.5% DD -30%; panel paper_trade; VALIDATION 2017-2020 -0.7% DD -45%",
+   "counted": true
+  },
+  {
+   "id": "IVR-L",
+   "date": "2026-11-03",
+   "family": "single_stock_long_call",
+   "title": "Low own-IV-rank (<=0.2) 90d ATM calls; $100k whole-contract account (docs/OPTIONS_IVRANK_CALLS_PREREG.md)",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "s20 6.2% DD -20% (bar 5.8%; S&P 7.8%)",
+   "counted": true
+  },
+  {
+   "id": "IM-GRID",
+   "date": "2026-11-03",
+   "family": "industry_momentum_options",
+   "title": "Calls on hot-industry / puts on cold-industry S&P stocks with structure and EMA filters",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 17634,
+   "outcome": "fail",
+   "result": "0 of 17634 configs t>2 at k=0.75 (max t 1.92); PBO 0.18",
+   "counted": true
+  },
+  {
+   "id": "IM-FVG",
+   "date": "2026-11-03",
+   "family": "fvg_vol_options",
+   "title": "Daily fair value gaps and volatility squeezes as option entries",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 7752,
+   "outcome": "fail",
+   "result": "18 of 7752 t>2 (fewer than chance); only ivrank_low cluster survived -> IVR prereg",
+   "counted": true
+  },
+  {
+   "id": "X-8f2ff38f",
+   "date": "2026-11-02",
+   "family": "sp500_deletion",
+   "title": "D1 S&P 500 deletion reversal",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "Stage 1 failed 2026-11-02 (docs/SP500_DELETION_PREREG.md)",
+   "counted": true
+  },
+  {
+   "id": "X-0730a51f",
+   "date": "2026-11-02",
+   "family": "trend_factor",
+   "title": "Trend factor (Han-Zhou-Zhu), long-only top 30",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "abandoned",
+   "result": "canceled after one version",
+   "counted": true
+  },
+  {
+   "id": "E1",
+   "date": "2026-11-02",
+   "family": "post_earnings_drift",
+   "title": "Post-earnings drift with and without cash-flow confirmation",
+   "source": "manual",
+   "kind": "test",
+   "configs": 2,
+   "outcome": "untested",
+   "result": "paused by the odds check; closed before any return was computed",
+   "counted": false
+  },
+  {
+   "id": "RS-O2LO",
+   "date": "2026-11-01",
+   "family": "option_implied_stock_signal",
+   "title": "O2 skew and IV-spread long-only after turnover costs (rules v4 re-screen)",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 2,
+   "outcome": "fail",
+   "result": "8.7% / 7.8% CAGR; lead is the equal-weight tilt; panel reject (split)",
+   "counted": true
+  },
+  {
+   "id": "O9",
+   "date": "2026-11-01",
+   "family": "index_long_call_spread",
+   "title": "XSP 5%-wide bull call spread gated by crash rule (user's $5k list #1)",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "+12.6% t=1.60; Sharpe 0.43 vs 0.63",
+   "counted": true
+  },
+  {
+   "id": "O12",
+   "date": "2026-11-01",
+   "family": "single_stock_wheel",
+   "title": "The wheel: 10% OTM CSPs on $20-60 non-dividend S&P names (no earnings) then covered calls at/above basis; 50% profit take",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "+0.62% t=1.04; Sharpe 0.30 vs 0.36; DD -55%",
+   "counted": true
+  },
+  {
+   "id": "O11",
+   "date": "2026-11-01",
+   "family": "single_stock_long_call",
+   "title": "45-70 DTE ATM calls on top-50 S&P names sold at next month-end (user's $5k list #3)",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "+1.4% t=0.34; $5k replay $5830 DD -51%",
+   "counted": true
+  },
+  {
+   "id": "O10",
+   "date": "2026-11-01",
+   "family": "single_stock_short_put",
+   "title": "Monthly 5% OTM cash-secured puts on $20-30 stocks (user's $5k list #2)",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "-0.21% t=-0.74; Sharpe -0.25 vs 0.19",
+   "counted": true
+  },
+  {
+   "id": "BEST-ETF",
+   "date": "2026-11-01",
+   "family": "trend_200d_etf",
+   "title": "SPY / SSO / TQQQ when SPY > 200-day under rules v4",
+   "source": "manual",
+   "kind": "review",
+   "configs": 3,
+   "outcome": "watch",
+   "result": "SSO watch (split); SPY and TQQQ reject",
+   "counted": false
+  },
+  {
+   "id": "A-zhan",
+   "date": "2026-11-01",
+   "family": "single_stock_dn_write",
+   "title": "Delta-hedged call writing top IVOL decile (dev rerun with all-strike exits)",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "-0.27% t=-1.18 (was +1.88% with big-move exits dropped)",
+   "counted": true
+  },
+  {
+   "id": "REV-FAIL",
+   "date": "2026-10-31",
+   "family": "reversed_failures",
+   "title": "Reversing the worst failures (S1 O3 O6)",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 3,
+   "outcome": "fail",
+   "result": "losses were the bid-ask spread; reversing pays it again",
+   "counted": true
+  },
+  {
+   "id": "CC-IVOL",
+   "date": "2026-10-31",
+   "family": "covered_calls",
+   "title": "Covered calls on high-IVOL stocks (small-account Zhan)",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "+0.3-0.4%/mo over the stock; t<2",
+   "counted": true
+  },
+  {
+   "id": "B-PUT",
+   "date": "2026-10-31",
+   "family": "index_short_vol",
+   "title": "Index put-writing (Cboe PUT replication on XSP)",
+   "source": "manual",
+   "kind": "replication",
+   "configs": 1,
+   "outcome": "parked",
+   "result": "~7.4%/yr corr 0.992 with Cboe; equity-risk substitute not an edge; v4 panel reject",
+   "counted": true
+  },
+  {
+   "id": "S1",
+   "date": "2026-10-30",
+   "family": "earnings_long_vol",
+   "title": "Pre-earnings ATM straddle (rdq-3 to rdq)",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "-6.6% t=-18.2",
+   "counted": true
+  },
+  {
+   "id": "R-ZHAN",
+   "date": "2026-10-30",
+   "family": "single_stock_dn_write",
+   "title": "Delta-hedged call writing on high-IVOL stocks replication (Zhan et al. 2022)",
+   "source": "manual",
+   "kind": "replication",
+   "configs": 1,
+   "outcome": "replicated",
+   "result": "R3b +3.86%/mo t 9.6 1996-2004 (dev later failed: A-zhan)",
+   "counted": true
+  },
+  {
+   "id": "R-OPTMOM",
+   "date": "2026-10-30",
+   "family": "option_momentum",
+   "title": "Option momentum replication (Heston et al. 2023) 1996-2004",
+   "source": "manual",
+   "kind": "replication",
+   "configs": 1,
+   "outcome": "replicated_not_tradable",
+   "result": "+7.30%/mo t 3.7; edge/cost 1.8 at k=0.75",
+   "counted": true
+  },
+  {
+   "id": "R-IVHV",
+   "date": "2026-10-30",
+   "family": "iv_hv",
+   "title": "IV minus HV replication (Goyal-Saretto 2009) 1996-2004",
+   "source": "manual",
+   "kind": "replication",
+   "configs": 1,
+   "outcome": "replicated_not_tradable",
+   "result": "R2 -13.81%/mo t -5.9; edge/cost 1.7",
+   "counted": true
+  },
+  {
+   "id": "O8",
+   "date": "2026-10-30",
+   "family": "index_leverage",
+   "title": "0.80-delta SPX calls rolled monthly as 2x vs 2x ETF model",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "Sharpe 0.26 vs 0.60",
+   "counted": true
+  },
+  {
+   "id": "O7-weekly",
+   "date": "2026-10-30",
+   "family": "index_long_call",
+   "title": "ATM SPX weekly calls",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "-5.3% t=-0.61",
+   "counted": true
+  },
+  {
+   "id": "O7-monthly",
+   "date": "2026-10-30",
+   "family": "index_long_call",
+   "title": "ATM SPX monthly calls",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "+6.5% t=0.70",
+   "counted": true
+  },
+  {
+   "id": "O6-1w",
+   "date": "2026-10-30",
+   "family": "single_stock_long_call",
+   "title": "First ITM call 5 days before expiry",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "-0.2% t=-0.06",
+   "counted": true
+  },
+  {
+   "id": "O6-1d",
+   "date": "2026-10-30",
+   "family": "single_stock_long_call",
+   "title": "First ITM call 1 day before expiry",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "-5.6% t=-2.33",
+   "counted": true
+  },
+  {
+   "id": "O5",
+   "date": "2026-10-30",
+   "family": "single_stock_long_call",
+   "title": "ATM calls 7-35 DTE month-end",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "+9.0% t=1.60",
+   "counted": true
+  },
+  {
+   "id": "O4",
+   "date": "2026-10-30",
+   "family": "single_stock_short_put",
+   "title": "Monthly 5% OTM cash-secured puts stocks<=$50",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "-0.13% t=-0.51",
+   "counted": true
+  },
+  {
+   "id": "O3",
+   "date": "2026-10-30",
+   "family": "earnings_short_vol",
+   "title": "Earnings iron butterfly (day-1 to day+1)",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "-31.5% t=-58",
+   "counted": true
+  },
+  {
+   "id": "O2-SKEW",
+   "date": "2026-10-30",
+   "family": "option_implied_stock_signal",
+   "title": "XZZ skew quintile L/S",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "0.35% t=2.06",
+   "counted": true
+  },
+  {
+   "id": "O2-IVSPREAD",
+   "date": "2026-10-30",
+   "family": "option_implied_stock_signal",
+   "title": "CW IV spread quintile L/S",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "weak_pass",
+   "result": "0.43% t=2.29; val 0.02%; final 0.23%",
+   "counted": true
+  },
+  {
+   "id": "O1",
+   "date": "2026-10-30",
+   "family": "index_short_vol",
+   "title": "XSP 20-delta put spread 1.25% wide gated by crash rule",
+   "source": "options_registry",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "fail",
+   "result": "-5.2% t=-2.39",
+   "counted": true
+  },
+  {
+   "id": "CBOE-PASS",
+   "date": "2026-10-29",
+   "family": "cboe_option_indices",
+   "title": "Cboe SPX option strategy indices (PUT WPUT BXM BXMD CNDR BFLY CLL PPUT) raw and crash-gated",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 10,
+   "outcome": "fail",
+   "result": "none beat the 1x crash rule (Sharpe 0.64); best gated put-write 0.62",
+   "counted": true
+  },
+  {
+   "id": "TV-TREND",
+   "date": "2026-10-28",
+   "family": "tv_pine_single_stock",
+   "title": "Multi-horizon trend on 12 mega-caps (Pine)",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 12,
+   "outcome": "fail",
+   "result": "positive on 12/12 but no script beats buy-and-hold; hindsight tickers",
+   "counted": true
+  },
+  {
+   "id": "TV-OVERNIGHT",
+   "date": "2026-10-28",
+   "family": "tv_pine_single_stock",
+   "title": "Overnight continuation on 12 mega-caps (Pine)",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 12,
+   "outcome": "fail",
+   "result": "loses on 11/12",
+   "counted": true
+  },
+  {
+   "id": "TV-LOWVOL",
+   "date": "2026-10-28",
+   "family": "tv_pine_single_stock",
+   "title": "Low-vol trend filter on 12 mega-caps (Pine)",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 12,
+   "outcome": "fail",
+   "result": "never beats buy-and-hold",
+   "counted": true
+  },
+  {
+   "id": "TV-DRIFT",
+   "date": "2026-10-28",
+   "family": "tv_pine_single_stock",
+   "title": "Earnings drift on 12 mega-caps (Pine)",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 12,
+   "outcome": "fail",
+   "result": "positive 9/12; never beats buy-and-hold",
+   "counted": true
+  },
+  {
+   "id": "TV-BREAKOUT",
+   "date": "2026-10-28",
+   "family": "tv_pine_single_stock",
+   "title": "High-proximity breakout on 12 mega-caps (Pine)",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 12,
+   "outcome": "fail",
+   "result": "positive 9/12; never beats buy-and-hold",
+   "counted": true
+  },
+  {
+   "id": "LEV-FREQ",
+   "date": "2026-10-28",
+   "family": "trend_200d_etf",
+   "title": "2x crash rule checked monthly / weekly / daily (data-suggested)",
+   "source": "manual",
+   "kind": "exploratory",
+   "configs": 3,
+   "outcome": "fail",
+   "result": "ties went to monthly",
+   "counted": true
+  },
+  {
+   "id": "LEV-2X",
+   "date": "2026-10-28",
+   "family": "trend_200d_etf",
+   "title": "2x S&P (SSO) on the crash rule; 3x stress case",
+   "source": "manual",
+   "kind": "test",
+   "configs": 2,
+   "outcome": "pass",
+   "result": "2x passed its prereg; became pilot v2 then stopped",
+   "counted": true
+  },
+  {
+   "id": "X-e4f78b01",
+   "date": "2026-10-26",
+   "family": "quality_profitability",
+   "title": "Cash profitability + long-horizon reversal blend",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 4,
+   "outcome": "passed_rules_v2",
+   "result": "reserved evaluation and gates completed",
+   "counted": true
+  },
+  {
+   "id": "X-aa8e5aa2",
+   "date": "2026-10-26",
+   "family": "quality_profitability",
+   "title": "Cash-based operating profitability (Ball et al.) long-only",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 4,
+   "outcome": "passed_rules_v2",
+   "result": "reserved evaluation and gates completed",
+   "counted": true
+  },
+  {
+   "id": "X-5bf24786",
+   "date": "2026-10-26",
+   "family": "quality_profitability",
+   "title": "Quality composite: cash profitability, QMJ profitability, low net debt",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 4,
+   "outcome": "passed_rules_v2",
+   "result": "reserved evaluation and gates completed",
+   "counted": true
+  },
+  {
+   "id": "ANNUAL-VP",
+   "date": "2026-10-21",
+   "family": "value_profitability",
+   "title": "Annual value and profitability portfolios (combined / value / profitability)",
+   "source": "manual",
+   "kind": "test",
+   "configs": 3,
+   "outcome": "fail",
+   "result": "combined alpha -0.22% t -0.24; not advanced",
+   "counted": true
+  },
+  {
+   "id": "X-e7e7a281",
+   "date": "2026-10-20",
+   "family": "share_issuance",
+   "title": "Net share issuance L/S",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 2,
+   "outcome": "fail",
+   "result": "no version met the targets on research data; the holdout years were left unused",
+   "counted": true
+  },
+  {
+   "id": "X-8f891192",
+   "date": "2026-10-20",
+   "family": "futures_tsmom",
+   "title": "Futures TSMOM (Moskowitz-Ooi-Pedersen)",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "abandoned",
+   "result": "canceled; rerun as 5af9f4ab",
+   "counted": true
+  },
+  {
+   "id": "X-5cd7c614",
+   "date": "2026-10-20",
+   "family": "value_profitability",
+   "title": "Value + profitability, market-hedged",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 4,
+   "outcome": "fail",
+   "result": "reserved evaluation and gates completed",
+   "counted": true
+  },
+  {
+   "id": "X-5af9f4ab",
+   "date": "2026-10-20",
+   "family": "futures_tsmom",
+   "title": "Futures TSMOM (Moskowitz-Ooi-Pedersen), 1975\u2013",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 4,
+   "outcome": "fail",
+   "result": "reserved evaluation and gates completed",
+   "counted": true
+  },
+  {
+   "id": "X-44119584",
+   "date": "2026-10-20",
+   "family": "value_profitability",
+   "title": "Value then profitability, small & mid caps",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "abandoned",
+   "result": "worker interrupted",
+   "counted": true
+  },
+  {
+   "id": "X-2b189776",
+   "date": "2026-10-20",
+   "family": "quality_profitability",
+   "title": "Quality + cash-flow sleeves L/S",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 4,
+   "outcome": "fail",
+   "result": "no version met the targets on research data; the holdout years were left unused",
+   "counted": true
+  },
+  {
+   "id": "SECTOR-MOM",
+   "date": "2026-10-20",
+   "family": "sector_momentum",
+   "title": "Sector momentum top 2-4 by 6/12-month return and semiconductors with the crash rule",
+   "source": "manual",
+   "kind": "test",
+   "configs": 8,
+   "outcome": "fail",
+   "result": "no variant clearly beat the 1x crash rule",
+   "counted": true
+  },
+  {
+   "id": "ETF-ALT",
+   "date": "2026-10-20",
+   "family": "etf_alternatives",
+   "title": "ETF alternatives to the pilot: bonds/gold/dual momentum/60-40/Nasdaq/equal-weight/2x with the crash rule",
+   "source": "manual",
+   "kind": "test",
+   "configs": 10,
+   "outcome": "fail",
+   "result": "none clearly beat the 1x crash rule",
+   "counted": true
+  },
+  {
+   "id": "CRASH-1X",
+   "date": "2026-10-20",
+   "family": "trend_200d_etf",
+   "title": "S&P 500 total return or T-bills on month-end close vs 200-session SMA (the crash rule)",
+   "source": "manual",
+   "kind": "test",
+   "configs": 1,
+   "outcome": "pass",
+   "result": "2000-2025 9.3% CAGR Sharpe 0.64 DD -25%; running as paper pilot v3",
+   "counted": true
+  },
+  {
+   "id": "X-d378d038",
+   "date": "2026-10-19",
+   "family": "value_profitability",
+   "title": "Value then profitability (Novy-Marx) long-only",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 4,
+   "outcome": "fail",
+   "result": "no version met the targets on research data; the holdout years were left unused",
+   "counted": true
+  },
+  {
+   "id": "X-90bf4f3e",
+   "date": "2026-10-19",
+   "family": "momentum",
+   "title": "Risk-adjusted momentum with sell threshold",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 4,
+   "outcome": "fail",
+   "result": "no version met the targets on research data; the holdout years were left unused",
+   "counted": true
+  },
+  {
+   "id": "X-84bc2fba",
+   "date": "2026-10-19",
+   "family": "ewo_rsi",
+   "title": "EWO/RSI weekly long/short",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 3,
+   "outcome": "fail",
+   "result": "stopped early: all 3 versions were far from the targets (best Sharpe -0.29, target 0.50), so a second round of fixes was not worth running; ",
+   "counted": true
+  },
+  {
+   "id": "X-5c0a4268",
+   "date": "2026-10-19",
+   "family": "quality_profitability",
+   "title": "Gross profitability (Novy-Marx) long-only",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 2,
+   "outcome": "fail",
+   "result": "no version met the targets on research data; the holdout years were left unused",
+   "counted": true
+  },
+  {
+   "id": "X-3adf93d2",
+   "date": "2026-10-19",
+   "family": "low_volatility",
+   "title": "Low-volatility S&P 500 stocks with a",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 4,
+   "outcome": "passed_rules_v1",
+   "result": "rules v2 re-score pass; BEST_REVIEW low-vol 50 'watch'",
+   "counted": true
+  },
+  {
+   "id": "X-399b2dd7",
+   "date": "2026-10-19",
+   "family": "short_term_reversal",
+   "title": "Short-term reversal",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 2,
+   "outcome": "fail",
+   "result": "stopped early: all 2 versions were far from the targets (best Sharpe 0.23, target 0.50), so a second round of fixes was not worth running; t",
+   "counted": true
+  },
+  {
+   "id": "X-1289437b",
+   "date": "2026-10-19",
+   "family": "seasonality",
+   "title": "Calendar-month seasonality L/S",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 3,
+   "outcome": "fail",
+   "result": "stopped early: all 3 versions were far from the targets (best Sharpe -0.03, target 0.50), so a second round of fixes was not worth running; ",
+   "counted": true
+  },
+  {
+   "id": "X-80be2953",
+   "date": "2026-10-16",
+   "family": "customer_momentum",
+   "title": "Customer Momentum",
+   "source": "atlas",
+   "kind": "test",
+   "configs": 2,
+   "outcome": "fail",
+   "result": "no version met the targets on research data; the holdout years were left unused",
+   "counted": true
+  },
+  {
+   "id": "X-064b6fa5",
+   "date": "2026-10-16",
+   "family": "daily_momentum_baseline",
+   "title": "Daily momentum baseline",
+   "source": "atlas",
+   "kind": "example",
+   "configs": 1,
+   "outcome": "pass",
+   "result": "the README's demo experiment",
+   "counted": false
+  }
+ ]
+}
