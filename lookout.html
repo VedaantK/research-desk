@@ -109,6 +109,8 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
     <h2>Who predicts better</h2>
     <p class="note">The checklist scores every flagged stock with fixed, literature-based adjustments (momentum, one-month reversal, post-earnings drift, 52-week-high proximity, idiosyncratic volatility, high volume). Random controls are unflagged stocks scored the same way, which tests whether flagging itself carries information. &ldquo;Follow the move&rdquo; uses Claude&rsquo;s own confidence but always bets in the direction of the move that triggered the flag, so it differs from Claude only where Claude went against the move.</p>
     <p class="note" id="lookout-move"></p>
+    <p class="note" id="lookout-economic"></p>
+    <p class="note" id="lookout-factor"></p>
     <div class="table-wrap">
       <table class="holdings" id="lookout-compare">
         <thead><tr><th>Predictor</th><th class="num">Resolved</th><th class="num">Open</th><th class="num">Hit rate</th><th class="num">Expected</th><th class="num">p</th><th class="num">Skill</th><th class="num">Avg edge</th></tr></thead>
@@ -195,6 +197,6 @@ table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
   <p class="fine">Lookout publishes research predictions, not investment advice. No trades are placed.</p>
 </footer>
 <script src="echarts.min.js?v=e84270bd0c"></script>
-<script src="lookout.js?v=60fe215919"></script>
+<script src="lookout.js?v=cb74baea14"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T15:01:58+00:00",
+ "updated": "2026-11-06T17:31:03+00:00",
  "summary": [
   {
    "predictor": "Claude",
@@ -32,7 +32,7 @@
   {
    "predictor": "Checklist, all flags",
    "resolved": 0,
-   "open": 984,
+   "open": 1014,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -46,7 +46,7 @@
   {
    "predictor": "Random controls",
    "resolved": 0,
-   "open": 117,
+   "open": 132,
    "hit_rate": null,
    "base_hit_rate": null,
    "p_value": null,
@@ -729,6 +729,19 @@
   },
   {
    "day": "2026-11-06",
+   "ticker": "WYNN",
+   "name": "Wynn Resorts",
+   "vs": "XLY",
+   "trigger": "earnings up",
+   "checklist_p": 0.521,
+   "new": true,
+   "first_flagged": "2026-11-06",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
    "ticker": "CBRE",
    "name": "CBRE Group",
    "vs": "XLRE",
@@ -755,11 +768,63 @@
   },
   {
    "day": "2026-11-06",
+   "ticker": "LYV",
+   "name": "Live Nation Entertainment",
+   "vs": "XLC",
+   "trigger": "earnings down",
+   "checklist_p": 0.499,
+   "new": true,
+   "first_flagged": "2026-11-06",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "CPAY",
+   "name": "Corpay",
+   "vs": "XLF",
+   "trigger": "earnings up",
+   "checklist_p": 0.601,
+   "new": false,
+   "first_flagged": "2026-11-05",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "PODD",
+   "name": "Insulet Corporation",
+   "vs": "XLV",
+   "trigger": "earnings down",
+   "checklist_p": 0.399,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
    "ticker": "AMD",
    "name": "Advanced Micro Devices",
    "vs": "XLK",
    "trigger": "earnings up",
    "checklist_p": 0.581,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "FSLR",
+   "name": "First Solar",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "checklist_p": 0.437,
    "new": false,
    "first_flagged": "2026-11-04",
    "claude": null,
@@ -794,6 +859,19 @@
   },
   {
    "day": "2026-11-06",
+   "ticker": "APP",
+   "name": "AppLovin",
+   "vs": "XLC",
+   "trigger": "earnings up",
+   "checklist_p": 0.441,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
    "ticker": "APTV",
    "name": "Aptiv",
    "vs": "XLY",
@@ -820,11 +898,50 @@
   },
   {
    "day": "2026-11-06",
+   "ticker": "VST",
+   "name": "Vistra Corp.",
+   "vs": "XLU",
+   "trigger": "earnings up",
+   "checklist_p": 0.541,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
    "ticker": "MU",
    "name": "Micron Technology",
    "vs": "XLK",
    "trigger": "filing up",
    "checklist_p": 0.533,
+   "new": false,
+   "first_flagged": "2026-11-05",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "PWR",
+   "name": "Quanta Services",
+   "vs": "XLI",
+   "trigger": "idio up",
+   "checklist_p": 0.529,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
+   "ticker": "COIN",
+   "name": "Coinbase",
+   "vs": "XLF",
+   "trigger": "divergence low",
+   "checklist_p": 0.474,
    "new": false,
    "first_flagged": "2026-11-05",
    "claude": null,
@@ -898,6 +1015,19 @@
   },
   {
    "day": "2026-11-06",
+   "ticker": "EXPE",
+   "name": "Expedia Group",
+   "vs": "XLY",
+   "trigger": "earnings down",
+   "checklist_p": 0.499,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": null
+  },
+  {
+   "day": "2026-11-06",
    "ticker": "MCHP",
    "name": "Microchip Technology",
    "vs": "XLK",
@@ -931,8 +1061,8 @@
   },
   {
    "day": "2026-11-06",
-   "flagged": 21,
-   "new": 9,
+   "flagged": 31,
+   "new": 11,
    "claude": 0
   }
  ],
