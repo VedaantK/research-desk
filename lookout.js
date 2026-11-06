@@ -39,6 +39,10 @@
       + `<td class="num">${pct(r.hit_rate)}</td><td class="num">${pct(r.base_hit_rate)}</td>`
       + `<td class="num">${num(r.p_value)}</td><td class="num ${cls(r.skill)}">${num(r.skill)}</td>`
       + `<td class="num">${sgn(r.avg_edge_pct)}</td></tr>`).join("");
+    const mvAll = (d.move_agreement || []).find(r => r.prompts === "all");
+    if (mvAll && mvAll.n) $("lookout-move").innerHTML = `<b>Claude has followed the triggering move on ${mvAll.same} of ${mvAll.n} calls.</b> `
+      + (mvAll.same === mvAll.n ? "Until it disagrees with the move, its direction can&rsquo;t beat this row; only its confidence can."
+        : `It went against the move ${mvAll.n - mvAll.same} time${mvAll.n - mvAll.same === 1 ? "" : "s"}; those calls decide whether its direction adds anything.`);
     $("lookout-gates").querySelector("tbody").innerHTML = d.gates.map(g => `<tr><td>${esc(g.gate)}</td>`
       + `<td class="num">${g.have}</td><td class="num">${g.need}</td>`
       + `<td><span class="lk-pill ${esc(g.status)}">${esc(g.status)}</span></td><td class="wrap">${esc(g.rule)}</td></tr>`).join("");

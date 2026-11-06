@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T07:45:33+00:00",
+ "updated": "2026-11-06T07:53:17+00:00",
  "summary": [
   {
    "predictor": "Claude",
@@ -73,6 +73,20 @@
   },
   {
    "predictor": "Claude + checklist average",
+   "resolved": 0,
+   "open": null,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Follow the move, same calls",
    "resolved": 0,
    "open": null,
    "hit_rate": null,
@@ -1954,6 +1968,20 @@
    "flagged": 101,
    "new": 48,
    "claude": 5
+  }
+ ],
+ "move_agreement": [
+  {
+   "prompts": "analyst_v2",
+   "n": 5,
+   "same": 5,
+   "share": 1.0
+  },
+  {
+   "prompts": "all",
+   "n": 15,
+   "same": 15,
+   "share": 1.0
   }
  ]
 }
