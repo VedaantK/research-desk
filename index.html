@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Atlas Research Desk</title>
+<meta name="description" content="An autonomous research loop that tests systematic S&amp;P 500 strategies on survivorship-free data, three reconciling backtest engines and recorded historical evaluations.">
+<meta property="og:title" content="Atlas Research Desk">
+<meta property="og:description" content="Every trading idea tested, including the ones that failed, against the S&amp;P 500.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=a6077b73a7">
+<link rel="stylesheet" href="research.css?v=1adaa0968d">
+<script src="theme.js?v=d756ea93c9"></script>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Atlas</a>
+    <nav aria-label="Main navigation">
+      <a href="index.html" aria-current="page">Compass</a>
+      <a href="beacon.html">Beacon</a>
+      <a href="lookout.html">Lookout</a>
+      <a href="tide.html">Tide</a>
+      <a href="theta.html">Theta</a>
+      <a href="trials.html">Trials</a>
+      <a href="notes.html">Research notes</a>
+      <a href="updates.html">Updates</a>
+    </nav>
+    <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <p class="eyebrow"><span id="live-dot" class="dot"></span><span id="live-text">Research desk</span></p>
+    <h1>Most trading ideas don't survive real data.<br><span class="accent">This machine finds out which ones do.</span></h1>
+    <p class="lede">Atlas is an autonomous research loop. Describe a strategy in plain English; Claude specifies it, Codex codes it, and three independent backtest engines must agree on every trade before it faces risk gates and a holdout. Every idea is shown here, including the failures.</p>
+    <div class="stats" id="stats"></div>
+  </section>
+
+  <section id="live" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Live paper portfolio <span id="paper-badge" class="badge Running">Not started</span></h2>
+        <p class="sub" id="paper-sub">The strategy that passed its holdout, running forward on an Interactive Brokers paper account. Returns and weights only.</p>
+      </div>
+    </div>
+    <div id="paper-kpis" class="stats"></div>
+    <div class="grid-2 live-grid">
+      <div class="panel"><div class="chart-label pad-top">Since start · paper vs benchmarks</div><div id="paper-growth" class="chart chart-mid"></div></div>
+      <div class="panel"><div class="chart-label pad-top" id="trend-label">Market filter</div><div id="trend" class="chart chart-mid"></div></div>
+    </div>
+    <div class="panel holdings-panel">
+      <div class="holdings-head"><h3>Holdings</h3><span class="sub" id="holdings-note"></span></div>
+      <div class="table-wrap"><table class="holdings" id="holdings"></table></div>
+    </div>
+  </section>
+
+  <section id="performance" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Growth of $100,000</h2>
+        <p class="sub">The shortlist after trading costs, against the S&amp;P 500 total return. Shaded bands are crises; hatched bands are holdout years. Archived ideas can be added from the chips.</p>
+      </div>
+      <div class="controls">
+        <div class="seg" id="range">
+          <button data-range="all" class="on">All</button>
+          <button data-range="2000-2009">2000s</button>
+          <button data-range="2010-2019">2010s</button>
+          <button data-range="2020-2025">2020s</button>
+        </div>
+        <div class="seg" id="scale">
+          <button data-scale="log" class="on">Log</button>
+          <button data-scale="value">Linear</button>
+        </div>
+      </div>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div class="panel">
+      <div id="growth" class="chart chart-tall"></div>
+      <div class="chart-label">Drawdown from peak</div>
+      <div id="drawdown" class="chart chart-short"></div>
+    </div>
+  </section>
+
+  <section id="rules" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>The rules changed once <span class="badge Running">20 Oct 2026</span></h2>
+        <p class="sub">Version 2 was written down before anything was re-scored with it.</p>
+      </div>
+    </div>
+    <details class="panel archive"><summary><span><b>What changed and why</b></span><span class="sub">Crash protection, alpha test, holdout, crisis results</span></summary>
+    <div class="pad">
+    <p class="sub">The original rules rejected any stock strategy that fell more than 35%, which meant any strategy invested through 2008, and asked three holdout years to clear a fixed Sharpe target.</p>
+    <div class="grid-3 guard">
+      <div class="panel pad"><h3>Crash protection</h3><p>A long stock strategy may be held with one fixed rule: if the S&amp;P 500 ends a month below its 200-day average, move to T-bills until a month ends back above it. The −35% limit applies to the portfolio as held. The rule is never tuned per strategy.</p></div>
+      <div class="panel pad"><h3>An edge of its own</h3><p>The rule alone makes the index look good, so a strategy must also beat the six-factor model on its own picks (alpha t-stat ≥ 1.5), measured without protection. Holding the index with the rule cannot pass.</p></div>
+      <div class="panel pad"><h3>Holdout: did it break?</h3><p>The later years fail a strategy only when it does clearly worse than its research predicted; a pass can still include losing years. A pass means paper trading, not proof: no strategy kept a factor edge after its research years.</p></div>
+    </div>
+    <div class="grid-2 rules-grid">
+      <div class="panel pad"><h3>Does stepping aside in a crash work?</h3><div id="cp-kpis" class="kpi-row"></div><p class="note" id="cp-note"></p></div>
+      <div class="panel pad"><h3>Through each crisis</h3><div class="table-wrap"><table class="versions" id="episodes"></table></div><p class="note">Bonds rallied in 2000–02 and 2008 but fell with stocks in 2022, so the rules use T-bills.</p></div>
+    </div>
+    </div></details>
+  </section>
+
+  <section id="search" class="wrap section">
+    <div class="grid-2">
+      <div>
+        <div class="section-head compact">
+          <div>
+            <h2>The whole search, not the highlight reel</h2>
+            <p class="sub">Every version the loop tested. The green box is Sharpe ≥ 0.5 with a worst drop no deeper than −35%. Hover for details.</p>
+          </div>
+        </div>
+        <div class="panel"><div id="scatter" class="chart chart-mid"></div></div>
+      </div>
+      <div>
+        <div class="section-head compact">
+          <div>
+            <h2>Skill or luck?</h2>
+            <p class="sub">Annual return left after removing the six factors (market, size, value, profitability, investment, momentum). Solid bars are significant (|t| ≥ 2).</p>
+          </div>
+        </div>
+        <div class="panel"><div id="alpha" class="chart chart-mid"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Year by year</h2>
+        <p class="sub">Calendar-year returns of the shortlist as held, against the S&amp;P 500.</p>
+      </div>
+    </div>
+    <div class="panel"><div id="heatmap-wrap"><div id="heatmap" class="chart"></div></div></div>
+  </section>
+
+  <section id="strategies" class="wrap section">
+    <div class="section-head">
+      <div>
+        <h2>Shortlist</h2>
+        <p class="sub">Strategies that pass the current rules, newest first. Open a card for the hypothesis and every version tried.</p>
+      </div>
+    </div>
+    <div class="cards" id="cards"></div>
+    <details class="panel archive" id="archive">
+      <summary><span><b>Archive</b> · <span id="archive-count"></span></span><span class="sub">Rejected or not worth pursuing, kept for the record</span></summary>
+      <div class="table-wrap"><table class="versions archive-table" id="archive-table"></table></div>
+    </details>
+  </section>
+
+  <section id="method" class="wrap section">
+    <details class="panel archive"><summary><span><b>How an idea is tested</b></span><span class="sub">The pipeline, data and statistics</span></summary>
+    <div class="pad">
+    <ol class="pipeline">
+      <li><b>Describe</b><span>A strategy in plain English, with the reason it should work.</span></li>
+      <li><b>Formalize</b><span>Claude writes a precise spec: universe, signals, timing, sizing, exits.</span></li>
+      <li><b>Implement</b><span>Codex writes the code. A validator replays it on synthetic markets to catch lookahead.</span></li>
+      <li><b>Backtest ×3</b><span>A reference engine, vectorbt and NautilusTrader must reconcile on the same orders.</span></li>
+      <li><b>Critique</b><span>Claude and Codex each propose falsifiable fixes. At most two rounds, and every version is counted.</span></li>
+      <li><b>Gates</b><span>Sharpe ≥ 0.5 and worst drop ≥ −35% as held, a six-factor alpha t ≥ 1.5, then doubled costs and nearby settings (Sharpe ≥ 0.3).</span></li>
+      <li><b>Holdout</b><span>A separate stretch of history checks that the result did not break. Years already looked at never count as fresh evidence again.</span></li>
+      <li><b>Paper</b><span>Survivors trade on an Interactive Brokers paper account before any real money.</span></li>
+    </ol>
+    <div class="grid-3 guard">
+      <div class="panel pad"><h3>Data timing and revisions</h3><p>CRSP daily prices including delisted companies and delisting returns, point-in-time S&amp;P 500 membership, and Compustat fundamentals used with availability lags. Waiting for the report date does not undo later corrections, so these numbers may not be exactly what was first published. The <a href="annual.html">annual research page</a> lists its own data limits.</p></div>
+      <div class="panel pad"><h3>Realistic execution</h3><p>Decisions are made at the close and filled at the next open. Costs include commissions, the quoted spread, size-based market impact and a borrow fee on shorts. Cash earns no interest, which understates hedged strategies.</p></div>
+      <div class="panel pad"><h3>Honest statistics</h3><p>Pass/fail rules are set before results are seen. They changed once (version 2, above), written down before any re-scoring, and re-scored verdicts are labelled. Alpha is measured against six factors and every version tried is recorded. The engine refuses to read data past the allowed date, and the annual study went further: its data was physically cut off at the end of 2019 and its code ran sandboxed.</p></div>
+    </div>
+    </div></details>
+  </section>
+</main>
+
+<footer class="wrap footer">
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. Updated automatically from the research machine. <span id="generated"></span></p>
+  <p class="fine">Backtested and hypothetical results. Not investment advice. Past performance, simulated or real, does not guarantee future returns. Data: CRSP and Compustat via WRDS (only portfolio-level aggregates are published) and Kenneth French's data library.</p>
+</footer>
+
+<script src="echarts.min.js?v=e84270bd0c"></script>
+<script src="site.js?v=615af49113"></script>
+</body>
+</html>

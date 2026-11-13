@@ -1,0 +1,2051 @@
+{
+ "updated": "2026-11-13T22:46:15+00:00",
+ "summary": [
+  {
+   "predictor": "Claude",
+   "resolved": 1,
+   "open": 6,
+   "hit_rate": 1.0,
+   "base_hit_rate": 0.5606,
+   "p_value": 0.188,
+   "brier": 0.2025,
+   "brier_base": 0.1931,
+   "skill": -0.0488,
+   "avg_edge_pct": 16.109,
+   "options_n": 1,
+   "options_avg_pnl_pct": 35.29
+  },
+  {
+   "predictor": "Checklist, same calls",
+   "resolved": 1,
+   "open": null,
+   "hit_rate": 1.0,
+   "base_hit_rate": 0.5606,
+   "p_value": 0.188,
+   "brier": 0.211,
+   "brier_base": 0.1931,
+   "skill": -0.0931,
+   "avg_edge_pct": 16.109,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Checklist, all flags",
+   "resolved": 345,
+   "open": 933,
+   "hit_rate": 0.5652,
+   "base_hit_rate": 0.5143,
+   "p_value": 0.0291,
+   "brier": 0.2473,
+   "brier_base": 0.2485,
+   "skill": 0.0051,
+   "avg_edge_pct": 1.183,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Random controls",
+   "resolved": 49,
+   "open": 257,
+   "hit_rate": 0.551,
+   "base_hit_rate": 0.5001,
+   "p_value": 0.2379,
+   "brier": 0.2458,
+   "brier_base": 0.2503,
+   "skill": 0.0179,
+   "avg_edge_pct": 0.337,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Local model",
+   "resolved": 99,
+   "open": 118,
+   "hit_rate": 0.4747,
+   "base_hit_rate": 0.5015,
+   "p_value": 0.7029,
+   "brier": 0.2542,
+   "brier_base": 0.2497,
+   "skill": -0.018,
+   "avg_edge_pct": -0.256,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Claude + checklist average",
+   "resolved": 1,
+   "open": null,
+   "hit_rate": 1.0,
+   "base_hit_rate": 0.5606,
+   "p_value": 0.188,
+   "brier": 0.2068,
+   "brier_base": 0.1931,
+   "skill": -0.0709,
+   "avg_edge_pct": 16.109,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Follow the move, same calls",
+   "resolved": 1,
+   "open": null,
+   "hit_rate": 0.0,
+   "base_hit_rate": 0.4394,
+   "p_value": 0.812,
+   "brier": 0.3025,
+   "brier_base": 0.1931,
+   "skill": -0.5668,
+   "avg_edge_pct": -16.109,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Fade the move, same calls",
+   "resolved": 1,
+   "open": null,
+   "hit_rate": 1.0,
+   "base_hit_rate": 0.5606,
+   "p_value": 0.188,
+   "brier": 0.2025,
+   "brier_base": 0.1931,
+   "skill": -0.0488,
+   "avg_edge_pct": 16.109,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Fade volume and idiosyncratic shocks, 20d",
+   "resolved": 0,
+   "open": null,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Fade volume-up, fixed rule, 20d",
+   "resolved": 0,
+   "open": 42,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Claude, earlier prompt",
+   "resolved": 0,
+   "open": 10,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  },
+  {
+   "predictor": "Claude, earlier rank (earnings book)",
+   "resolved": 0,
+   "open": 5,
+   "hit_rate": null,
+   "base_hit_rate": null,
+   "p_value": null,
+   "brier": null,
+   "brier_base": null,
+   "skill": null,
+   "avg_edge_pct": null,
+   "options_n": 0,
+   "options_avg_pnl_pct": null
+  }
+ ],
+ "gates": [
+  {
+   "gate": "Small real stock trades",
+   "have": 0,
+   "need": 60,
+   "status": "collecting",
+   "rule": "60+ resolved E4 Claude calls (confirmed volume-up), beats base rate (skill > 0, p < 0.10), and beats the fixed fade rule on the same names"
+  },
+  {
+   "gate": "Options with real money",
+   "have": 0,
+   "need": 40,
+   "status": "collecting",
+   "rule": "stock gate plus 40+ option legs with average P&L above 0"
+  },
+  {
+   "gate": "Keep paying for Claude picks",
+   "have": 0,
+   "need": 100,
+   "status": "collecting",
+   "rule": "at 100 calls E4 must beat the fixed fade rule on the same calls"
+  }
+ ],
+ "calls": [
+  {
+   "id": 1947,
+   "day": "2026-11-13",
+   "ticker": "KDP",
+   "name": "Keurig Dr Pepper",
+   "vs": "XLP",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-14",
+   "confidence": 0.53,
+   "expected_move_pct": -1,
+   "drivers": [
+    "Volume-up base rate 44%",
+    "Small company-specific move, no filing",
+    "Stretched 9% above SMA50",
+    "Momentum near 52-week high offsets"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "current_stock_return_pct": null,
+   "current_etf_return_pct": null,
+   "beta_adj_return_pct": null,
+   "rel_change_1d_pct": null,
+   "marked": null,
+   "version": "analyst_v2",
+   "selection": "rank_v3",
+   "created": "2026-11-13T20:26:17+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "at_or_near_highs",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": -4.81,
+     "vs_sma200_pct": 20.84,
+     "sector_beta": 1.15
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": []
+    }
+   },
+   "reason": "Of today's +2.8%, about 1.2 points came from the sector. The company part (+1.6%, 1.04\u03c3) is modest even with heavy volume (3.5x), and nothing was filed. Earnings were ten days ago, so this looks like flow or positioning more than new information. Volume-up triggers outperform only about 44% of the time. Strong 12-month momentum and a price near the 52-week high partly offset that. The stock is already 9% above its 50-day average, after a strong staples rally. Slight lean toward underperforming.",
+   "wrong_if": "KDP makes a new 52-week high (about 5% above today's level) and outperforms XLP by more than 3% within 10 sessions."
+  },
+  {
+   "id": 1706,
+   "day": "2026-11-11",
+   "ticker": "NVDA",
+   "name": "Nvidia",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 5,
+   "due": "2026-11-18",
+   "confidence": 0.53,
+   "expected_move_pct": -1,
+   "drivers": [
+    "move is market beta, not company-specific",
+    "volume_up base rate 44% at 5d",
+    "oversold 1m reversal offsets",
+    "earnings ~Nov 25 outside 5d window"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 2,
+   "current_rel_return_pct": -3.92,
+   "current_stock_return_pct": -6.26,
+   "current_etf_return_pct": -2.34,
+   "beta_adj_return_pct": -4.34,
+   "rel_change_1d_pct": 0.08,
+   "marked": "2026-11-13",
+   "version": "analyst_v2",
+   "selection": "rank_v3",
+   "created": "2026-11-11T20:26:51+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "far_below_highs",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": -26.9,
+     "vs_sma200_pct": -14.36,
+     "sector_beta": 0.82
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": []
+    }
+   },
+   "reason": "Today's +3.55% is almost all market beta (2.39%) plus sector (0.66%); the company residual is only 0.27\u03c3, with no filings or news. The volume-up base rate favours underperforming the sector (44% outperform at 5 days). But NVDA is down 23% in a month, 19% below its 50-day average and near its 52-week low, so short-term reversal risk offsets this. It is also a large XLK weight, which mutes relative moves. 5 days avoids the ~Nov 25 earnings.",
+   "wrong_if": "NVDA outperforms XLK by more than 2% over the next 5 sessions (e.g., a sharp oversold rebound into the ~Nov 25 earnings)."
+  },
+  {
+   "id": 1704,
+   "day": "2026-11-11",
+   "ticker": "FTNT",
+   "name": "Fortinet",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-10",
+   "confidence": 0.55,
+   "expected_move_pct": -2.5,
+   "drivers": [
+    "post-earnings drift after ~33% drop",
+    "today's move is market beta",
+    "trigger base rate below 50%",
+    "12-1 momentum is pre-break"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 2,
+   "current_rel_return_pct": 1.65,
+   "current_stock_return_pct": -0.69,
+   "current_etf_return_pct": -2.34,
+   "beta_adj_return_pct": 0.65,
+   "rel_change_1d_pct": 0.19,
+   "marked": "2026-11-13",
+   "version": "analyst_v2",
+   "selection": "rank_v3",
+   "created": "2026-11-11T20:26:15+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "far_below_highs",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": -34.33,
+     "vs_sma200_pct": -1.8,
+     "sector_beta": 0.57
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": []
+    }
+   },
+   "reason": "Today's gain is mostly market beta (company move 0.41 sigma, light volume), so it's not a company catalyst. The stock fell about 33% in the month after the 10-28 earnings, which looks like a negative earnings reset where downward drift usually continues. The base rate for this trigger favors underperformance at every horizon. Oversold conditions and high realized volatility could bring a short bounce, so I use 20 days at modest confidence.",
+   "wrong_if": "FTNT outperforms XLK by more than 3% within 10 sessions, or holds above its 200-day SMA (now about 1.8% above the price) on a down-market day."
+  },
+  {
+   "id": 1416,
+   "day": "2026-11-06",
+   "ticker": "SNDK",
+   "name": "Sandisk",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 10,
+   "due": "2026-11-20",
+   "confidence": 0.54,
+   "expected_move_pct": -3,
+   "drivers": [
+    "move is market beta, company part negative",
+    "post-earnings collapse, likely cycle de-rating",
+    "volume_up base rate ~44%",
+    "extreme beta adds two-sided risk"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 5,
+   "current_rel_return_pct": 2.62,
+   "current_stock_return_pct": 5.98,
+   "current_etf_return_pct": 3.36,
+   "beta_adj_return_pct": -7.47,
+   "rel_change_1d_pct": -4.16,
+   "marked": "2026-11-13",
+   "version": "analyst_v2",
+   "selection": "rank_v3",
+   "created": "2026-11-06T20:27:17+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "far_below_highs",
+    "hedge_quality": "unusually_high",
+    "measurements": {
+     "from_52w_high_pct": -64.27,
+     "vs_sma200_pct": -34.42,
+     "sector_beta": 4.0
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": []
+    }
+   },
+   "reason": "Today's +3.45% is all market beta. The company part was -1.55% (-0.34\u03c3), so the stock lagged on a strong up day even with 2.55x volume. It has fallen 48% in a month since the Oct 29 earnings and sits 64% below its 52-week high. That looks like a memory-cycle de-rating, not a temporary shock. The volume_up base rate is 44-46%. A beta of 4.4 in a stressed-VIX regime makes this close to a coin flip.",
+   "wrong_if": "SNDK beats XLK by more than 8% within 10 sessions, for example by recovering its 50-day average gap through a sharp memory-led rebound."
+  },
+  {
+   "id": 1415,
+   "day": "2026-11-06",
+   "ticker": "FSLR",
+   "name": "First Solar",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-07",
+   "confidence": 0.56,
+   "expected_move_pct": -3,
+   "drivers": [
+    "volume_up base rate 0.44",
+    "1m outperformance mostly from XLK falling",
+    "weak 12-1 momentum, 37% below 52w high",
+    "move was market beta, not company-specific"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 5,
+   "current_rel_return_pct": -18.15,
+   "current_stock_return_pct": -14.79,
+   "current_etf_return_pct": 3.36,
+   "beta_adj_return_pct": -15.53,
+   "rel_change_1d_pct": 1.67,
+   "marked": "2026-11-13",
+   "version": "analyst_v2",
+   "selection": "rank_v3",
+   "created": "2026-11-06T20:27:01+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "far_below_highs",
+    "hedge_quality": "unusually_low",
+    "measurements": {
+     "from_52w_high_pct": -36.72,
+     "vs_sma200_pct": -6.18,
+     "sector_beta": 0.22
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": []
+    }
+   },
+   "reason": "Today's move is mainly market beta (company sigma 0.39) on heavy volume, with no new filing; earnings were 8 days ago. The 30% 1-month lead over XLK comes largely from XLK falling 12.6% against SPY. FSLR has little sector beta, so a tech rebound would leave it behind. The base rate (0.44) and weak 12-month momentum favour underperformance. Its 2x market beta in a stressed VIX regime makes the result noisy, so I'm only modestly confident.",
+   "wrong_if": "FSLR outperforms XLK by more than 5% cumulatively over the next 10 sessions, or XLK keeps sliding versus SPY while FSLR holds its 1-month gains."
+  },
+  {
+   "id": 1414,
+   "day": "2026-11-06",
+   "ticker": "EME",
+   "name": "Emcor",
+   "vs": "XLI",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-07",
+   "confidence": 0.54,
+   "expected_move_pct": -2,
+   "drivers": [
+    "post-earnings negative drift",
+    "today's move is market beta, not company",
+    "base rate 44% outperform",
+    "near 52w low, below SMA50/200"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 5,
+   "current_rel_return_pct": 4.61,
+   "current_stock_return_pct": 8.37,
+   "current_etf_return_pct": 3.76,
+   "beta_adj_return_pct": 2.28,
+   "rel_change_1d_pct": -0.15,
+   "marked": "2026-11-13",
+   "version": "analyst_v2",
+   "selection": "rank_v3",
+   "created": "2026-11-06T20:26:45+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "far_below_highs",
+    "hedge_quality": "unusually_high",
+    "measurements": {
+     "from_52w_high_pct": -35.59,
+     "vs_sma200_pct": -22.14,
+     "sector_beta": 1.62
+    },
+    "reason_audit": {
+     "status": "unsupported",
+     "claims": [
+      "guidance"
+     ],
+     "note": "Reason asserts catalyst facts but research coverage has no usable text."
+    }
+   },
+   "reason": "Today's +2% is mostly market beta. The company part is only 0.42 sigma, so it's noise even on 3x volume. The real story is a 22% slide in the month after the Oct 29 earnings, 18% worse than the sector. That points to a guidance or margin reset, not a temporary shock. Post-earnings drift, a price near the 52-week low and a weak base rate for this trigger favour mild further underperformance. A short-term bounce could offset some of it, so confidence is low.",
+   "wrong_if": "EME beats XLI by more than 3% over the next 10 sessions, or recovers its 50-day moving average (about 17% above today's price) within 20 sessions."
+  },
+  {
+   "id": 1413,
+   "day": "2026-11-06",
+   "ticker": "NVDA",
+   "name": "Nvidia",
+   "vs": "XLK",
+   "trigger": "volume up",
+   "call": "lag",
+   "horizon_days": 5,
+   "due": "2026-11-13",
+   "confidence": 0.55,
+   "expected_move_pct": -1,
+   "drivers": [
+    "move mostly market beta, 1.1\u03c3 idio",
+    "volume_up base rate 0.44",
+    "downtrend below SMA50/200",
+    "no filing catalyst; earnings ~19d"
+   ],
+   "status": "hit",
+   "rel_return_pct": -16.11,
+   "elapsed_days": null,
+   "current_rel_return_pct": null,
+   "current_stock_return_pct": null,
+   "current_etf_return_pct": null,
+   "beta_adj_return_pct": null,
+   "rel_change_1d_pct": null,
+   "marked": null,
+   "version": "analyst_v2",
+   "selection": "rank_v3",
+   "created": "2026-11-06T20:26:33+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "intermediate",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": -21.3,
+     "vs_sma200_pct": -7.89,
+     "sector_beta": 0.75
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": []
+    }
+   },
+   "reason": "The 3.7% gain is mostly high-beta market rebound; the company part is only 1.1\u03c3 with no filing or earnings catalyst. The volume_up base rate favors underperformance (44% outperform at 5d). The trend is weak (\u221214% vs SMA50, \u221218% in 1m) in a stressed-VIX tape with soft credit, so the bounce looks like relief rather than a thesis change. NVDA's large XLK weight mutes relative moves. Earnings in about 19 days make 20d noisy, so I chose 5d with modest conviction.",
+   "wrong_if": "NVDA outperforms XLK by more than 2% over the next 5 sessions, e.g. reclaiming its 50-day SMA on continued heavy volume."
+  },
+  {
+   "id": 1038,
+   "day": "2026-11-05",
+   "ticker": "ROK",
+   "name": "Rockwell Automation",
+   "vs": "XLI",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-04",
+   "confidence": 0.52,
+   "expected_move_pct": -1.5,
+   "drivers": [
+    "5.9-sigma company-specific drop on earnings",
+    "FY27 guide likely below expectations",
+    "post-earnings drift base rate about 48%",
+    "stressed macro, high-beta cyclical"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 6,
+   "current_rel_return_pct": 1.73,
+   "current_stock_return_pct": 5.62,
+   "current_etf_return_pct": 3.88,
+   "beta_adj_return_pct": 1.97,
+   "rel_change_1d_pct": -0.05,
+   "marked": "2026-11-13",
+   "version": "analyst_v2",
+   "selection": "rank_v1",
+   "created": "2026-11-05T20:28:17+00:00",
+   "evidence_coverage": "retrieved",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "intermediate",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": -22.46,
+     "vs_sma200_pct": -10.11,
+     "sector_beta": 0.94
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": []
+    }
+   },
+   "reason": "About -8.5% of the -13.8% drop is company-specific, a 5.9-sigma move on 4.5x volume. Q4 adjusted EPS rose 16%, but organic sales grew only 3%. Tariff-refund items muddy the quality, and the FY27 adjusted EPS midpoint of $15 (about 12% growth) probably fell short of what a stock with strong 12-month momentum had priced in. The stock was already down 14% against its sector over the past month, and the macro backdrop is stressed (VIX 26, credit widening). The post-earnings drift base rate gives only a slight downward edge.",
+   "wrong_if": "ROK beats XLI by more than 3% within 10 sessions, or retakes the pre-earnings close level (about 14% above today's close) inside 20 sessions."
+  },
+  {
+   "id": 1037,
+   "day": "2026-11-05",
+   "ticker": "CPAY",
+   "name": "Corpay",
+   "vs": "XLF",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "due": "2026-12-04",
+   "confidence": 0.57,
+   "expected_move_pct": 2.5,
+   "drivers": [
+    "Beat-and-raise with organic acceleration",
+    "Post-earnings drift after 7.7-sigma move",
+    "52-week high, strong 12-1 momentum",
+    "Stressed macro limits conviction"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 6,
+   "current_rel_return_pct": 1.35,
+   "current_stock_return_pct": 3.4,
+   "current_etf_return_pct": 2.05,
+   "beta_adj_return_pct": 1.25,
+   "rel_change_1d_pct": 0.57,
+   "marked": "2026-11-13",
+   "version": "analyst_v2",
+   "selection": "rank_v1",
+   "created": "2026-11-05T20:28:02+00:00",
+   "evidence_coverage": "retrieved",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "at_or_near_highs",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": 0.0,
+     "vs_sma200_pct": 26.68,
+     "sector_beta": 1.05
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": [
+      "beat"
+     ],
+     "note": "Claims present; automatic quote match not found."
+    }
+   },
+   "reason": "Clean beat-and-raise: 11% organic growth, 32% adjusted EPS growth, Corporate Payments up 18% organic, full-year EPS guide raised to $28.00, buybacks continuing. The +11% company-specific 7.7-sigma move on 5.6x volume at a 52-week high fits post-earnings drift and momentum. Low market beta cushions the stressed tape. Confidence stays modest because the reaction is already large, XLF has run hot vs SPY, and VIX is 26.",
+   "wrong_if": "CPAY gives back more than half of the +11% company-specific move vs XLF within 10 sessions (falls below about 5.5% above the Nov 4 close, sector-adjusted)."
+  },
+  {
+   "id": 1036,
+   "day": "2026-11-05",
+   "ticker": "NWSA",
+   "name": "News Corp (Class A)",
+   "vs": "XLC",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-04",
+   "confidence": 0.53,
+   "expected_move_pct": -2,
+   "drivers": [
+    "-9.5\u03c3 company-specific move on 3.5x volume",
+    "Big drop despite strong headlines implies an unseen negative (guidance?)",
+    "Weak post-earnings drift base rate",
+    "Buyback support and rebound risk cap confidence"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 6,
+   "current_rel_return_pct": -2.32,
+   "current_stock_return_pct": 1.85,
+   "current_etf_return_pct": 4.17,
+   "beta_adj_return_pct": -1.48,
+   "rel_change_1d_pct": 1.56,
+   "marked": "2026-11-13",
+   "version": "analyst_v2",
+   "selection": "rank_v1",
+   "created": "2026-11-05T20:27:45+00:00",
+   "evidence_coverage": "retrieved",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "intermediate",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": -12.92,
+     "vs_sma200_pct": 0.74,
+     "sector_beta": 0.8
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": [
+      "guidance"
+     ],
+     "note": "Claims present; automatic quote match not found."
+    }
+   },
+   "reason": "The -13.5% company-specific drop (-9.5\u03c3, 3.5x volume) came despite record headline results. FX-adjusted growth was softer (revenue +4%, adjusted EBITDA +13%) and News Media EBITDA fell 40%. A reaction this large to good headlines implies an unseen negative, likely guidance or the call, so I lean slightly towards drift. The $1B buyback and possible overreaction limit conviction, so this stays near the 48% base rate.",
+   "wrong_if": "Recovers to within 7% of the 2026-11-04 close (retraces about half the drop) within 10 sessions, or daily ASX filings show heavy buybacks"
+  },
+  {
+   "id": 1035,
+   "day": "2026-11-05",
+   "ticker": "NWS",
+   "name": "News Corp (Class B)",
+   "vs": "XLC",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-04",
+   "confidence": 0.53,
+   "expected_move_pct": -2,
+   "drivers": [
+    "-9.6 sigma company-specific drop on 2.6x volume",
+    "Post-earnings drift and base rate tilt down (0.48)",
+    "Headline results strong, so the cause is unseen and reversal risk is real",
+    "Stressed VIX, weak sector trend"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 6,
+   "current_rel_return_pct": -0.99,
+   "current_stock_return_pct": 3.18,
+   "current_etf_return_pct": 4.17,
+   "beta_adj_return_pct": -0.45,
+   "rel_change_1d_pct": 1.4,
+   "marked": "2026-11-13",
+   "version": "analyst_v2",
+   "selection": "rank_v1",
+   "created": "2026-11-05T20:27:03+00:00",
+   "evidence_coverage": "retrieved",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "intermediate",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": -16.4,
+     "vs_sma200_pct": -3.09,
+     "sector_beta": 0.87
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": [
+      "outlook"
+     ],
+     "note": "Claims present; automatic quote match not found."
+    }
+   },
+   "reason": "Almost all of the drop is company-specific: -14% at -9.6 sigma on 2.6x volume, while the sector rose. The release itself looks strong: revenue +6%, segment EBITDA +19%, adjusted EPS $0.28 vs $0.22. So the selloff probably reflects something outside the release, such as outlook, REA/Move commentary or a class-specific factor, and I can't see it. The size of the reaction suggests investors took in real new information, so post-earnings drift and the base rate point slightly down. The strong numbers limit my confidence.",
+   "wrong_if": "NWS gets back more than half of the post-earnings company-specific drop (relative to XLC) within 10 sessions, i.e. it closes about 7% or more above today's close while the sector stays flat."
+  },
+  {
+   "id": 1034,
+   "day": "2026-11-05",
+   "ticker": "APP",
+   "name": "AppLovin",
+   "vs": "XLC",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "due": "2026-12-04",
+   "confidence": 0.55,
+   "expected_move_pct": 4,
+   "drivers": [
+    "9.9-sigma company-specific earnings move",
+    "55% revenue growth, strong Q4 guide, bigger buyback",
+    "Re-rating from 52% below the 52-week high",
+    "High beta in a stressed market is a headwind"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 6,
+   "current_rel_return_pct": 10.71,
+   "current_stock_return_pct": 14.88,
+   "current_etf_return_pct": 4.17,
+   "beta_adj_return_pct": 10.42,
+   "rel_change_1d_pct": 3.25,
+   "marked": "2026-11-13",
+   "version": "analyst_v2",
+   "selection": "rank_v1",
+   "created": "2026-11-05T20:26:38+00:00",
+   "evidence_coverage": "retrieved",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "far_below_highs",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": -52.12,
+     "vs_sma200_pct": -14.32,
+     "sector_beta": 1.07
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": []
+    }
+   },
+   "reason": "Almost all of the move is company-specific: +36% (9.9 sigma), on a day the market took 9 points off it. Q3 revenue grew 55%, the EBITDA margin was 84%, the buyback was raised by $3.2B, and the Q4 guide implies about 9% sequential growth. The stock came in 52% below its high, so this looks like a re-rating rather than froth. Post-earnings drift after huge high-volume surprises favors mild continuation. The 2.2 market beta in a stressed VIX regime caps conviction.",
+   "wrong_if": "Gives back more than half of the post-earnings gain, i.e. closes less than ~14% above the Nov 4 close within 10 sessions, or trails XLC by more than 5% over the next 5 sessions."
+  },
+  {
+   "id": 700,
+   "day": "2026-11-04",
+   "ticker": "ZBH",
+   "name": "Zimmer Biomet",
+   "vs": "XLV",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "due": "2026-12-03",
+   "confidence": 0.56,
+   "expected_move_pct": 2,
+   "drivers": [
+    "7.4-sigma earnings gap on 3.5x volume",
+    "Post-earnings drift and estimate revisions",
+    "Breakout to 52-week high from depressed base",
+    "Stretched +17% vs 50-day limits upside"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 7,
+   "current_rel_return_pct": -5.87,
+   "current_stock_return_pct": -6.3,
+   "current_etf_return_pct": -0.43,
+   "beta_adj_return_pct": -5.95,
+   "rel_change_1d_pct": -1.76,
+   "marked": "2026-11-13",
+   "version": "analyst_v1",
+   "selection": "rank_v1",
+   "created": "2026-11-04T20:27:31+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "at_or_near_highs",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": 0.0,
+     "vs_sma200_pct": 21.51,
+     "sector_beta": 0.83
+    },
+    "reason_audit": {
+     "status": "unsupported",
+     "claims": [
+      "guidance"
+     ],
+     "note": "Reason asserts catalyst facts but research coverage has no usable text."
+    }
+   },
+   "reason": "This is a company story: about 12 of today's 14.5 percentage points are company-specific (7.4 sigma) on 3.5x volume, set off by the earnings release. A beaten-down large-cap medtech (12-1 momentum still negative) that re-rates this hard on earnings usually reflects a real shift in growth or guidance. Analysts tend to revise estimates slowly, which supports modest drift. The risks are the stretch above the 50-day average (+17%) and possible mean reversion after the run-up, so the edge is small.",
+   "wrong_if": "ZBH gives back more than half of today's ~12% company-specific gain relative to XLV within 10 sessions, i.e. it trails XLV by more than 6% from today's close."
+  },
+  {
+   "id": 699,
+   "day": "2026-11-04",
+   "ticker": "CVS",
+   "name": "CVS Health",
+   "vs": "XLV",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-03",
+   "confidence": 0.55,
+   "expected_move_pct": -2.5,
+   "drivers": [
+    "8-sigma company-specific earnings drop",
+    "post-earnings drift after a negative surprise",
+    "low sector beta vs strong XLV rally",
+    "already oversold 1m caps conviction"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 7,
+   "current_rel_return_pct": 12.17,
+   "current_stock_return_pct": 11.74,
+   "current_etf_return_pct": -0.43,
+   "beta_adj_return_pct": 11.94,
+   "rel_change_1d_pct": -1.09,
+   "marked": "2026-11-13",
+   "version": "analyst_v1",
+   "selection": "rank_v1",
+   "created": "2026-11-04T20:27:16+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "far_below_highs",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": -25.97,
+     "vs_sma200_pct": -7.93,
+     "sector_beta": 0.46
+    },
+    "reason_audit": {
+     "status": "unsupported",
+     "claims": [
+      "guidance"
+     ],
+     "note": "Reason asserts catalyst facts but research coverage has no usable text."
+    }
+   },
+   "reason": "Almost all of the -11.6% is company-specific: -12.9% at 8 sigma on 6x volume, on the earnings day itself, while XLV was up. That points to a fundamental reset, probably managed-care costs or guidance, not market noise. Large negative earnings surprises tend to drift lower, and CVS has a record of follow-on guide-downs. Its low 0.46 sector beta also drags against a strongly rallying XLV. The base rate leans slightly toward underperformance. The stock is already down 16% vs the sector over the month, which limits conviction.",
+   "wrong_if": "CVS recovers more than half of today's gap (closes above roughly 6% over today's close) relative to XLV within 10 sessions, or management reaffirms/raises guidance at an investor conference"
+  },
+  {
+   "id": 698,
+   "day": "2026-11-04",
+   "ticker": "SWK",
+   "name": "Stanley Black & Decker",
+   "vs": "XLI",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "due": "2026-12-03",
+   "confidence": 0.55,
+   "expected_move_pct": 2,
+   "drivers": [
+    "9-sigma company-specific earnings move",
+    "post-earnings drift",
+    "breakout to 52-week high on heavy volume",
+    "risk of giveback after extended run-up"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 7,
+   "current_rel_return_pct": -3.87,
+   "current_stock_return_pct": -4.28,
+   "current_etf_return_pct": -0.4,
+   "beta_adj_return_pct": -3.81,
+   "rel_change_1d_pct": 0.6,
+   "marked": "2026-11-13",
+   "version": "analyst_v1",
+   "selection": "rank_v1",
+   "created": "2026-11-04T20:27:02+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "at_or_near_highs",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": 0.0,
+     "vs_sma200_pct": 40.61,
+     "sector_beta": 1.16
+    },
+    "reason_audit": {
+     "status": "unsupported",
+     "claims": [
+      "guidance"
+     ],
+     "note": "Reason asserts catalyst facts but research coverage has no usable text."
+    }
+   },
+   "reason": "The move is almost all company-specific: +14.9% at 9 sigma, on 6.7x volume, against a falling sector. The cause is the earnings release (8-K 2.02/7.01), which likely points to margin or guidance upside in SWK's cost-cutting turnaround. Large confirmed earnings surprises at 52-week highs tend to drift modestly in the same direction, and implied vol is low relative to realized. Offsetting that, the stock was already extended before the print, and the earnings_up base rate is about 50%. So this is a small edge.",
+   "wrong_if": "SWK gives back more than half of today's ~15% company-specific gain relative to XLI within 10 sessions, or closes below the pre-earnings level."
+  },
+  {
+   "id": 697,
+   "day": "2026-11-04",
+   "ticker": "TRMB",
+   "name": "Trimble Inc.",
+   "vs": "XLK",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-03",
+   "confidence": 0.56,
+   "expected_move_pct": -3,
+   "drivers": [
+    "-11 sigma idiosyncratic earnings drop",
+    "5.02 officer/director change day before results",
+    "post-earnings-announcement drift",
+    "weak 12-1 momentum, below 50/200 SMA"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 7,
+   "current_rel_return_pct": 6.09,
+   "current_stock_return_pct": 2.56,
+   "current_etf_return_pct": -3.52,
+   "beta_adj_return_pct": 0.24,
+   "rel_change_1d_pct": 1.63,
+   "marked": "2026-11-13",
+   "version": "analyst_v1",
+   "selection": "rank_v1",
+   "created": "2026-11-04T20:26:49+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "far_below_highs",
+    "hedge_quality": "negative",
+    "measurements": {
+     "from_52w_high_pct": -33.7,
+     "vs_sma200_pct": -8.71,
+     "sector_beta": -0.66
+    },
+    "reason_audit": {
+     "status": "unsupported",
+     "claims": [
+      "guidance"
+     ],
+     "note": "Reason asserts catalyst facts but research coverage has no usable text."
+    }
+   },
+   "reason": "Almost all of the move is company-specific: -19.3% company return, -11.2 sigma, 6.6x normal volume, on a day the market and sector were up. The 5.02 officer/director change filed the day before earnings hints at a deeper problem, such as weaker guidance or a leadership exit. The stock was already below its 50- and 200-day averages, with -23% 12-1 momentum. Post-earnings drift and the base rate both point slightly toward continued underperformance. High realized volatility keeps confidence modest.",
+   "wrong_if": "TRMB wins back half of today's -15.6% drop (about +9% from today's close) within 10 sessions, or beats XLK by more than 3% over the 20 sessions."
+  },
+  {
+   "id": 696,
+   "day": "2026-11-04",
+   "ticker": "FIS",
+   "name": "Fidelity National Information Services",
+   "vs": "XLF",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-03",
+   "confidence": 0.55,
+   "expected_move_pct": -3.5,
+   "drivers": [
+    "Post-earnings drift after a -14 sigma miss",
+    "Likely guidance or thesis reset",
+    "Weak momentum, 52-week low",
+    "Strong sector benchmark"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 7,
+   "current_rel_return_pct": 0.14,
+   "current_stock_return_pct": -0.74,
+   "current_etf_return_pct": -0.88,
+   "beta_adj_return_pct": 0.59,
+   "rel_change_1d_pct": 3.17,
+   "marked": "2026-11-13",
+   "version": "analyst_v1",
+   "selection": "rank_v1",
+   "created": "2026-11-04T20:26:38+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "far_below_highs",
+    "hedge_quality": "unusually_high",
+    "measurements": {
+     "from_52w_high_pct": -54.3,
+     "vs_sma200_pct": -29.76,
+     "sector_beta": 1.51
+    },
+    "reason_audit": {
+     "status": "unsupported",
+     "claims": [
+      "guidance"
+     ],
+     "note": "Reason asserts catalyst facts but research coverage has no usable text."
+    }
+   },
+   "reason": "A -14 sigma company-specific earnings collapse with 8x volume, while the sector rose, points to a guidance or thesis reset, not noise. Prices tend to keep drifting after bad earnings, the stock is at its 52-week low with -44% 12-month momentum, and a strong XLF is a hard benchmark. Some bounce after capitulation is likely, which keeps conviction modest and close to the 48% base rate.",
+   "wrong_if": "FIS recovers more than half of today's 23% loss relative to XLF within 10 sessions (back above ~88% of the pre-earnings close), or management reaffirms or reframes guidance at an investor event."
+  },
+  {
+   "id": 125,
+   "day": "2026-11-03",
+   "ticker": "RVTY",
+   "name": "Revvity",
+   "vs": "XLV",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "due": "2026-12-02",
+   "confidence": 0.55,
+   "expected_move_pct": 2,
+   "drivers": [
+    "4.4\u03c3 company-specific earnings gap",
+    "post-earnings drift",
+    "breakout to new 52-week high with 12-1 momentum",
+    "extended after doubling off the low"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 8,
+   "current_rel_return_pct": -8.19,
+   "current_stock_return_pct": -5.56,
+   "current_etf_return_pct": 2.62,
+   "beta_adj_return_pct": -7.29,
+   "rel_change_1d_pct": -2.16,
+   "marked": "2026-11-13",
+   "version": "analyst_v1",
+   "selection": "rank_v1",
+   "created": "2026-11-03T20:26:58+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "at_or_near_highs",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": 0.0,
+     "vs_sma200_pct": 48.64,
+     "sector_beta": 0.66
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": []
+    }
+   },
+   "reason": "Almost all of the move is company-specific. RVTY rose 9.95% on its own (4.4\u03c3) on 2.6x normal volume, after an earnings release (filing items 2.02 and 8.01), while the market and sector were flat. A clean earnings gap to a new 52-week high with strong 12-1 momentum fits post-earnings drift. The offsets are a stock already up 103% from its low, an extended price (49% above the 200-day average), and weakening credit. That makes this a modest edge over the roughly 50% base rate, not a strong one.",
+   "wrong_if": "RVTY gives back more than half of today's gap relative to XLV (underperforms XLV by over 5%) within 10 sessions, or closes below its pre-earnings price."
+  },
+  {
+   "id": 124,
+   "day": "2026-11-03",
+   "ticker": "ADM",
+   "name": "Archer Daniels Midland",
+   "vs": "XLP",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-02",
+   "confidence": 0.53,
+   "expected_move_pct": -2,
+   "drivers": [
+    "4.5-sigma earnings-driven company move",
+    "post-earnings drift and estimate cuts",
+    "ag margin cycle downturn",
+    "offset: deeply oversold vs sector"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 8,
+   "current_rel_return_pct": -0.56,
+   "current_stock_return_pct": 3.26,
+   "current_etf_return_pct": 3.82,
+   "beta_adj_return_pct": 3.18,
+   "rel_change_1d_pct": 1.28,
+   "marked": "2026-11-13",
+   "version": "analyst_v1",
+   "selection": "rank_v1",
+   "created": "2026-11-03T20:26:45+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "intermediate",
+    "hedge_quality": "unusually_low",
+    "measurements": {
+     "from_52w_high_pct": -20.6,
+     "vs_sma200_pct": -7.96,
+     "sector_beta": 0.02
+    },
+    "reason_audit": {
+     "status": "unsupported",
+     "claims": [
+      "outlook"
+     ],
+     "note": "Reason asserts catalyst facts but research coverage has no usable text."
+    }
+   },
+   "reason": "Almost all of today's -7.7% is company-specific (-4.5\u03c3, 3.2x volume) on the earnings release, so this is a fundamental reset. For ADM that most likely means weaker crush or processing margins and a lower outlook, and analysts usually revise estimates down over several weeks. The base rate leans slightly to underperformance. A 27% one-month lag versus the sector and a strong XLP raise the odds of a bounce, so I keep conviction close to 50%.",
+   "wrong_if": "ADM recovers half of today's drop (back above about 8.3% below the pre-earnings close) within 10 sessions, or management reaffirms full-year EPS guidance at a post-earnings conference."
+  },
+  {
+   "id": 123,
+   "day": "2026-11-03",
+   "ticker": "DD",
+   "name": "DuPont",
+   "vs": "XLI",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "due": "2026-12-02",
+   "confidence": 0.55,
+   "expected_move_pct": 1.5,
+   "drivers": [
+    "post-earnings drift after 6-sigma beat",
+    "new 52-week high with 6x volume",
+    "stretched 1-month run limits upside",
+    "weaker credit is a cyclical headwind"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 8,
+   "current_rel_return_pct": 1.69,
+   "current_stock_return_pct": 0.21,
+   "current_etf_return_pct": -1.48,
+   "beta_adj_return_pct": 1.14,
+   "rel_change_1d_pct": -0.21,
+   "marked": "2026-11-13",
+   "version": "analyst_v1",
+   "selection": "rank_v1",
+   "created": "2026-11-03T20:26:33+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "at_or_near_highs",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": 0.0,
+     "vs_sma200_pct": 11.71,
+     "sector_beta": 0.63
+    },
+    "reason_audit": {
+     "status": "unchecked",
+     "claims": []
+    }
+   },
+   "reason": "A 6-sigma, company-specific earnings jump on 6x volume to a new 52-week high fits the pattern of post-earnings drift, backed by positive 12-month momentum. Low implied volatility means options don't price a reversal. Against that, the stock had already beaten its sector by 18% in a month, sits 16% above its 50-day average, and credit is weakening. That makes some profit-taking likely and limits the edge to a modest tilt above the roughly 50% base rate.",
+   "wrong_if": "DD gives back more than half of today's gap (closes below ~+4.5% from yesterday's close) within 5 sessions, or falls behind XLI by more than 3% over the next 10 sessions."
+  },
+  {
+   "id": 122,
+   "day": "2026-11-03",
+   "ticker": "FISV",
+   "name": "Fiserv",
+   "vs": "XLF",
+   "trigger": "earnings up",
+   "call": "beat",
+   "horizon_days": 20,
+   "due": "2026-12-02",
+   "confidence": 0.55,
+   "expected_move_pct": 3,
+   "drivers": [
+    "6.4\u03c3 company-specific earnings gap",
+    "post-earnings drift on turnaround",
+    "underweight positioning after guidance reset",
+    "risk: 1m reversal after 27% run"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 8,
+   "current_rel_return_pct": 6.61,
+   "current_stock_return_pct": 9.21,
+   "current_etf_return_pct": 2.61,
+   "beta_adj_return_pct": 5.12,
+   "rel_change_1d_pct": 3.08,
+   "marked": "2026-11-13",
+   "version": "analyst_v1",
+   "selection": "rank_v1",
+   "created": "2026-11-03T20:26:18+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "intermediate",
+    "hedge_quality": "unusually_high",
+    "measurements": {
+     "from_52w_high_pct": -15.91,
+     "vs_sma200_pct": 7.56,
+     "sector_beta": 1.57
+    },
+    "reason_audit": {
+     "status": "unsupported",
+     "claims": [
+      "guidance"
+     ],
+     "note": "Reason asserts catalyst facts but research coverage has no usable text."
+    }
+   },
+   "reason": "This is purely a company move: a 14% idiosyncratic jump (6.4\u03c3) on an earnings release with 4.8x volume, while the sector fell. For a stock that reset guidance and has lagged badly (12-1 momentum \u221231%, 16% below its high), a strong print likely signals the turnaround is working. Underweight investors may keep buying after a big surprise, which supports modest outperformance over 20 days. Risks: profit-taking after a 27% one-month run, and widening credit spreads.",
+   "wrong_if": "FISV gives back more than half of today's ~13% gain relative to XLF within 10 sessions (i.e., sector-relative return since the 11/3 close falls below about \u22126.5%)."
+  },
+  {
+   "id": 121,
+   "day": "2026-11-03",
+   "ticker": "SYY",
+   "name": "Sysco",
+   "vs": "XLP",
+   "trigger": "earnings down",
+   "call": "lag",
+   "horizon_days": 20,
+   "due": "2026-12-02",
+   "confidence": 0.54,
+   "expected_move_pct": -2,
+   "drivers": [
+    "-7\u03c3 company-specific earnings drop",
+    "Officer change filed with the results",
+    "Already weak relative to the sector",
+    "Post-earnings drift base rate below 50%"
+   ],
+   "status": "open",
+   "rel_return_pct": null,
+   "elapsed_days": 8,
+   "current_rel_return_pct": 0.21,
+   "current_stock_return_pct": 4.03,
+   "current_etf_return_pct": 3.82,
+   "beta_adj_return_pct": 1.82,
+   "rel_change_1d_pct": -0.29,
+   "marked": "2026-11-13",
+   "version": "analyst_v1",
+   "selection": "rank_v1",
+   "created": "2026-11-03T20:25:58+00:00",
+   "evidence_coverage": "no_event_found_in_search_scope",
+   "invalidation_status": "not_machine_checkable",
+   "review": {
+    "catalyst": "unknown",
+    "extension": "intermediate",
+    "hedge_quality": "normal",
+    "measurements": {
+     "from_52w_high_pct": -16.43,
+     "vs_sma200_pct": -6.21,
+     "sector_beta": 0.58
+    },
+    "reason_audit": {
+     "status": "unsupported",
+     "claims": [
+      "guidance",
+      "miss"
+     ],
+     "note": "Reason asserts catalyst facts but research coverage has no usable text."
+    }
+   },
+   "reason": "Almost all of the drop is company-specific: -7.6% idiosyncratic, about -7\u03c3, on 4.8x normal volume, at earnings. The 8-K pairing of results (2.02) with an officer or director change (5.02) and a Reg FD disclosure (7.01) suggests a guidance cut or leadership shake-up, not a one-off miss. The stock was already 14% behind XLP over the past month and is below both moving averages. The XLP rally is lifting peers without lifting SYY. Post-earnings drift favors continued modest underperformance.",
+   "wrong_if": "SYY recovers half the gap (closes back above ~7% below the pre-earnings close, i.e. regains about 4% relative to XLP) within 10 sessions."
+  }
+ ],
+ "progress": [
+  {
+   "day": "2026-11-10",
+   "predictor": "Claude",
+   "resolved": 0
+  },
+  {
+   "day": "2026-11-11",
+   "predictor": "Claude",
+   "resolved": 0
+  },
+  {
+   "day": "2026-11-12",
+   "predictor": "Claude",
+   "resolved": 0
+  },
+  {
+   "day": "2026-11-13",
+   "predictor": "Claude",
+   "resolved": 1
+  },
+  {
+   "day": "2026-11-10",
+   "predictor": "Checklist",
+   "resolved": 30
+  },
+  {
+   "day": "2026-11-11",
+   "predictor": "Checklist",
+   "resolved": 206
+  },
+  {
+   "day": "2026-11-12",
+   "predictor": "Checklist",
+   "resolved": 307
+  },
+  {
+   "day": "2026-11-13",
+   "predictor": "Checklist",
+   "resolved": 345
+  }
+ ],
+ "size_check": [
+  {
+   "n": 1,
+   "need": 30,
+   "status": "collecting",
+   "expected_pct": 1.0,
+   "realized_pct": 16.11,
+   "realized_on_hits_pct": 16.11,
+   "typical_abs_pct": 16.11,
+   "mean_abs_error_pct": 15.11
+  }
+ ],
+ "trade_check": [
+  {
+   "predictor": "Claude",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "long_only",
+   "rule": "buy the stock on 'beat' calls; skip 'lag' calls",
+   "n": 0
+  },
+  {
+   "predictor": "Claude",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "directional",
+   "rule": "buy on 'beat', short on 'lag'; stock alone, no hedge",
+   "n": 1,
+   "mean_net_pct": 12.64,
+   "median_net_pct": 12.64,
+   "win_rate": 1.0,
+   "worst_pct": 12.64,
+   "best_pct": 12.64,
+   "total_usd": 31.59,
+   "max_drawdown_usd": 0.0,
+   "mean_adverse_pct": 0.0,
+   "worst_adverse_pct": -0.0
+  },
+  {
+   "predictor": "Claude",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "hedged",
+   "rule": "stock against its sector ETF, equal dollars (what the calls predict)",
+   "n": 1,
+   "mean_net_pct": 15.9,
+   "median_net_pct": 15.9,
+   "win_rate": 1.0,
+   "worst_pct": 15.9,
+   "best_pct": 15.9,
+   "total_usd": 39.75,
+   "max_drawdown_usd": 0.0,
+   "mean_adverse_pct": 0.0,
+   "worst_adverse_pct": -0.0
+  },
+  {
+   "predictor": "Checklist, same calls",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "long_only",
+   "rule": "buy the stock on 'beat' calls; skip 'lag' calls",
+   "n": 0
+  },
+  {
+   "predictor": "Checklist, same calls",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "directional",
+   "rule": "buy on 'beat', short on 'lag'; stock alone, no hedge",
+   "n": 1,
+   "mean_net_pct": 12.64,
+   "median_net_pct": 12.64,
+   "win_rate": 1.0,
+   "worst_pct": 12.64,
+   "best_pct": 12.64,
+   "total_usd": 31.59,
+   "max_drawdown_usd": 0.0,
+   "mean_adverse_pct": 0.0,
+   "worst_adverse_pct": -0.0
+  },
+  {
+   "predictor": "Checklist, same calls",
+   "status": "collecting",
+   "need": 30,
+   "cost_per_leg_bp": 10.0,
+   "borrow_per_year_pct": 0.5,
+   "position_usd": 250,
+   "expression": "hedged",
+   "rule": "stock against its sector ETF, equal dollars (what the calls predict)",
+   "n": 1,
+   "mean_net_pct": 15.9,
+   "median_net_pct": 15.9,
+   "win_rate": 1.0,
+   "worst_pct": 15.9,
+   "best_pct": 15.9,
+   "total_usd": 39.75,
+   "max_drawdown_usd": 0.0,
+   "mean_adverse_pct": 0.0,
+   "worst_adverse_pct": -0.0
+  }
+ ],
+ "flags": [
+  {
+   "day": "2026-11-13",
+   "ticker": "KDP",
+   "name": "Keurig Dr Pepper",
+   "vs": "XLP",
+   "trigger": "volume up",
+   "checklist_p": 0.517,
+   "new": false,
+   "first_flagged": "2026-11-12",
+   "claude": "lag",
+   "claude_horizon": 20,
+   "local": "beat"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "TGT",
+   "name": "Target Corporation",
+   "vs": "XLP",
+   "trigger": "filing down",
+   "checklist_p": 0.553,
+   "new": true,
+   "first_flagged": "2026-11-13",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "beat"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "NVDA",
+   "name": "Nvidia",
+   "vs": "XLK",
+   "trigger": "volume down",
+   "checklist_p": 0.561,
+   "new": false,
+   "first_flagged": "2026-11-05",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "lag"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "HST",
+   "name": "Host Hotels & Resorts",
+   "vs": "XLRE",
+   "trigger": "filing down",
+   "checklist_p": 0.533,
+   "new": false,
+   "first_flagged": "2026-11-05",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "lag"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "AAPL",
+   "name": "Apple Inc.",
+   "vs": "XLK",
+   "trigger": "divergence high",
+   "checklist_p": 0.528,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "beat"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "AKAM",
+   "name": "Akamai Technologies",
+   "vs": "XLK",
+   "trigger": "filing up",
+   "checklist_p": 0.473,
+   "new": false,
+   "first_flagged": "2026-11-06",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "lag"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "COIN",
+   "name": "Coinbase",
+   "vs": "XLF",
+   "trigger": "divergence low",
+   "checklist_p": 0.474,
+   "new": false,
+   "first_flagged": "2026-11-05",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "lag"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "CSCO",
+   "name": "Cisco",
+   "vs": "XLK",
+   "trigger": "earnings down",
+   "checklist_p": 0.519,
+   "new": false,
+   "first_flagged": "2026-11-05",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "lag"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "CDW",
+   "name": "CDW Corporation",
+   "vs": "XLK",
+   "trigger": "divergence high",
+   "checklist_p": 0.488,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "beat"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "STE",
+   "name": "Steris",
+   "vs": "XLV",
+   "trigger": "idio up",
+   "checklist_p": 0.489,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "beat"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "ON",
+   "name": "ON Semiconductor",
+   "vs": "XLK",
+   "trigger": "filing down",
+   "checklist_p": 0.493,
+   "new": false,
+   "first_flagged": "2026-11-03",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "lag"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "SRE",
+   "name": "Sempra",
+   "vs": "XLU",
+   "trigger": "filing up",
+   "checklist_p": 0.493,
+   "new": false,
+   "first_flagged": "2026-11-04",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "lag"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "TPR",
+   "name": "Tapestry, Inc.",
+   "vs": "XLY",
+   "trigger": "filing down",
+   "checklist_p": 0.493,
+   "new": false,
+   "first_flagged": "2026-11-05",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "lag"
+  },
+  {
+   "day": "2026-11-13",
+   "ticker": "APTV",
+   "name": "Aptiv",
+   "vs": "XLY",
+   "trigger": "divergence low",
+   "checklist_p": 0.494,
+   "new": false,
+   "first_flagged": "2026-11-03",
+   "claude": null,
+   "claude_horizon": null,
+   "local": "lag"
+  }
+ ],
+ "flag_days": [
+  {
+   "day": "2026-11-03",
+   "flagged": 30,
+   "new": 30,
+   "claude": 5
+  },
+  {
+   "day": "2026-11-04",
+   "flagged": 176,
+   "new": 160,
+   "claude": 5
+  },
+  {
+   "day": "2026-11-05",
+   "flagged": 101,
+   "new": 48,
+   "claude": 5
+  },
+  {
+   "day": "2026-11-06",
+   "flagged": 38,
+   "new": 13,
+   "claude": 4
+  },
+  {
+   "day": "2026-11-09",
+   "flagged": 35,
+   "new": 7,
+   "claude": 0
+  },
+  {
+   "day": "2026-11-11",
+   "flagged": 12,
+   "new": 3,
+   "claude": 2
+  },
+  {
+   "day": "2026-11-12",
+   "flagged": 20,
+   "new": 3,
+   "claude": 0
+  },
+  {
+   "day": "2026-11-13",
+   "flagged": 14,
+   "new": 1,
+   "claude": 1
+  }
+ ],
+ "move_agreement": [
+  {
+   "prompts": "analyst_v2",
+   "n": 12,
+   "same": 5,
+   "share": 0.4167
+  },
+  {
+   "prompts": "all",
+   "n": 22,
+   "same": 15,
+   "share": 0.6818
+  }
+ ],
+ "factor_days": {
+  "limit": 15,
+  "days": [
+   {
+    "day": "2026-11-04",
+    "idio_flags": 84
+   },
+   {
+    "day": "2026-11-05",
+    "idio_flags": 18
+   }
+  ],
+  "claude_calls": 22,
+  "claude_calls_on_factor_days": 10
+ },
+ "economic": {
+  "status": "collecting",
+  "n": 1,
+  "need": 30,
+  "mean_net_pct": 15.9,
+  "win_rate": 1.0,
+  "note": "Hedged stock against the sector ETF after 10 bp per leg and borrow. This is the number to read once calls settle. It is not a gate."
+ },
+ "diagnostics": {
+  "issuers": {
+   "n_calls": 1,
+   "n_tickers": 1,
+   "n_issuers": 1,
+   "note": "Share classes (e.g. NWS/NWSA) share one issuer when CIK is known."
+  },
+  "day_cluster_bootstrap": {
+   "n_days": 1,
+   "n_calls": 1,
+   "status": "insufficient_dates",
+   "note": "Need \u22655 distinct entry dates for a clustered bootstrap CI."
+  },
+  "vs_follow_move": {
+   "baseline": "follow_the_move",
+   "n_matched": 1,
+   "n_disagree": 1,
+   "n_agree": 0,
+   "disagree_metrics": {
+    "n": 1,
+    "n_calls": 1,
+    "hit_rate": 1.0,
+    "base_hit_rate": 0.5606,
+    "z": 0.89,
+    "p_one": 0.188,
+    "brier": 0.2025,
+    "brier_base": 0.1931,
+    "skill": -0.0488,
+    "mean_signed_rel_pct": 16.109,
+    "options_n": 1,
+    "options_mean_pnl_pct": 35.29
+   }
+  },
+  "vs_fade_move": {
+   "baseline": "fade_the_move",
+   "n_matched": 1,
+   "n_disagree": 0,
+   "n_agree": 1,
+   "agree_metrics": {
+    "n": 1,
+    "n_calls": 1,
+    "hit_rate": 1.0,
+    "base_hit_rate": 0.5606,
+    "z": 0.89,
+    "p_one": 0.188,
+    "brier": 0.2025,
+    "brier_base": 0.1931,
+    "skill": -0.0488,
+    "mean_signed_rel_pct": 16.109,
+    "options_n": 1,
+    "options_mean_pnl_pct": 35.29
+   }
+  },
+  "vs_volume_fade": {
+   "baseline": "volume_fade",
+   "n_matched": 1,
+   "n_disagree": 0,
+   "n_agree": 1,
+   "agree_metrics": {
+    "n": 1,
+    "n_calls": 1,
+    "hit_rate": 1.0,
+    "base_hit_rate": 0.5606,
+    "z": 0.89,
+    "p_one": 0.188,
+    "brier": 0.2025,
+    "brier_base": 0.1931,
+    "skill": -0.0488,
+    "mean_signed_rel_pct": 16.109,
+    "options_n": 1,
+    "options_mean_pnl_pct": 35.29
+   }
+  },
+  "power": {
+   "gate": "stock: n\u226560, Brier skill>0, one-sided p<0.10 vs base rate",
+   "assumptions": {
+    "planning_conf": 0.55,
+    "base_rate": 0.48,
+    "rho_day": 0.3,
+    "calls_per_day": 4.0
+   },
+   "rows": [
+    {
+     "n": 30,
+     "p_true": 0.52,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.2,
+     "n_effective_clustered": 15.8,
+     "approx_power_day_clustered": 0.168
+    },
+    {
+     "n": 30,
+     "p_true": 0.55,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.304,
+     "n_effective_clustered": 15.8,
+     "approx_power_day_clustered": 0.234
+    },
+    {
+     "n": 30,
+     "p_true": 0.58,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.427,
+     "n_effective_clustered": 15.8,
+     "approx_power_day_clustered": 0.313
+    },
+    {
+     "n": 60,
+     "p_true": 0.52,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.254,
+     "n_effective_clustered": 31.6,
+     "approx_power_day_clustered": 0.203
+    },
+    {
+     "n": 60,
+     "p_true": 0.55,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.422,
+     "n_effective_clustered": 31.6,
+     "approx_power_day_clustered": 0.311
+    },
+    {
+     "n": 60,
+     "p_true": 0.58,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.606,
+     "n_effective_clustered": 31.6,
+     "approx_power_day_clustered": 0.438
+    },
+    {
+     "n": 150,
+     "p_true": 0.52,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.382,
+     "n_effective_clustered": 78.9,
+     "approx_power_day_clustered": 0.284
+    },
+    {
+     "n": 150,
+     "p_true": 0.55,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.668,
+     "n_effective_clustered": 78.9,
+     "approx_power_day_clustered": 0.485
+    },
+    {
+     "n": 150,
+     "p_true": 0.58,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.879,
+     "n_effective_clustered": 78.9,
+     "approx_power_day_clustered": 0.69
+    },
+    {
+     "n": 230,
+     "p_true": 0.52,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.473,
+     "n_effective_clustered": 121.1,
+     "approx_power_day_clustered": 0.344
+    },
+    {
+     "n": 230,
+     "p_true": 0.55,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.8,
+     "n_effective_clustered": 121.1,
+     "approx_power_day_clustered": 0.603
+    },
+    {
+     "n": 230,
+     "p_true": 0.58,
+     "base_rate": 0.48,
+     "approx_power_independent": 0.96,
+     "n_effective_clustered": 121.1,
+     "approx_power_day_clustered": 0.821
+    }
+   ],
+   "caveats": [
+    "Brier skill>0 is not the same as hit-rate power; both must pass.",
+    "Day clustering reduces effective n; figures are approximate.",
+    "Do not treat prior informal 40% pass / ~230-call estimates as verified.",
+    "With n_days small, any power calculation is speculative."
+   ]
+  }
+ },
+ "experiments": {
+  "experiments": {
+   "E1": {
+    "status": "closed",
+    "gate": false,
+    "made": 10,
+    "n": 0,
+    "abstained": 0
+   },
+   "E2a": {
+    "status": "closed",
+    "gate": false,
+    "made": 5,
+    "n": 0,
+    "abstained": 0
+   },
+   "E2": {
+    "status": "paper",
+    "gate": false,
+    "made": 7,
+    "n": 1,
+    "n_calls": 1,
+    "hit_rate": 1.0,
+    "base_hit_rate": 0.5606,
+    "z": 0.89,
+    "p_one": 0.188,
+    "brier": 0.2025,
+    "brier_base": 0.1931,
+    "skill": -0.0488,
+    "mean_signed_rel_pct": 16.109,
+    "options_n": 1,
+    "options_mean_pnl_pct": 35.29,
+    "abstained": 0
+   },
+   "E3": {
+    "status": "paper",
+    "gate": false,
+    "made": 3,
+    "n": 0,
+    "abstained": 0
+   },
+   "E4": {
+    "status": "paper",
+    "gate": true,
+    "made": 0,
+    "n": 0,
+    "abstained": 0
+   },
+   "E3x": {
+    "status": "development",
+    "gate": false,
+    "made": 0,
+    "n": 0,
+    "abstained": 0
+   },
+   "E5pre": {
+    "status": "paper",
+    "gate": false,
+    "made": 10,
+    "n": 0,
+    "abstained": 0
+   },
+   "E5": {
+    "status": "paper",
+    "gate": false,
+    "made": 10,
+    "n": 0,
+    "abstained": 0
+   }
+  },
+  "matched_20d": {
+   "E2": {
+    "n": 0
+   },
+   "volume_fade": {
+    "n": 0
+   }
+  },
+  "gate_owner": "E4",
+  "matched_20d_E4": {
+   "volume_fade_c": {
+    "n": 0
+   }
+  },
+  "matched_20d_E5": {
+   "E5pre": {
+    "n": 0
+   },
+   "rubric": {
+    "n": 0
+   }
+  },
+  "volume_up_eod": {
+   "flags": 42,
+   "met_at_close": 6,
+   "not_met": 36,
+   "unknown": 0,
+   "volume_fade_20_met_at_close": {
+    "n": 0
+   },
+   "claude_met_at_close": {
+    "n": 0
+   },
+   "volume_fade_20_not_met": {
+    "n": 0
+   },
+   "claude_not_met": {
+    "n": 1,
+    "n_calls": 1,
+    "hit_rate": 1.0,
+    "base_hit_rate": 0.5606,
+    "z": 0.89,
+    "p_one": 0.188,
+    "brier": 0.2025,
+    "brier_base": 0.1931,
+    "skill": -0.0488,
+    "mean_signed_rel_pct": 16.109,
+    "options_n": 1,
+    "options_mean_pnl_pct": 35.29
+   }
+  }
+ }
+}
