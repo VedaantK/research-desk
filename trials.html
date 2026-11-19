@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trials · Every idea tested</title>
+<meta name="description" content="Every strategy idea tested across Atlas, Theta and side studies, counted in one place, and the bar a new result has to clear because of it.">
+<meta property="og:title" content="Trials · Every idea tested">
+<meta property="og:description" content="60 ideas, 35 families, 25,567 configurations: the full search, and what luck alone would show.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=a6077b73a7">
+<link rel="stylesheet" href="research.css?v=1adaa0968d">
+<script src="theme.js?v=d756ea93c9"></script>
+<style>
+.trials-page { --s1: #2a78d6; --s2: #eb6834 }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .trials-page { --s1: #3987e5; --s2: #d95926 } }
+:root[data-theme="dark"] .trials-page { --s1: #3987e5; --s2: #d95926 }
+.trials-page section { margin: 44px 0 }
+.trials-page .stats { grid-template-columns: repeat(5, minmax(0, 1fr)) }
+.tr-scroll { overflow-x: auto }
+.tr-chart { padding: 18px; display: grid; gap: 14px; margin-top: 18px; position: relative }
+.tr-chart svg { width: 100%; height: auto; display: block; touch-action: none }
+.tr-chart svg text { fill: var(--ink-2); font: 11px "JetBrains Mono", monospace }
+.tr-chart svg .lbl { fill: var(--ink); font: 500 12px Inter, system-ui, sans-serif }
+.tr-legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--ink-2) }
+.tr-legend i { display: inline-block; width: 18px; height: 2px; vertical-align: middle; margin-right: 6px; background: var(--c) }
+#tr-tip { position: fixed; pointer-events: none; background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; font-size: 12.5px; box-shadow: var(--shadow); z-index: 20; display: none; line-height: 1.5 }
+#tr-tip b { font-family: "JetBrains Mono", monospace; font-weight: 500 }
+.tr-filters { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; font-size: 14px; margin: 14px 0 }
+.tr-filters label { display: flex; gap: 8px; align-items: center }
+.tr-filters select { font: inherit; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--ink) }
+.trials-page td.n { font-family: "JetBrains Mono", monospace; font-size: 13px; text-align: right }
+.trials-page td.mono { font-family: "JetBrains Mono", monospace; font-size: 12.5px }
+.trials-page td.wrap { white-space: normal; min-width: 26ch; max-width: 48ch }
+.trials-page tr.uncounted td { color: var(--ink-3) }
+#tr-table td, #tr-table th { padding: 10px 10px; vertical-align: top }
+#tr-table td.wrap { min-width: 22ch; max-width: 40ch }
+#tr-table .fam { display: block; margin-top: 4px; font: 11.5px "JetBrains Mono", monospace; color: var(--ink-3) }
+#tr-more { margin-top: 12px; font: inherit; font-weight: 600; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); cursor: pointer }
+.oc { display: inline-flex; align-items: center; gap: 6px; font: 500 11.5px/1 "JetBrains Mono", monospace; white-space: nowrap }
+.oc::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--ink-3)) }
+.oc.fail { --c: var(--bad) } .oc.live { --c: var(--accent) } .oc.old { --c: var(--warn) }
+@media (max-width: 860px) { .trials-page .stats { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Atlas</a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Compass</a>
+      <a href="beacon.html">Beacon</a>
+      <a href="lookout.html">Lookout</a>
+      <a href="tide.html">Tide</a>
+      <a href="theta.html">Theta</a>
+      <a href="trials.html" aria-current="page">Trials</a>
+      <a href="notes.html">Research notes</a>
+      <a href="updates.html">Updates</a>
+    </nav>
+    <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="wrap research-page trials-page">
+  <p class="eyebrow">EVERY IDEA TESTED</p>
+  <h1 id="tr-h1">Every idea we have tested, counted in one place.</h1>
+  <p class="lede">Each experiment checks its own versions for luck. That isn't enough: test enough ideas and one of them will look good by chance. So every idea tried anywhere in the project is counted here (Compass experiments, Theta's options tests, and the side studies), and a new result is judged against all of them.</p>
+
+  <div class="stats" id="tr-stats">
+    <div class="stat"><b>—</b><span>ideas tested</span></div>
+    <div class="stat"><b>—</b><span>independent families</span></div>
+    <div class="stat"><b>—</b><span>configurations looked at</span></div>
+    <div class="stat"><b>—</b><span>t-stat a new idea needs</span></div>
+    <div class="stat"><b>—</b><span>Sharpe luck alone gives over 20 years</span></div>
+  </div>
+
+  <section class="decision" id="tr-decision">
+    <strong>What this means for the next idea</strong>
+    <p id="tr-decision-text">Loading the registry…</p>
+  </section>
+
+  <section>
+    <h2>The bar rises with every idea tried</h2>
+    <p>The best Sharpe ratio expected from that many ideas with no skill at all (Bailey &amp; López de Prado, 2014). More years of data lower the bar, because a lucky streak is harder to sustain. The bar never resets: dropping an idea doesn't remove it from the count.</p>
+    <div class="panel tr-chart">
+      <div class="tr-legend" id="tr-legend"></div>
+      <div id="tr-svg"></div>
+      <details><summary><b>Table view</b></summary><div class="tr-scroll"><table id="tr-curve"><thead><tr><th>Ideas (families)</th><th>Luck Sharpe, 10 years</th><th>Luck Sharpe, 20 years</th><th>t needed (Bonferroni 5%)</th></tr></thead><tbody></tbody></table></div></details>
+    </div>
+  </section>
+
+  <section>
+    <h2>All trials</h2>
+    <p>One row per idea. "Configurations" counts every parameter set looked at within it; the industry-momentum grids alone tried 25,386. Grayed rows are listed but not counted: the demo experiment, re-reviews of results already counted, and an idea closed before any return was computed.</p>
+    <div class="tr-filters">
+      <label>Source <select id="tr-source"><option value="">All</option><option value="atlas">Compass experiments</option><option value="options_registry">Theta options tests</option><option value="manual">Side studies</option></select></label>
+      <label>Outcome <select id="tr-outcome"><option value="">All</option><option value="live">Still standing</option><option value="fail">Failed</option></select></label>
+      <span id="tr-count" class="note"></span>
+    </div>
+    <div class="panel"><div class="tr-scroll"><table id="tr-table">
+      <thead><tr><th>Date</th><th>Idea <span class="fam">family</span></th><th>Kind</th><th>Configs</th><th>Outcome</th><th>Result</th></tr></thead>
+      <tbody></tbody>
+    </table></div></div>
+    <button id="tr-more" type="button" hidden></button>
+    <p class="note">Source of truth: <a href="https://github.com/VedaantK/atlas/blob/main/docs/TRIALS.md">docs/TRIALS.md</a>, generated by <code>./atlas trials</code> from the research database, the options registry and a hand-kept list of side studies. The Compass review panel sees these counts on every review; they don't change any pass/fail threshold.</p>
+  </section>
+</main>
+<div id="tr-tip" role="tooltip"></div>
+<footer class="wrap footer">
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Compass</a> · <a href="beacon.html">Beacon</a> · <a href="lookout.html">Lookout</a> · <a href="tide.html">Tide</a> · <a href="theta.html">Theta</a> · <a href="trials.html">Trials</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
+  <p class="fine">Backtested and hypothetical results. Not investment advice. Past performance, simulated or real, does not guarantee future returns.</p>
+</footer>
+<script>
+(async function () {
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+  const fmt = n => Number(n).toLocaleString("en-US");
+  const LIVE = new Set(["pass", "weak_pass", "watch"]);
+  const cls = o => LIVE.has(o) ? "live" : o.startsWith("passed_") ? "old" : (o === "fail" ? "fail" : "");
+  const label = o => ({weak_pass: "weak pass", passed_old_rules: "passed old rules", passed_rules_v1: "passed rules v1",
+    passed_rules_v2: "passed rules v2", replicated_not_tradable: "replicated, not tradable"}[o] || o.replace(/_/g, " "));
+  const KIND = {test: "pre-registered", exploratory: "exploratory", replication: "replication", review: "re-review", example: "demo"};
+  let d;
+  try {
+    const res = await fetch("trials.json", {cache: "no-store"});
+    if (!res.ok) throw new Error(res.status);
+    d = await res.json();
+  } catch (e) {
+    $("tr-decision-text").textContent = "The registry could not be loaded.";
+    return;
+  }
+  const s = d.summary, fam = s.bars.families, cfg = s.bars.configs;
+  $("tr-h1").textContent = `${s.hypotheses} ideas tested. The next one has to beat all of them.`;
+  const st = [fmt(s.hypotheses), fmt(s.families), fmt(s.configs), fam.bonferroni_t.toFixed(2), fam.luck_sharpe_20y.toFixed(2)];
+  $("tr-stats").querySelectorAll(".stat b").forEach((b, i) => { b.textContent = st[i]; });
+  $("tr-decision-text").innerHTML =
+    `Over 20 years of data, the luckiest of ${s.families} skill-less ideas would show a Sharpe of about ` +
+    `<b>${fam.luck_sharpe_20y.toFixed(2)}</b> and a t-stat near <b>${fam.bonferroni_t.toFixed(2)}</b>. A new backtest below ` +
+    `that is indistinguishable from the best of our failures. Counting every configuration instead of every idea ` +
+    `(${fmt(cfg.n)}), the bar is ${cfg.luck_sharpe_20y.toFixed(2)}: the true number is somewhere between, because ` +
+    `configurations within one idea are near-copies. The S&amp;P 500 crash rule the paper pilot runs (Sharpe 0.64, 2000–2025) ` +
+    `clears the first bar, not the second.`;
+
+  // ---- chart: luck Sharpe vs number of ideas, 10y and 20y
+  const C = d.curve, W = 720, H = 300, m = {l: 44, r: 92, t: 16, b: 38};
+  const X = n => m.l + (Math.log(n) / Math.log(100)) * (W - m.l - m.r);
+  const ymax = 1.0, Y = v => m.t + (1 - v / ymax) * (H - m.t - m.b);
+  const NS = "http://www.w3.org/2000/svg";
+  const el = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; };
+  const svg = el("svg", {viewBox: `0 0 ${W} ${H}`, role: "img", "aria-label": "Luck Sharpe against number of ideas tested, for 10 and 20 years of data"});
+  for (let v = 0; v <= ymax + 1e-9; v += 0.25) {
+    el("line", {x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: "var(--line)", "stroke-width": 1}, svg);
+    el("text", {x: m.l - 8, y: Y(v) + 4, "text-anchor": "end"}, svg).textContent = v.toFixed(2);
+  }
+  for (const n of [1, 2, 5, 10, 20, 50, 100]) {
+    el("text", {x: X(n), y: H - m.b + 18, "text-anchor": "middle"}, svg).textContent = n;
+  }
+  el("text", {x: (m.l + W - m.r) / 2, y: H - 4, "text-anchor": "middle"}, svg).textContent = "ideas tested (log scale)";
+  const series = [{k: "s10", name: "10 years of data", c: "var(--s1)"}, {k: "s20", name: "20 years of data", c: "var(--s2)"}];
+  $("tr-legend").innerHTML = series.map(x => `<span><i style="--c:${x.c}"></i>${x.name}</span>`).join("");
+  for (const x of series) {
+    el("path", {d: C.map((p, i) => (i ? "L" : "M") + X(p.n).toFixed(1) + "," + Y(p[x.k]).toFixed(1)).join(""),
+      fill: "none", stroke: x.c, "stroke-width": 2, "stroke-linejoin": "round"}, svg);
+    const last = C[C.length - 1];
+    el("text", {x: X(last.n) + 8, y: Y(last[x.k]) + 4, class: "lbl"}, svg).textContent = x.name.replace(" of data", "");
+  }
+  const now = C[Math.min(s.families, 100) - 1];
+  el("line", {x1: X(now.n), x2: X(now.n), y1: m.t, y2: H - m.b, stroke: "var(--ink-3)", "stroke-width": 1, "stroke-dasharray": "3 3"}, svg);
+  el("text", {x: X(now.n) + 6, y: m.t + 12, class: "lbl"}, svg).textContent = `today: ${now.n}`;
+  for (const x of series) el("circle", {cx: X(now.n), cy: Y(now[x.k]), r: 4.5, fill: x.c, stroke: "var(--panel)", "stroke-width": 2}, svg);
+  const cross = el("line", {y1: m.t, y2: H - m.b, stroke: "var(--ink-2)", "stroke-width": 1, visibility: "hidden"}, svg);
+  const dots = series.map(x => el("circle", {r: 4, fill: x.c, stroke: "var(--panel)", "stroke-width": 2, visibility: "hidden"}, svg));
+  const hit = el("rect", {x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: "transparent"}, svg);
+  const tip = $("tr-tip");
+  const move = ev => {
+    const r = svg.getBoundingClientRect(), px = (ev.clientX - r.left) * W / r.width;
+    const n = Math.max(1, Math.min(100, Math.round(Math.exp((px - m.l) / (W - m.l - m.r) * Math.log(100)))));
+    const p = C[n - 1];
+    cross.setAttribute("x1", X(n)); cross.setAttribute("x2", X(n)); cross.setAttribute("visibility", "visible");
+    dots.forEach((dt, i) => { dt.setAttribute("cx", X(n)); dt.setAttribute("cy", Y(p[series[i].k])); dt.setAttribute("visibility", "visible"); });
+    tip.innerHTML = `<b>${n}</b> idea${n > 1 ? "s" : ""}<br>10 years: <b>${p.s10.toFixed(2)}</b><br>20 years: <b>${p.s20.toFixed(2)}</b><br>t needed: <b>${p.t.toFixed(2)}</b>`;
+    tip.style.display = "block";
+    tip.style.left = Math.min(ev.clientX + 14, innerWidth - tip.offsetWidth - 8) + "px";
+    tip.style.top = (ev.clientY + 14) + "px";
+  };
+  const leave = () => { tip.style.display = "none"; cross.setAttribute("visibility", "hidden"); dots.forEach(dt => dt.setAttribute("visibility", "hidden")); };
+  hit.addEventListener("pointermove", move); hit.addEventListener("pointerdown", move); hit.addEventListener("pointerleave", leave);
+  $("tr-svg").appendChild(svg);
+  $("tr-curve").querySelector("tbody").innerHTML = [1, 5, 10, 20, s.families, 50, 100].filter((v, i, a) => a.indexOf(v) === i && v <= 100)
+    .sort((a, b) => a - b).map(n => C[n - 1])
+    .map(p => `<tr><td>${p.n}${p.n === s.families ? " (today)" : ""}</td><td>${p.s10.toFixed(2)}</td><td>${p.s20.toFixed(2)}</td><td>${p.t.toFixed(2)}</td></tr>`).join("");
+
+  // ---- table
+  let all = false;
+  const render = () => {
+    const src = $("tr-source").value, oc = $("tr-outcome").value;
+    const matched = d.trials.filter(r => (!src || r.source === src) &&
+      (!oc || (oc === "live" ? LIVE.has(r.outcome) : r.outcome === "fail")));
+    const rows = all ? matched : matched.slice(0, 20);
+    $("tr-count").textContent = `${matched.length} of ${d.trials.length}`;
+    $("tr-more").hidden = matched.length <= 20;
+    $("tr-more").textContent = all ? "Show the latest 20" : `Show all ${matched.length}`;
+    $("tr-table").querySelector("tbody").innerHTML = rows.map(r =>
+      `<tr class="${r.counted ? "" : "uncounted"}"><td class="mono">${esc(r.date)}</td><td class="wrap">${esc(r.title)}<span class="fam">${esc(r.family.replace(/_/g, " "))}</span></td>` +
+      `<td>${KIND[r.kind] || esc(r.kind)}${r.counted ? "" : " · not counted"}</td>` +
+      `<td class="n">${fmt(r.configs)}</td><td><span class="oc ${cls(r.outcome)}">${esc(label(r.outcome))}</span></td>` +
+      `<td class="wrap">${esc(r.result)}</td></tr>`).join("");
+  };
+  $("tr-source").addEventListener("change", render);
+  $("tr-outcome").addEventListener("change", render);
+  $("tr-more").addEventListener("click", () => { all = !all; render(); });
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Market Indicator · Atlas</title>
+<meta name="description" content="Lookout: Claude flags unusual S&amp;P 500 moves each trading day, predicts whether the stock beats its sector, and every call is scored in the open.">
+<meta property="og:title" content="Market Indicator · Atlas">
+<meta property="og:description" content="A forward-tested AI market indicator: dated sector-relative calls on S&amp;P 500 stocks, scored against history and a fixed checklist.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f1720'/%3E%3Cpath d='M6 22l6-7 5 4 9-11' stroke='%2334d399' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css?v=a6077b73a7">
+<link rel="stylesheet" href="research.css?v=1adaa0968d">
+<script src="theme.js?v=d756ea93c9"></script>
+<style>
+#lookout-kpis,#lookout-size{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:860px){#lookout-kpis,#lookout-size{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:480px){#lookout-kpis,#lookout-size{grid-template-columns:1fr}}
+.lk-pill{display:inline-block;font:600 12px Inter,sans-serif;padding:2px 9px;border-radius:999px;white-space:nowrap;color:var(--ink-3);background:var(--bg-2)}
+.lk-pill.hit,.lk-pill.passed{color:var(--accent);background:var(--accent-soft)}
+.lk-pill.miss,.lk-pill.stop{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.lk-good{color:var(--accent)}.lk-bad{color:var(--bad)}
+.lk-pill.new{color:var(--accent);background:var(--accent-soft)}
+.lk-scroll{max-height:460px;overflow:auto}
+.lk-scroll{max-height:560px;overflow:auto}
+.lk-up{color:var(--accent)}.lk-down{color:var(--bad)}
+.lk-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-top:12px}
+.lk-card{border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;background:var(--panel);display:flex;flex-direction:column;gap:10px;min-width:0}
+.lk-top{display:flex;align-items:center;gap:10px}
+.lk-arrow{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:18px;line-height:1}
+.lk-arrow.up{color:var(--accent);background:var(--accent-soft)}
+.lk-arrow.down{color:var(--bad);background:color-mix(in srgb,var(--bad) 12%,transparent)}
+.lk-id{min-width:0;flex:1}.lk-id b{font-size:18px;letter-spacing:.01em}
+.lk-id span{display:block;color:var(--ink-2);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lk-head{font-size:16px;font-weight:600;margin:0}
+.lk-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-2);margin:0}
+.lk-meta b{color:var(--ink);font-weight:600}
+.research-page .lk-card ul{margin:0;padding-left:18px;font-size:14px}.research-page .lk-card li{margin:3px 0;line-height:1.45;color:var(--ink)}
+
+.lk-wrong{font-size:13px;color:var(--ink-2);margin:0}.lk-wrong b{color:var(--ink)}
+.research-page .lk-card details{font-size:13px;color:var(--ink-2);padding:0;background:none;border:0;border-radius:0}.lk-card summary{cursor:pointer;color:var(--ink)}
+.lk-card details p{margin:6px 0 0;line-height:1.5}
+.lk-more{font:600 14px Inter,sans-serif;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg-2);color:var(--ink);cursor:pointer}
+@media(max-width:480px){.lk-cards{grid-template-columns:1fr}}
+.lk-calls-scroll{max-height:72vh;overflow:auto;padding-right:4px}
+.lk-calls-scroll .lk-cards{margin-top:0}
+table.holdings td.wrap{white-space:normal;min-width:30ch;max-width:60ch}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 22l6-7 5 4 9-11"/></svg>Atlas</a>
+    <nav aria-label="Main navigation">
+      <a href="index.html">Compass</a>
+      <a href="beacon.html">Beacon</a>
+      <a href="lookout.html" aria-current="page">Lookout</a>
+      <a href="tide.html">Tide</a>
+      <a href="theta.html">Theta</a>
+      <a href="trials.html">Trials</a>
+      <a href="notes.html">Research notes</a>
+      <a href="updates.html">Updates</a>
+    </nav>
+    <button id="theme" class="icon-btn" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="wrap research-page ">
+  <p class="eyebrow">MARKET INDICATOR</p>
+  <h1>Lookout asks whether an AI can read a stock&rsquo;s move better than history can.</h1>
+  <p class="lede">Every trading day a fixed scanner flags S&amp;P 500 stocks that moved unusually. As of November 6, the bet being tested is a narrow one: a stock that jumped at least 2% on unusually high volume, and the day was not an earnings report. A fixed rule says that stock will lag its sector over the next month. Claude still reads up to five of those names a day, and that opinion is scored on its own. Nothing is traded.</p>
+  <p><span class="status" id="lookout-status">Loading results&hellip;</span></p>
+
+  <section class="decision">
+    <strong>The bar is close to a coin flip.</strong>
+    <p>From 2010 to 2025, after the same kinds of moves, 44&ndash;53% of S&amp;P 500 stocks went on to beat their industry over the next 5&ndash;20 sessions. A call has to beat that base rate, and a fixed checklist, before any of this is used with real money.</p>
+  </section>
+
+  <section>
+    <h2>What changed on November 7</h2>
+    <p>Nothing about the live test changed. The rules, the prompt and the pass/fail lines are the same. The work went into measuring the test more honestly and building a stricter challenger.</p>
+    <ul>
+      <li><strong>Cleaner prices.</strong> A stock&rsquo;s move is no longer compared with an ETF move from a different day. A stock with mismatched data is skipped and the skip is logged. This was written into the rules before any call finished.</li>
+      <li><strong>Clearer open calls.</strong> Each open call now shows the stock&rsquo;s own return, the sector ETF&rsquo;s return, and a beta-adjusted return, so a call that &ldquo;wins&rdquo; only because the ETF fell is easy to spot.</li>
+      <li><strong>Honest sample size.</strong> Calls made on the same day often share one market bet. With a real 7-point edge, 60 calls would pass the test only about 4 times in 10, and about 230 are needed to be fairly sure. Passing at 60 means more paper testing, not money.</li>
+      <li><strong>A stricter Claude (v3), now on.</strong> It reads the same stocks as the current version, must cite a filing for every factual claim, sees the last earnings release with its date, and may answer &ldquo;no edge&rdquo;. Those answers are still scored. Its rules were frozen on November 7 and it starts with the next trading day&rsquo;s run. Its main rival is the free volume rule on the same stocks.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>What changed on November 6</h2>
+    <p>A check of S&amp;P 500 history from 2010 to 2025 found one pattern large enough to test live. When a stock rises at least 2% on about three times its normal volume, and that day is not an earnings report and not an even bigger company-specific shock, the stock has usually lagged its industry by about 1% over the next 20 trading days. The typical case was almost the same as the average, so a few crashes do not explain it. Ordinary up days, without the heavy volume, did not lag. About 1,100 cases, 14 of 16 years.</p>
+    <p>That is history. No live call on this page has finished yet, so the pattern is not a result. History of this kind often shrinks once you start keeping score.</p>
+    <ul>
+      <li><strong>The rule.</strong> Every stock that fits the volume pattern gets a paper bet that it will lag its sector. The confidence is fixed. This bet does not ask Claude.</li>
+      <li><strong>Claude, from here.</strong> The five daily reads are spent only on those volume-spike stocks. They start from zero toward the pass/fail lines.</li>
+      <li><strong>Claude, already made.</strong> The first fifteen calls were earnings days, and every one of them pointed the same way as that day&rsquo;s move. They still settle and stay on the page. They no longer count toward the pass/fail lines.</li>
+      <li><strong>Busy days.</strong> A day with more than 15 &ldquo;company-specific&rdquo; flags is marked. The scanner may be calling a market-wide shock fifteen different company stories. Those days are labeled, not thrown out.</li>
+    </ul>
+    <p class="note">The last of the current volume bets finishes its 20 trading days on December 7. The page is the place to read whether the live bets look like the history.</p>
+  </section>
+
+  <section>
+    <h2>Latest scan</h2>
+    <p class="note">Every stock the scanner flagged on the latest scan day. <b>New</b> means it has never been flagged before. Claude&rsquo;s five picks are listed first; the local model and the checklist score the rest. Updated after each scan (10:00 and 12:30 ET), after Claude&rsquo;s calls (3:25 PM) and after the close. <span id="lookout-flags-status"></span></p>
+    <div class="stats" id="lookout-flag-kpis">
+      <div class="stat"><b>—</b><span>Flagged</span></div>
+      <div class="stat"><b>—</b><span>New names</span></div>
+      <div class="stat"><b>—</b><span>Picked by Claude</span></div>
+      <div class="stat"><b>—</b><span>Days scanned</span></div>
+    </div>
+    <div class="table-wrap lk-scroll">
+      <table class="holdings" id="lookout-flags">
+        <thead><tr><th>Ticker</th><th>Company</th><th>Trigger</th><th></th><th>Claude</th><th>Local model</th><th class="num">Checklist p(beat)</th><th>vs</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Claude so far</h2>
+    <div class="stats" id="lookout-kpis">
+      <div class="stat"><b>—</b><span>Resolved calls (60 needed)</span></div>
+      <div class="stat"><b>—</b><span>Hit rate</span></div>
+      <div class="stat"><b>—</b><span>Expected from base rates</span></div>
+      <div class="stat"><b>—</b><span>Skill vs base rate</span></div>
+    </div>
+    <p class="note">Hit rate is the share of calls where the stock moved the way the call said, measured against its sector ETF. Skill is 1 minus Claude&rsquo;s Brier score over the base rate&rsquo;s; above zero is better than history, and it rewards honest confidence as well as direction.</p>
+  </section>
+
+  <section>
+    <h2>Who predicts better</h2>
+    <p class="note">The checklist scores every flagged stock with fixed, literature-based adjustments (momentum, one-month reversal, post-earnings drift, 52-week-high proximity, idiosyncratic volatility, high volume). Random controls are unflagged stocks scored the same way, which tests whether flagging itself carries information. &ldquo;Follow the move&rdquo; uses Claude&rsquo;s own confidence but always bets in the direction of the move that triggered the flag, so it differs from Claude only where Claude went against the move.</p>
+    <p class="note" id="lookout-move"></p>
+    <p class="note" id="lookout-economic"></p>
+    <p class="note" id="lookout-factor"></p>
+    <div class="table-wrap">
+      <table class="holdings" id="lookout-compare">
+        <thead><tr><th>Predictor</th><th class="num">Resolved</th><th class="num">Open</th><th class="num">Hit rate</th><th class="num">Expected</th><th class="num">p</th><th class="num">Skill</th><th class="num">Avg edge</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Versions, side by side</h2>
+    <p class="note">Each version of the Claude analyst is scored on its own, and only one experiment counts toward the gates: E2 until November 10, E4 from November 11. E3 (v3) was frozen on November 7 and starts with the next trading day&rsquo;s 15:25 run. It reads the same stocks as E2, right after E2, with sourced filings, an older earnings release marked as background, beta-adjusted moves and an options-implied move. It is allowed to say &ldquo;no edge&rdquo;, and those answers still count in its probability score. E4 was added on November 10. An audit that day found that most live volume-up flags fire on a mid-session volume projection and do not end the day at the three-times-normal volume the historical study tested, so E4 re-checks the event at 15:25 on the study&rsquo;s own definition and starts counting from zero. E2 runs on unchanged. On November 11 the real-money gates moved from E2 to E4, before any call of either had settled. E4 must also beat the fixed fade rule on the same stocks. A test of the same volume rule on mid and small caps failed its preset bar, so the scan stays on the S&amp;P 500.</p>
+    <div class="table-wrap">
+      <table class="holdings" id="lookout-experiments">
+        <thead><tr><th>Version</th><th>Status</th><th class="num">Made</th><th class="num">Resolved</th><th class="num">No edge</th><th class="num">Hit rate</th><th class="num">Skill</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="note" id="lookout-matched"></p>
+    <p class="note" id="lookout-eod"></p>
+  </section>
+
+  <section>
+    <h2>Gates</h2>
+    <p class="note">Fixed before the first call. Options are only considered after paper spreads, bought at the ask and sold at the bid, show a profit.</p>
+    <div class="table-wrap">
+      <table class="holdings" id="lookout-gates">
+        <thead><tr><th>Gate</th><th class="num">Have</th><th class="num">Need</th><th>Status</th><th>Rule</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Resolved predictions over time</h2>
+    <p class="note">Cumulative settled calls by the day each horizon ended, Claude vs. the checklist. The dashed line is the 60 calls the first gate needs. <span id="lookout-progress-status"></span></p>
+    <div class="panel"><div id="lookout-progress" class="chart chart-mid" role="img" aria-label="Cumulative resolved predictions over time"></div></div>
+  </section>
+
+  <section>
+    <h2>Current standing, open calls</h2>
+    <p class="note">Mark-to-market since entry from the nightly bar refresh &mdash; informal, long before settlement. The official score is stock minus sector ETF. Stock alone and ETF alone are shown separately so a quiet stock in a falling sector is not mistaken for a recovery. &ldquo;β-adj&rdquo; is a diagnostic (<code>stock − β·ETF</code> using the call-time sector beta); it is not the official outcome. Residuals in the dossier are unexplained by the fitted market/sector model, not proof of a company event. <span id="lookout-standing-status"></span></p>
+    <p class="note" id="lookout-diag"></p>
+    <div class="panel"><div id="lookout-standing" class="chart" role="img" aria-label="Current sector-relative return of open calls"></div></div>
+    <div class="table-wrap">
+      <table class="holdings" id="lookout-open">
+        <thead><tr><th>Ticker</th><th>Call</th><th class="num">Sessions</th><th class="num">Vs sector</th><th class="num">Stock</th><th class="num">ETF</th><th class="num">β-adj</th><th class="num">Last session</th><th>Coverage</th><th>Wrong-if</th><th>Settles</th><th>On track</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Does Claude size moves right?</h2>
+    <p class="note">Each call also estimates how far the stock will move against its sector if the call is right. This compares those estimates with what actually happened, in the called direction. It is descriptive only and never counts toward a gate, but it matters for options: each spread&rsquo;s strikes are set from this estimate. <span id="lookout-size-status"></span></p>
+    <div class="stats" id="lookout-size">
+      <div class="stat"><b>—</b><span>Claude&rsquo;s average estimate</span></div>
+      <div class="stat"><b>—</b><span>Actual, when the call was right</span></div>
+      <div class="stat"><b>—</b><span>Actual, all calls</span></div>
+      <div class="stat"><b>—</b><span>Typical size of a move, either way</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What would the calls earn as trades?</h2>
+    <p class="note">The calls predict a stock beating or lagging its sector, but a small account would usually just buy the stock. This shows each settled call as a $250 position three ways, after fixed costs (10 bp per leg round trip, 0.5%/yr borrow on shorts). The checklist on the same calls is the comparison. Drawdown is the worst run of losses across positions, and adverse is the worst close while a position was held. Descriptive only, never a gate. <span id="lookout-trade-status"></span></p>
+    <div class="table-wrap">
+      <table class="holdings" id="lookout-trade">
+        <thead><tr><th>Predictor</th><th>Trade</th><th class="num">n</th><th class="num">Avg net</th><th class="num">Win rate</th><th class="num">Worst</th><th class="num">Total $</th><th class="num">Drawdown $</th><th class="num">Worst adverse</th></tr></thead>
+        <tbody><tr><td colspan="9" class="note">Loading&hellip;</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Claude&rsquo;s calls</h2>
+    <p class="note">Newest first. Every call is against the stock&rsquo;s sector ETF: <b class="lk-up">&#9650; beat</b> means Claude expects the stock to do better than its sector, <b class="lk-down">&#9660; lag</b> means worse. The move is Claude&rsquo;s estimate of the gap to the sector by the due date, measured from the close on the day of the call.</p>
+    <div class="lk-calls-scroll"><div class="lk-cards" id="lookout-calls"><p class="note">Loading&hellip;</p></div></div>
+    <p><button type="button" class="lk-more" id="lookout-more" hidden>Show older calls</button></p>
+  </section>
+
+  <section>
+    <details><summary><b>How it works, and limits</b></summary>
+    <ol class="steps">
+      <li><strong>Scan</strong>Three times a day on delayed data, each move is split into market, sector and company parts.</li>
+      <li><strong>Flag</strong>Fixed rules, set in advance, pick unusual names. Five random names are also scored as controls.</li>
+      <li><strong>Fact sheet</strong>The same fifteen or so fields for every name: the move split, trend, momentum, earnings timing, filings, volatility and macro.</li>
+      <li><strong>Predict</strong>The checklist scores every flag. A volume spike also gets a fixed &ldquo;lag the sector&rdquo; bet. Claude is asked only about volume spikes, up to five a day.</li>
+      <li><strong>Log</strong>Calls go into a hash-chained ledger before the close, so none can be edited later.</li>
+      <li><strong>Score</strong>When the horizon ends, each call settles against its sector ETF with dividends included.</li>
+    </ol>
+    <h2>Limits</h2>
+    <p>Model judgment is only tested forward, because any backtest would overlap the model&rsquo;s training data. The volume rule is the exception that was measured on history, with the pass rules written down first, and it still has to repeat on the live page. The historical base rates use an industry benchmark rather than sector ETFs. There is no news feed and no analyst-estimate feed yet; a free news feed is being set up to be measured in shadow (stored, not shown to Claude) before any experiment uses it. Results need a finished sample before they mean much. The first gate is still 60 resolved calls.</p>
+    </details>
+  </section>
+</main>
+<footer class="wrap footer">
+  <p>Built by <a href="https://github.com/VedaantK">Vedaant</a>. <a href="index.html">Compass</a> · <a href="beacon.html">Beacon</a> · <a href="lookout.html">Lookout</a> · <a href="tide.html">Tide</a> · <a href="theta.html">Theta</a> · <a href="trials.html">Trials</a> · <a href="notes.html">Research notes</a> · <a href="updates.html">Updates</a></p>
+  <p class="fine">Lookout publishes research predictions, not investment advice. No trades are placed.</p>
+</footer>
+<script src="echarts.min.js?v=e84270bd0c"></script>
+<script src="lookout.js?v=43cc365e37"></script>
+</body>
+</html>
